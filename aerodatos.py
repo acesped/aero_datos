@@ -130,8 +130,8 @@ def ajustar_texto_visual(texto, max_caracteres=40, max_palabras=6):
 
 # Los textos son ideas completas, nunca fragmentos cortados.
 VISUAL_MIN_WORDS = 3
-VISUAL_MAX_WORDS = 9
-VISUAL_MAX_CHARS = 52
+VISUAL_MAX_WORDS = 12
+VISUAL_MAX_CHARS = 72
 GENERIC_VISUALS = (
     'sabias esto', 'ahora ya lo sabes', 'dato sorprendente',
     'descubre algo nuevo', 'una idea util', 'increible pero cierto',
@@ -178,7 +178,7 @@ def validar_microfrases(visuals, script, title='', fact='', lesson=''):
         if not (VISUAL_MIN_WORDS <= len(words) <= VISUAL_MAX_WORDS):
             raise ValueError(f'Escena {index}: requiere entre 3 y 9 palabras, tiene {len(words)}')
         if len(clean) > VISUAL_MAX_CHARS:
-            raise ValueError(f'Escena {index}: supera 52 caracteres; reformular, no truncar')
+            raise ValueError(f'Escena {index}: supera 72 caracteres; reformular, no truncar')
         if clean.endswith(('...', '…', ':', ',', ';')):
             raise ValueError(f'Escena {index}: mensaje incompleto')
         norm = _visual_normalizado(clean).strip(' .!?¿¡')
@@ -583,7 +583,7 @@ def _recuperar_mensajes(narracion, respuestas=()):
                     for breve in _proposiciones_breves(frase):
                         agregar(breve)
     # Después, proposiciones literales del guion y sus afirmaciones asociadas.
-    for campo in ('script', 'fact', 'lesson'):
+    for campo in ('script', 'fact', 'lesson', 'title'):
         for breve in _proposiciones_breves(narracion[campo]):
             agregar(breve)
 
@@ -642,8 +642,8 @@ def create_ai_episode(ep):
     # No volver a generar el guion cuando fallan los mensajes visuales.
     visuals_prompt = (
         'Basándote ÚNICAMENTE en el guion siguiente, escribe cinco frases educativas '
-        'completas para cinco escenas consecutivas. Cada una entre 3 y 9 palabras, '
-        'máximo 52 caracteres, sin títulos vacíos, sin puntos suspensivos, sin introducir '
+        'completas para cinco escenas consecutivas. Idealmente 3 a 9 palabras, '
+        'máximo 72 caracteres y nunca más de 12 palabras, sin títulos vacíos, sin puntos suspensivos, sin introducir '
         'hechos ajenos al guion. Deben explicar cinco aspectos o consecuencias distintas. '
         'Responde SOLO estas cinco líneas, sin Markdown ni explicaciones: '
         'MENSAJE_1: ...\nMENSAJE_2: ...\nMENSAJE_3: ...\nMENSAJE_4: ...\nMENSAJE_5: ...\n'
