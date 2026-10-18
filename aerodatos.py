@@ -616,21 +616,84 @@ def _provider_credentials():
     return providers
 
 
+def _discover_groq_models(key):
+    """Consulta el catálogo accesible para esta API key, sin suponer IDs vigentes."""
+    preferred = ('openai/gpt-oss-20b', 'openai/gpt-oss-120b',
+                 'llama-3.3-70b-versatile', 'llama-3.1-8b-instant')
+    response = requests.get('https://api.groq.com/openai/v1/models',
+                            headers={'Authorization': f'Bearer {key}'}, timeout=25)
+    response.raise_for_status()
+    available = {row.get('id') for row in response.json().get('data', [])
+                 if isinstance(row, dict) and isinstance(row.get('id'), str)}
+    chosen = os.getenv('GROQ_MODEL', '').strip()
+    # Only general text generation models: avoid audio, guard, vision, or tooling.
+    allowed = [mid for mid in preferred if mid in available]
+    if chosen and chosen in available and chosen not in allowed:
+        allowed.insert(0, chosen)
+    elif chosen in allowed:
+        allowed.remove(chosen)
+        allowed.insert(0, chosen)
+    return allowed[:3]
+
+
+def _discover_gemini_models(key):
+    """Lista modelos con generateContent y prioriza Flash-Lite (no TTS/imágenes)."""
+    preferred = ('gemini-3.1-flash-lite', 'gemini-3.5-flash-lite',
+                 'gemini-3.6-flash', 'gemini-3.8-flash')
+    found = set()
+    page = None
+    for _ in range(5):
+        params = {'pageSize': 100}
+        if page:
+            params['pageToken'] = page
+        response = requests.get('https://generativelanguage.googleapis.com/v1beta/models',
+                                headers={'x-goog-api-key': key}, params=params, timeout=25)
+        response.raise_for_status()
+        payload = response.json()
+        for row in payload.get('models', []):
+            if 'generateContent' in row.get('supportedGenerationMethods', []):
+                name = str(row.get('name', '')).removeprefix('models/')
+                if name:
+                    found.add(name)
+        page = payload.get('nextPageToken')
+        if not page:
+            break
+    chosen = os.getenv('GEMINI_MODEL', '').strip().removeprefix('models/')
+    allowed = [mid for mid in preferred if mid in found]
+    if chosen and chosen in found and chosen not in allowed:
+        allowed.insert(0, chosen)
+    elif chosen in allowed:
+        allowed.remove(chosen)
+        allowed.insert(0, chosen)
+    return allowed[:3]
+
+
 def _ai_candidates():
     result = []
     for provider, key in _provider_credentials():
         if provider == 'groq':
-            # Modelo estándar de texto, disponible bajo los límites del plan del usuario.
-            result.append((provider, os.getenv('GROQ_MODEL', 'llama-3.1-8b-instant'), key))
+            try:
+                models = _discover_groq_models(key)
+                result.extend((provider, model, key) for model in models)
+                if not models:
+                    print('Groq: sin modelos de texto compatibles accesibles con esta clave', flush=True)
+            except (requests.RequestException, ValueError, KeyError) as exc:
+                print(f'Groq: no se pudo consultar catálogo: {str(exc)[:160]}', flush=True)
         elif provider == 'gemini':
-            result.append((provider, os.getenv('GEMINI_MODEL', 'gemini-2.5-flash-lite'), key))
+            try:
+                models = _discover_gemini_models(key)
+                result.extend((provider, model, key) for model in models)
+                if not models:
+                    print('Gemini: sin modelos Flash compatibles accesibles con esta clave', flush=True)
+            except (requests.RequestException, ValueError, KeyError) as exc:
+                print(f'Gemini: no se pudo consultar catálogo: {str(exc)[:160]}', flush=True)
         else:
             try:
                 result.extend((provider, model, key) for model, _ in select_free_json_models(key, 5))
             except (requests.RequestException, ValueError, RuntimeError) as exc:
                 print(f'OpenRouter: no se pudieron listar modelos gratuitos: {exc}', flush=True)
     if not result:
-        raise RuntimeError('No hay modelos de IA disponibles')
+        raise RuntimeError('Ningún proveedor ofrece modelos compatibles accesibles; revisa las claves y las cuotas.')
     return result
 
 
@@ -710,7 +773,10 @@ def create_ai_episode(ep):
     narration = None
     narration_model = None
     last_problem = 'sin respuesta'
+    providers_exhausted = set()
     for provider, model, key in candidates:
+        if provider in providers_exhausted:
+            continue
         try:
             raw = _provider_text(provider, model, key, narration_prompt, max_tokens=1500)
             narration = _parse_narration(raw)
@@ -722,6 +788,8 @@ def create_ai_episode(ep):
         except (ValueError, requests.RequestException, KeyError, TypeError) as exc:
             last_problem = f'{provider}/{model}: {str(exc)[:140]}'
             print(f'IA etapa 1: {last_problem}', flush=True)
+            if provider == 'openrouter' and 'cuota gratuita' in str(exc).lower():
+                providers_exhausted.add(provider)
     if narration is None:
         raise RuntimeError('Ningún proveedor configurado generó narración válida. '
                            f'Último diagnóstico: {last_problem}. No se publicó nada.')
