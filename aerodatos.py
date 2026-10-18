@@ -799,9 +799,9 @@ def palette(i):
 
 
 
-# Imágenes CC0, dominio público o CC BY/CC BY-SA: conservar atribución.
-# No se aceptan ND, NC ni licencias no identificadas.
-IMAGE_LICENSES = {'cc0', 'pdm', 'by', 'by-sa'}
+# Solo material CC0 o dominio público: no requiere crédito visible.
+# No se descargan imágenes CC BY/CC BY-SA si no se va a publicar su atribución.
+IMAGE_LICENSES = {'cc0', 'pdm'}
 
 def _safe_photo_download(url, target):
     from urllib.parse import urlparse
@@ -846,10 +846,14 @@ def _commons_candidates(query):
         info = (page.get('imageinfo') or [{}])[0]
         meta = info.get('extmetadata') or {}
         lic = _strip_html((meta.get('LicenseShortName') or {}).get('value','')).lower().replace(' ', '')
-        if not (any(x in lic for x in ('cc-by','cc0','publicdomain','publicdomainmark')) and
-                not any(x in lic for x in ('cc-by-sa',))):
-            continue
-        if any(x in lic for x in ('-nc','-nd')):
+        # Wikimedia utiliza variantes para CC0, marca de dominio público y PD.
+        # Ante cualquier ambigüedad se descarta la imagen, nunca se presume libre.
+        free_of_attribution = (
+            'cc0' in lic or 'publicdomain' in lic or
+            lic in ('pd', 'pdm', 'dominiopúblico', 'dominiopublico') or
+            lic.startswith('pd-')
+        )
+        if not free_of_attribution or any(x in lic for x in ('cc-by', '-nc', '-nd')):
             continue
         url = info.get('thumburl') or info.get('url')
         if not url:
@@ -860,7 +864,7 @@ def _commons_candidates(query):
 
 def _openverse_candidates(query):
     r=requests.get('https://api.openverse.org/v1/images/',
-                   params={'q':query,'license':'cc0,pdm,by,by-sa','page_size':8},
+                   params={'q':query,'license':'cc0,pdm','page_size':8},
                    timeout=18, headers={'User-Agent':'AeroDatosBot/1.0'})
     r.raise_for_status()
     for item in r.json().get('results',[]):
@@ -1228,13 +1232,17 @@ def publish(ep, movie, cover, approval):
     response = requests.get(video_url, timeout=60)
     if not response.ok or len(response.content) != movie.stat().st_size:
         raise RuntimeError(f'MP4 no accesible públicamente: HTTP {response.status_code}')
-    caption = f'{ep["title"]}\n\n{ep["lesson"]}'
+    # La descripción desarrolla el contenido en lugar de mostrar autores de fotos.
+    # Los datos se extraen exclusivamente del guion generado; no se inventan cifras.
+    caption = f'{ep["title"]}\n\n{ep["script"].strip()}'
+    fact = str(ep.get('fact') or '').strip()
+    lesson = str(ep.get('lesson') or '').strip()
+    if fact and fact.casefold() not in ep['script'].casefold():
+        caption += f'\n\nDato clave: {fact}'
+    if lesson and lesson.casefold() not in ep['script'].casefold():
+        caption += f'\n\nPara recordar: {lesson}'
     if ep.get('source'):
         caption += f'\n\nReferencias sugeridas (no verificadas): {ep["source"]}'
-    if ep.get('image_credits'):
-        caption += '\n\nCréditos de imágenes: ' + '; '.join(
-            f"{c.get('author') or 'autor no identificado'} ({c.get('license')}), {c.get('source')}"
-            for c in ep['image_credits'])[:1600]
     caption += '\n\n#AeroDatos #Aviacion #ConocimientoAeronautico'
     state['episodes'][ep['id']] = row
     row['reel'] = 'enviando'
