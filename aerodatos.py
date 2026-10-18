@@ -954,35 +954,55 @@ def palette(i):
 
 
 
-# Solo material CC0 o dominio público: no requiere crédito visible.
-# No se descargan imágenes CC BY/CC BY-SA si no se va a publicar su atribución.
+# Solo fotografías CC0 o de dominio público: no precisan atribución obligatoria.
+# Se conserva la procedencia en creditos_imagenes.json para trazabilidad.
 IMAGE_LICENSES = {'cc0', 'pdm'}
+IMAGE_HEADERS = {
+    'User-Agent': 'AeroDatosEducationalBot/1.2 (https://github.com/acesped/aero_datos; contact via GitHub issues)',
+    'Accept': 'application/json, image/jpeg, image/png, image/webp, */*;q=0.5',
+}
+
+
+def _image_request(url, *, params=None, stream=False, timeout=20):
+    """Segundo intento moderado para límites transitorios; sin bucles agresivos."""
+    for attempt in range(2):
+        r = requests.get(url, params=params, headers=IMAGE_HEADERS, timeout=timeout, stream=stream)
+        if r.status_code in (429, 502, 503, 504) and attempt == 0:
+            r.close()
+            time.sleep(2)
+            continue
+        r.raise_for_status()
+        return r
+    raise RuntimeError('Servicio de imágenes no disponible')
+
 
 def _safe_photo_download(url, target):
     from urllib.parse import urlparse
     parsed = urlparse(url)
-    if parsed.scheme != 'https' or not parsed.hostname:
+    # Rechazar enlaces inseguros y direcciones internas; solo proveedores públicos conocidos.
+    host = (parsed.hostname or '').lower()
+    if parsed.scheme != 'https' or not host or host in ('localhost',) or host.endswith('.local'):
         return False
     try:
-        r = requests.get(url, timeout=16, headers={'User-Agent': 'AeroDatosBot/1.0 (educational-content; Wikimedia/Openverse)'}, stream=True)
-        r.raise_for_status()
-        kind = r.headers.get('Content-Type', '').lower()
-        if 'image/' not in kind or any(x in kind for x in ('svg', 'gif')):
-            return False
-        payload = bytearray()
-        for chunk in r.iter_content(65536):
-            payload.extend(chunk)
-            if len(payload) > 8_000_000:
+        with _image_request(url, stream=True, timeout=22) as r:
+            kind = r.headers.get('Content-Type', '').lower()
+            if not any(t in kind for t in ('image/jpeg', 'image/png', 'image/webp')):
                 return False
+            payload = bytearray()
+            for chunk in r.iter_content(65536):
+                if chunk:
+                    payload.extend(chunk)
+                if len(payload) > 10_000_000:
+                    return False
         from PIL import ImageOps
-        with Image.open(io.BytesIO(payload)) as image:
-            image = ImageOps.exif_transpose(image)
-            if image.width < 500 or image.height < 350:
+        with Image.open(io.BytesIO(payload)) as img:
+            img = ImageOps.exif_transpose(img)
+            if img.width < 420 or img.height < 300:
                 return False
-            image.convert('RGB').save(target, 'JPEG', quality=86)
+            img.convert('RGB').save(target, 'JPEG', quality=86)
         return True
     except Exception as exc:
-        print(f'Imagen descartada: {type(exc).__name__}: {str(exc)[:100]}', flush=True)
+        print(f'Imagen descartada: {type(exc).__name__}: {str(exc)[:150]}', flush=True)
         return False
 
 
@@ -991,75 +1011,101 @@ def _strip_html(value):
 
 
 def _commons_candidates(query):
-    params = {'action':'query','format':'json','generator':'search',
-              'gsrsearch': 'filetype:bitmap ' + query, 'gsrnamespace':6,'gsrlimit':8,
-              'prop':'imageinfo','iiprop':'url|extmetadata','iiurlwidth':1100}
-    r = requests.get('https://commons.wikimedia.org/w/api.php', params=params, timeout=20,
-                     headers={'User-Agent':'AeroDatosBot/1.0 (automatic educational video; contact via repository)'})
-    r.raise_for_status()
-    for page in r.json().get('query',{}).get('pages',{}).values():
+    params = {'action':'query', 'format':'json', 'generator':'search',
+              'gsrsearch':'filetype:bitmap ' + query, 'gsrnamespace':6,
+              'gsrlimit':18, 'prop':'imageinfo', 'iiprop':'url|extmetadata',
+              'iiurlwidth':900}
+    with _image_request('https://commons.wikimedia.org/w/api.php', params=params) as r:
+        pages = r.json().get('query', {}).get('pages', {})
+    for page in pages.values():
         info = (page.get('imageinfo') or [{}])[0]
         meta = info.get('extmetadata') or {}
-        lic = _strip_html((meta.get('LicenseShortName') or {}).get('value','')).lower().replace(' ', '')
-        # Wikimedia utiliza variantes para CC0, marca de dominio público y PD.
-        # Ante cualquier ambigüedad se descarta la imagen, nunca se presume libre.
-        free_of_attribution = (
-            'cc0' in lic or 'publicdomain' in lic or
-            lic in ('pd', 'pdm', 'dominiopúblico', 'dominiopublico') or
-            lic.startswith('pd-')
-        )
-        if not free_of_attribution or any(x in lic for x in ('cc-by', '-nc', '-nd')):
+        lic = _strip_html((meta.get('LicenseShortName') or {}).get('value','')).lower().replace(' ','')
+        free_of_attribution = ('cc0' in lic or 'publicdomain' in lic or
+                               lic in ('pd','pdm','dominiopúblico','dominiopublico') or
+                               lic.startswith('pd-'))
+        if not free_of_attribution or any(x in lic for x in ('cc-by','-nc','-nd')):
             continue
         url = info.get('thumburl') or info.get('url')
-        if not url:
-            continue
-        yield {'url':url,'title':page.get('title',''),'author':_strip_html((meta.get('Artist') or {}).get('value','')),
-               'license':lic,'source':info.get('descriptionurl','')}
+        if url:
+            yield {'url':url, 'title':page.get('title',''),
+                   'author':_strip_html((meta.get('Artist') or {}).get('value','')),
+                   'license':lic, 'source':info.get('descriptionurl','')}
 
 
 def _openverse_candidates(query):
-    r=requests.get('https://api.openverse.org/v1/images/',
-                   params={'q':query,'license':'cc0,pdm','page_size':8},
-                   timeout=18, headers={'User-Agent':'AeroDatosBot/1.0'})
-    r.raise_for_status()
-    for item in r.json().get('results',[]):
-        lic=str(item.get('license') or '').lower()
+    with _image_request('https://api.openverse.org/v1/images/',
+                        params={'q':query, 'license':'cc0,pdm', 'page_size':20}, timeout=20) as r:
+        items = r.json().get('results', [])
+    for item in items:
+        lic = str(item.get('license') or '').lower()
         if lic not in IMAGE_LICENSES:
             continue
-        url=item.get('thumbnail') or item.get('url')
+        url = item.get('url') or item.get('thumbnail')
         if url:
-            yield {'url':url,'title':item.get('title',''),'author':item.get('creator',''),
-                   'license':lic,'source':item.get('foreign_landing_url','')}
+            yield {'url':url, 'title':item.get('title',''), 'author':item.get('creator',''),
+                   'license':lic, 'source':item.get('foreign_landing_url','')}
+
+
+def _image_queries(ep):
+    """Priorizar el objeto real; convertir temas amplios en búsquedas aeronáuticas en inglés."""
+    original = re.sub(r'\s+', ' ', str(ep.get('image_query') or ep.get('title',''))).strip()[:110]
+    category = str(ep.get('category','')).lower()
+    category_queries = {
+        'motores': 'aircraft jet engine aviation',
+        'aerodinámica': 'airplane wing aerodynamics aircraft flight',
+        'mantenimiento': 'aircraft maintenance hangar aviation technician',
+        'operaciones': 'commercial aviation airport operations',
+        'meteorología': 'aircraft aviation weather clouds',
+        'navegación': 'aircraft cockpit navigation instruments',
+        'economía': 'commercial airline passenger aircraft airport',
+        'regulación': 'commercial aircraft aviation airport',
+        'ciencia': 'aerospace aircraft engineering',
+        'historia': 'historic airplane aviation museum',
+    }
+    general = next((v for k,v in category_queries.items() if k in category), 'aviation aircraft')
+    terms = [original + ' aircraft aviation' if original else general, original, general]
+    # Una designación de motor/avión requiere su propio modelo; nunca mostrar otro como sustituto.
+    models = re.findall(r'\b(?:CFM56(?:-5B)?|PW1100G|GEnx|GE90|CF34|PT6A|A320|747|787|Trent\s*(?:1000|XWB)|LEAP-1A|Concorde)\b', original, re.I)
+    if models:
+        terms = [original + ' aircraft', original]
+    return [q for i,q in enumerate(terms) if q and q not in terms[:i]], models
 
 
 def prepare_photos(ep, folder):
-    """Hasta cinco fotografías. Fallo de red/licencia => escenas animadas."""
-    query = str(ep.get('image_query') or ep.get('title',''))[:100]
-    # Las consultas con designación exacta no deben reemplazarse por otras máquinas.
-    photos=[]; credits=[]; used=set()
-    for backend in (_commons_candidates, _openverse_candidates):
-        if len(photos)>=5:
+    """Busca hasta 5 fotografías CC0/PD, con trazabilidad y respaldo animado."""
+    queries, models = _image_queries(ep)
+    photos, credits, used = [], [], set()
+    print(f'Imágenes: consultas={queries!r} (solo CC0/dominio público)', flush=True)
+    for query in queries:
+        if len(photos) == 5:
             break
-        try:
-            for candidate in backend(query):
-                if len(photos)>=5:
-                    break
-                url=candidate['url']
-                if url in used:
-                    continue
-                used.add(url)
-                title=(str(candidate.get('title',''))+' '+str(candidate.get('source',''))).lower()
-                # Si el tema menciona una designación concreta, exigir coincidencia de nombre.
-                models=re.findall(r'\b(?:CFM56(?:-5B)?|PW1100G|GEnx|GE90|CF34|PT6A|A320|747|787|Trent\s*(?:1000|XWB)|LEAP-1A|Concorde)\b',query,re.I)
-                if models and not all(x.lower().replace(' ','') in title.replace(' ','') for x in models):
-                    continue
-                path=folder/f'foto_{len(photos)}.jpg'
-                if _safe_photo_download(url,path):
-                    photos.append(path); credits.append(candidate)
-        except Exception as exc:
-            print(f'Fuente fotográfica no disponible: {type(exc).__name__}: {str(exc)[:120]}', flush=True)
-    (folder/'creditos_imagenes.json').write_text(json.dumps(credits,ensure_ascii=False,indent=2),encoding='utf-8')
-    return photos,credits
+        for backend in (_commons_candidates, _openverse_candidates):
+            if len(photos) == 5:
+                break
+            try:
+                candidates = list(backend(query))
+                print(f'Imágenes: {backend.__name__} encontró {len(candidates)} candidatas para {query!r}', flush=True)
+                for candidate in candidates:
+                    if len(photos) == 5:
+                        break
+                    url = candidate['url']
+                    if url in used:
+                        continue
+                    used.add(url)
+                    title = (str(candidate.get('title',''))+' '+str(candidate.get('source',''))).lower()
+                    if models and not all(x.lower().replace(' ','') in title.replace(' ','') for x in models):
+                        continue
+                    path = folder / f'foto_{len(photos)}.jpg'
+                    if _safe_photo_download(url, path):
+                        photos.append(path)
+                        credits.append(candidate)
+            except Exception as exc:
+                print(f'Fuente fotográfica no disponible: {backend.__name__}: {type(exc).__name__}: {str(exc)[:120]}', flush=True)
+    (folder/'creditos_imagenes.json').write_text(json.dumps(credits, ensure_ascii=False, indent=2), encoding='utf-8')
+    print(f'Imágenes: {len(photos)}/5 fotos descargadas; '+
+          ('usando fotografías reales' if photos else 'usando fondos animados de respaldo'), flush=True)
+    return photos, credits
 
 
 def _photo_background(image_path, w=720, h=1280):
