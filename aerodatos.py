@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """AeroDatos: catálogo integrado (500 propuestas), previews y publicación de VIDEO en Reels, feed y Stories de IG.
 
