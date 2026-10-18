@@ -1152,6 +1152,45 @@ def upload_video_to_public_github(gh, movie: Path, episode_id: str):
                        'Revisar manualmente la estructura del repositorio; no se publicó en Instagram.')
 
 
+def check_instagram_identity(token=None, user_id=None, expected=None):
+    """Verifica en Meta el usuario e ID, sin publicar ni mostrar secretos."""
+    token = token if token is not None else credential('INSTAGRAM_TOKEN', TEST_INSTAGRAM_TOKEN)
+    user_id = str(user_id if user_id is not None else credential('INSTAGRAM_USER_ID', TEST_INSTAGRAM_USER_ID)).strip()
+    expected = (expected if expected is not None else os.environ.get('IG_EXPECTED_USERNAME', '')).strip().lstrip('@').lower()
+    if not expected:
+        raise RuntimeError('Falta IG_EXPECTED_USERNAME en GitHub Actions')
+    if not user_id.isdigit():
+        raise RuntimeError('INSTAGRAM_USER_ID debe ser numérico')
+    try:
+        me = ig_api('GET', 'me', token=token, data={'fields': 'id,user_id,username'})
+    except RuntimeError as exc:
+        detail = str(exc).lower()
+        unsupported = 'user_id' in detail and any(x in detail for x in
+            ('nonexisting field', 'non-existing field', 'unknown field', 'field is not supported'))
+        if not unsupported:
+            raise
+        me = ig_api('GET', 'me', token=token, data={'fields': 'id,username'})
+    username = str(me.get('username', '')).strip().lstrip('@').lower()
+    if username != expected:
+        raise RuntimeError('TOKEN DE OTRA CUENTA: se esperaba @' + expected +
+                           ' pero Meta autorizó @' + (username or 'desconocido') +
+                           '. Reautoriza INSTAGRAM_TOKEN para @' + expected)
+    ids = {str(me.get(k, '')).strip() for k in ('id', 'user_id') if str(me.get(k, '')).strip().isdigit()}
+    if user_id not in ids:
+        # Identificadores no se imprimen completos en logs públicos.
+        safe = lambda v: ('…' + v[-4:]) if v else '(ausente)'
+        raise RuntimeError('INSTAGRAM_USER_ID INCORRECTO para @' + expected +
+            ': secret termina en ' + safe(user_id) +
+            '; Meta devuelve id ' + safe(str(me.get('id',''))) +
+            ' y user_id ' + safe(str(me.get('user_id',''))) +
+            '. Corrige el secret usando el ID del mismo flujo Instagram Login. '
+            'El video no se publicará con credenciales inconsistentes.')
+    print('Instagram verificado: @' + username +
+          '; identificador coincide con ' + ('user_id' if user_id == str(me.get('user_id','')) else 'id'),
+          flush=True)
+    return me
+
+
 def publish(ep, movie, cover, approval):
     if approval != ep['id']:
         raise ValueError('Se exige aprobación explícita del mismo ID de episodio')
@@ -1169,16 +1208,7 @@ def publish(ep, movie, cover, approval):
     expected = os.environ.get('IG_EXPECTED_USERNAME', '').strip().lstrip('@').lower()
     if not expected:
         raise RuntimeError('Falta IG_EXPECTED_USERNAME: define la variable de GitHub para publicar')
-    me = ig_api('GET', 'me', token=token, data={'fields': 'id,username'})
-    actual_id = str(me.get('id', '')).strip()
-    actual_username = str(me.get('username', '')).strip().lstrip('@').lower()
-    if actual_id != user_id:
-        raise RuntimeError('INSTAGRAM_USER_ID no coincide con la cuenta autorizada por INSTAGRAM_TOKEN')
-    if actual_username != expected:
-        raise RuntimeError(
-            f'Cuenta Instagram diferente: esperado=@{expected}, recibido=@{actual_username}'
-        )
-    print(f'Cuenta Instagram verificada: @{actual_username}', flush=True)
+    check_instagram_identity(token, user_id, expected)
     gh = Github()
     gh.assert_public()
     path = 'aerodatos/state.json'
@@ -1254,12 +1284,19 @@ def publish(ep, movie, cover, approval):
 def main():
     ap = argparse.ArgumentParser(description='AERO_DATOS: 500 ideas, IA OpenRouter Free y video Instagram')
     ap.add_argument('--list', action='store_true')
+    ap.add_argument('--check-instagram', action='store_true', help='Verifica token, cuenta e ID sin generar video ni publicar')
     ap.add_argument('--episode', default='', help='ID concreto; vacío = siguiente disponible')
     ap.add_argument('--out', default='output')
     ap.add_argument('--publish', action='store_true', help='Publicar Reel en feed y Story independiente')
     ap.add_argument('--approved-id', default='', help='ID revisado manualmente (modo seguro)')
     ap.add_argument('--auto-publish', action='store_true', help='Publicación autónoma (sin revisión humana)')
     args=ap.parse_args()
+    if args.check_instagram:
+        check_instagram_identity()
+        return 0
+    if args.publish:
+        # Validar ANTES de consumir OpenRouter y renderizar video.
+        check_instagram_identity()
     episodes=catalog()
     if len(episodes)!=500 or len({e['id'] for e in episodes})!=500:
         raise RuntimeError('Catálogo de 500 propuestas dañado')
