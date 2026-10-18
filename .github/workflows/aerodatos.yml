@@ -1,4 +1,4 @@
-name: AERO_DATOS - OpenRouter Free guiones y videos Instagram
+name: AERO_DATOS - Groq Gemini OpenRouter - Instagram
 
 on:
   workflow_dispatch:
@@ -38,6 +38,8 @@ jobs:
     env:
       PYTHONUNBUFFERED: '1'
       OPENROUTER_MODEL: 'openrouter/free'
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
       INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
@@ -98,7 +100,7 @@ jobs:
           APPROVED: ${{ inputs.approved_id }}
         run: |
           set -euo pipefail
-          [[ -n "${OPENROUTER_API_KEY:-}" ]] || { echo '::error::Falta OPENROUTER_API_KEY'; exit 1; }
+          [[ -n "${GROQ_API_KEY:-}" || -n "${GEMINI_API_KEY:-}" || -n "${OPENROUTER_API_KEY:-}" ]] || { echo '::error::Configura GROQ_API_KEY, GEMINI_API_KEY u OPENROUTER_API_KEY'; exit 1; }
           if [[ "$PUBLISH" == true ]]; then
             [[ -n "${INSTAGRAM_TOKEN:-}" && -n "${INSTAGRAM_USER_ID:-}" ]] || { echo '::error::Faltan secretos de Instagram'; exit 1; }
             [[ "$INSTAGRAM_USER_ID" =~ ^[0-9]+$ ]] || { echo '::error::INSTAGRAM_USER_ID no es numerico'; exit 1; }
@@ -111,19 +113,16 @@ jobs:
               [[ "$EPISODE" == "$APPROVED" ]] || { echo '::error::Con ID especifico, confirma approved_id o activa auto_publish'; exit 1; }
             fi
           fi
-      - name: Confirmar modelo gratuito OpenRouter
+      - name: Informar proveedores de IA
         shell: bash
         run: |
-          set -euo pipefail
-          python - <<'PY'
-          import aerodatos
-          assert aerodatos.OPENROUTER_MODEL == 'openrouter/free', aerodatos.OPENROUTER_MODEL
-          print('Modelo OpenRouter:', aerodatos.OPENROUTER_MODEL)
-          PY
+          echo 'Orden de proveedores: Groq, Gemini, OpenRouter gratuito'
       - name: Generar video con fotografias libres y publicar
         shell: bash
         env:
           IG_EXPECTED_USERNAME: ${{ vars.IG_EXPECTED_USERNAME || 'aero_datos' }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
