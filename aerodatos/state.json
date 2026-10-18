@@ -48,11 +48,12 @@
     },
     "AD-148": {
       "reel": "publicado",
-      "updated_at": "2026-10-18T18:38:35.779703+00:00",
+      "updated_at": "2026-10-18T18:39:12.860039+00:00",
       "share_to_feed": true,
       "reel_id": "17952165318276572",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/b34dd2ad125805239fb1d1aed1ac77f82e79dc73/aerodatos_assets/media/AD-148-936790f13654f625.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18173063587459604"
     }
   }
 }
