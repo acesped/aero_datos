@@ -30,11 +30,12 @@
     },
     "AD-272": {
       "reel": "publicado",
-      "updated_at": "2026-10-18T13:51:35.674544+00:00",
+      "updated_at": "2026-10-18T13:52:10.825575+00:00",
       "share_to_feed": true,
       "reel_id": "17985719946107135",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/4a33850205a4cfeddd3af844fb5f1d57ffd90655/aerodatos_assets/media/AD-272-a385dcc7b9790216.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18122837569899922"
     }
   }
 }
