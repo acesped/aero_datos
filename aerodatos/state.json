@@ -65,8 +65,11 @@
       "story_id": "18231970303335262"
     },
     "AD-309": {
-      "reel": "enviando",
-      "updated_at": "2026-10-19T11:52:06.316568+00:00"
+      "reel": "publicado",
+      "updated_at": "2026-10-19T11:52:45.900534+00:00",
+      "share_to_feed": true,
+      "reel_id": "18013868588936497",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/f29cb3c65b9e34c34ab12a19b467849619d75730/aerodatos_assets/media/AD-309-683145cd2bebe20b.mp4"
     }
   }
 }
