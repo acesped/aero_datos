@@ -120,10 +120,11 @@
     },
     "AD-488": {
       "reel": "publicado",
-      "updated_at": "2026-10-21T09:02:25.235612+00:00",
+      "updated_at": "2026-10-21T09:02:26.337686+00:00",
       "share_to_feed": true,
       "reel_id": "18133456918743430",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/b1a74712abe9ae3e1474324404f8d54ec3e0bb6f/aerodatos_assets/media/AD-488-411bdae55744693c.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/b1a74712abe9ae3e1474324404f8d54ec3e0bb6f/aerodatos_assets/media/AD-488-411bdae55744693c.mp4",
+      "story": "enviando"
     }
   }
 }
