@@ -1030,6 +1030,7 @@ def _commons_candidates(query):
         if url:
             yield {'url':url, 'title':page.get('title',''),
                    'author':_strip_html((meta.get('Artist') or {}).get('value','')),
+                   'description':_strip_html((meta.get('ImageDescription') or {}).get('value',''))[:500],
                    'license':lic, 'source':info.get('descriptionurl','')}
 
 
@@ -1043,70 +1044,124 @@ def _openverse_candidates(query):
             continue
         url = item.get('url') or item.get('thumbnail')
         if url:
-            yield {'url':url, 'title':item.get('title',''), 'author':item.get('creator',''),
+            yield {'url':url, 'title':item.get('title',''),
+                   'description':str(item.get('description') or '')[:500], 'author':item.get('creator',''),
                    'license':lic, 'source':item.get('foreign_landing_url','')}
 
 
+# Exclusivamente aviones civiles o de aerolínea (no helicópteros ni cazas).
+# Los metadatos son un filtro conservador; no sustituyen inspección visual.
+AIRLINER_POSITIVE = re.compile(
+    r"\b(?:airliners?|passenger\s+(?:aircraft|airplanes?|jets?)|"
+    r"commercial\s+(?:aircraft|airplanes?|aviation|jets?)|"
+    r"civil(?:ian)?\s+(?:aircraft|airplanes?|aviation)|"
+    r"airbus|boeing|embraer|bombardier|atr\s?\d{2}|"
+    r"(?:a(?:220|3(?:19|20|21|30|40|50)|380))|"
+    r"(?:b?7(?:17|27|37|47|57|67|77|87))|"
+    r"(?:e-?jets?|e(?:170|175|190|195)|crj(?:100|200|700|900|1000))|"
+    r"(?:dc-?(?:8|9|10)|md-?(?:80|81|82|83|87|88|90|11))|"
+    r"(?:concorde|fokker\s?(?:50|70|100))|"
+    r"(?:airline|airlines|aerolinea|aerolineas|avion\s+comercial|"
+    r"avion\s+de\s+pasajeros|aeropuerto\s+avion))\b",
+    re.I,
+)
+AIRLINER_NEGATIVE = re.compile(
+    r"\b(?:military|warplane|warbird|fighter|bomber|combat|"
+    r"air\s*force|usaf|raf\s+fighter|naval\s+aviation|"
+    r"helicopter|helicoptero|chopper|rotorcraft|drone|uav|"
+    r"mig-?\d+|su-?\d+|f-?(?:14|15|16|18|22|35)\b|"
+    r"eurofighter|typhoon\s+fighter|rafale\s+fighter|"
+    r"spitfire|messerschmitt|lancaster\s+bomber|"
+    r"tank|toy|model\s+kit|illustration|drawing|diagram|"
+    r"infographic|logo|poster|silhouette|simulation|"
+    r"cockpit\s+only|interior\s+only|engine\s+only|"
+    r"avion\s+militar|caza\s+militar|avion\s+de\s+combate)\b",
+    re.I,
+)
+AIRLINER_STRONG = re.compile(
+    r"\b(?:airliners?|passenger\s+(?:aircraft|airplanes?|jets?)|"
+    r"commercial\s+(?:aircraft|airplanes?|jets?)|"
+    r"airbus\s+a?\d{3}|boeing\s+b?7\d{2}|"
+    r"embraer\s+e?-?\d{3}|atr\s?\d{2}|"
+    r"airline\s+(?:aircraft|airplane|jet)|"
+    r"avion\s+(?:comercial|de\s+pasajeros))\b", re.I,
+)
+
+
+def _airliner_metadata_valid(candidate):
+    text = ' '.join(str(candidate.get(k) or '') for k in ('title', 'description'))
+    # El enlace a Commons/Openverse suele contener categorías no fiables;
+    # verificar título y descripción editorial y no sólo una URL arbitraria.
+    if AIRLINER_NEGATIVE.search(text):
+        return False
+    return bool(AIRLINER_STRONG.search(text) or (
+        AIRLINER_POSITIVE.search(text) and
+        re.search(r'\b(?:aircraft|airplane|jet|airport|airliner|landing|takeoff|flight|avion)\b', text, re.I)
+    ))
+
+
 def _image_queries(ep):
-    """Priorizar el objeto real; convertir temas amplios en búsquedas aeronáuticas en inglés."""
-    original = re.sub(r'\s+', ' ', str(ep.get('image_query') or ep.get('title',''))).strip()[:110]
-    category = str(ep.get('category','')).lower()
-    category_queries = {
-        'motores': 'aircraft jet engine aviation',
-        'aerodinámica': 'airplane wing aerodynamics aircraft flight',
-        'mantenimiento': 'aircraft maintenance hangar aviation technician',
-        'operaciones': 'commercial aviation airport operations',
-        'meteorología': 'aircraft aviation weather clouds',
-        'navegación': 'aircraft cockpit navigation instruments',
-        'economía': 'commercial airline passenger aircraft airport',
-        'regulación': 'commercial aircraft aviation airport',
-        'ciencia': 'aerospace aircraft engineering',
-        'historia': 'historic airplane aviation museum',
-    }
-    general = next((v for k,v in category_queries.items() if k in category), 'aviation aircraft')
-    terms = [original + ' aircraft aviation' if original else general, original, general]
-    # Una designación de motor/avión requiere su propio modelo; nunca mostrar otro como sustituto.
-    models = re.findall(r'\b(?:CFM56(?:-5B)?|PW1100G|GEnx|GE90|CF34|PT6A|A320|747|787|Trent\s*(?:1000|XWB)|LEAP-1A|Concorde)\b', original, re.I)
-    if models:
-        terms = [original + ' aircraft', original]
-    return [q for i,q in enumerate(terms) if q and q not in terms[:i]], models
+    """Sólo consultas de aviones civiles: cada video utiliza un avión visible."""
+    subject = ' '.join(str(ep.get(k) or '') for k in ('title', 'image_query', 'script'))
+    # Identificar familias civiles sin que un tema de motores produzca una foto de sólo el motor.
+    models = re.findall(r'\b(?:A220|A319|A320|A321|A330|A340|A350|A380|'
+                        r'B?717|B?727|B?737|B?747|B?757|B?767|B?777|B?787|'
+                        r'E170|E175|E190|E195|CRJ700|CRJ900|ATR42|ATR72|Concorde)\b',
+                        subject, re.I)
+    queries = [f'{model.upper()} passenger airliner aircraft' for model in dict.fromkeys(models)]
+    queries.extend([
+        'commercial passenger aircraft airport',
+        'Boeing 737 passenger airliner',
+        'Airbus A320 commercial airplane',
+        'Boeing 787 passenger airliner',
+        'Embraer E190 passenger airliner',
+        'ATR 72 passenger aircraft',
+    ])
+    return list(dict.fromkeys(queries)), []
 
 
 def prepare_photos(ep, folder):
-    """Busca hasta 5 fotografías CC0/PD, con trazabilidad y respaldo animado."""
-    queries, models = _image_queries(ep)
-    photos, credits, used = [], [], set()
-    print(f'Imágenes: consultas={queries!r} (solo CC0/dominio público)', flush=True)
+    """Busca UNA foto de avión civil/comercial CC0/PD para todas las escenas.
+
+    Rechaza material militar, diagramas y fotografías sin indicios explícitos de
+    un avión comercial. Nunca crea un video con un fondo plano de respaldo.
+    """
+    queries, _ = _image_queries(ep)
+    credits, used = [], set()
+    print(f'AVIONES CIVILES: búsquedas={queries!r}', flush=True)
+    rejected = 0
+    failed = 0
+    dest = folder / 'foto_avion_comercial.jpg'
+    dest.unlink(missing_ok=True)
     for query in queries:
-        if len(photos) == 5:
-            break
         for backend in (_commons_candidates, _openverse_candidates):
-            if len(photos) == 5:
-                break
             try:
                 candidates = list(backend(query))
-                print(f'Imágenes: {backend.__name__} encontró {len(candidates)} candidatas para {query!r}', flush=True)
+                print(f'AVIONES CIVILES: {backend.__name__}: {len(candidates)} resultados para {query!r}', flush=True)
                 for candidate in candidates:
-                    if len(photos) == 5:
-                        break
                     url = candidate['url']
                     if url in used:
                         continue
                     used.add(url)
-                    title = (str(candidate.get('title',''))+' '+str(candidate.get('source',''))).lower()
-                    if models and not all(x.lower().replace(' ','') in title.replace(' ','') for x in models):
+                    if not _airliner_metadata_valid(candidate):
+                        rejected += 1
                         continue
-                    path = folder / f'foto_{len(photos)}.jpg'
-                    if _safe_photo_download(url, path):
-                        photos.append(path)
-                        credits.append(candidate)
+                    if _safe_photo_download(url, dest):
+                        candidate['matched_query'] = query
+                        credits = [candidate]
+                        (folder/'creditos_imagenes.json').write_text(
+                            json.dumps(credits, ensure_ascii=False, indent=2), encoding='utf-8')
+                        print(f'AVIÓN CIVIL SELECCIONADO: {candidate.get("title", "")} ({backend.__name__})', flush=True)
+                        return [dest], credits
+                    failed += 1
             except Exception as exc:
-                print(f'Fuente fotográfica no disponible: {backend.__name__}: {type(exc).__name__}: {str(exc)[:120]}', flush=True)
-    (folder/'creditos_imagenes.json').write_text(json.dumps(credits, ensure_ascii=False, indent=2), encoding='utf-8')
-    print(f'Imágenes: {len(photos)}/5 fotos descargadas; '+
-          ('usando fotografías reales' if photos else 'usando fondos animados de respaldo'), flush=True)
-    return photos, credits
-
+                print(f'AVIONES CIVILES: fallo {backend.__name__}: {type(exc).__name__}: {str(exc)[:140]}', flush=True)
+    (folder/'creditos_imagenes.json').write_text('[]', encoding='utf-8')
+    raise RuntimeError(
+        'No se encontró una fotografía CC0/dominio público de un avión civil o comercial. '
+        f'Candidatas descartadas={rejected}; descargas fallidas={failed}. '
+        'Se cancela el video: prohibidos fondos genéricos o aviones militares.'
+    )
 
 def _photo_background(image_path, w=720, h=1280):
     from PIL import ImageOps, ImageEnhance
@@ -1119,7 +1174,9 @@ def _photo_background(image_path, w=720, h=1280):
 def scene(ep, number, dest, photo=None):
     W, H = 720, 1280
     bg, accent = palette(number + int(ep['id'][-3:]))
-    img = _photo_background(photo, W, H) if photo else Image.new('RGB', (W, H), bg)
+    if photo is None or not Path(photo).is_file():
+        raise RuntimeError('AERO_DATOS exige fotografía de avión civil o comercial.')
+    img = _photo_background(photo, W, H)
     d = ImageDraw.Draw(img, 'RGBA')
     # Estética aeronáutica limpia: sin círculos que distraigan del texto.
     d.rounded_rectangle((46, 420, 674, 825), radius=26, fill=(3, 12, 28, 148))
@@ -1169,11 +1226,13 @@ def render(ep, out: Path, require_voice=False):
     folder = out / ep['id']
     folder.mkdir(parents=True, exist_ok=True)
     photos, image_credits = prepare_photos(ep, folder)
+    if not photos:
+        raise RuntimeError('Sin fotografía de avión comercial, se cancela la producción.')
     ep['image_credits'] = image_credits
     frames = []
     for i in range(5):
         path = folder / f'escena_{i}.jpg'
-        scene(ep, i, path, photos[0] if photos else None)
+        scene(ep, i, path, photos[0])
         frames.append(path)
     cover = out / f"{ep['id']}.jpg"
     cover.write_bytes(frames[0].read_bytes())
