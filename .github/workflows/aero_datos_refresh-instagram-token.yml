@@ -1,10 +1,10 @@
 
-name: Renovar token de Instagram - AERO_DATOS
+name: Renovar token Instagram AERO_DATOS
 
 on:
   schedule:
-    # Todos los días a las 09:00 UTC (06:00 Brasilia)
-    - cron: "0 9 * * *"
+    # Diario a las 06:17, horario de Brasilia
+    - cron: "17 9 * * *"
 
   workflow_dispatch:
 
@@ -12,45 +12,32 @@ permissions:
   contents: read
 
 concurrency:
-  group: instagram-token-refresh
+  group: aero-datos-instagram-refresh
   cancel-in-progress: false
 
 jobs:
-  refresh-instagram-token:
-    name: Verificar y renovar token Instagram
+  refresh:
+    name: Verificar y renovar Instagram
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
 
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
-      - name: Configurar Python 3.11
+      - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Instalar dependencias
         run: |
-          python -m pip install --upgrade pip
           python -m pip install requests PyNaCl
 
-      - name: Comprobar configuración
+      - name: Verificar y renovar token
+        timeout-minutes: 3
         env:
-          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
-          GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
-        run: |
-          for name in INSTAGRAM_TOKEN INSTAGRAM_USER_ID GH_SECRETS_TOKEN; do
-            if [ -z "${!name}" ]; then
-              echo "::error::Falta configurar el secreto $name"
-              exit 1
-            fi
-          done
-          echo "Configuración de secretos completa."
-
-      - name: Verificar y renovar token de Instagram
-        env:
+          PYTHONUNBUFFERED: "1"
           IG_LOGIN_TYPE: instagram
           IG_EXPECTED_USERNAME: aero_datos
           INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
@@ -58,4 +45,6 @@ jobs:
           GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          python scripts/refresh_instagram_token.py
+          echo "Iniciando verificación Instagram..."
+          python -u scripts/refresh_instagram_token.py
+          echo "Verificación terminada."
