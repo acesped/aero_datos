@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AeroDatos: catálogo integrado (500 propuestas), previews y publicación de VIDEO en Reels, feed y Stories de IG.
+"""DataViral: 500 propuestas, Reels/feed/Stories; edición de retención y fondo monocromático.
 
 Las referencias son opcionales; la ausencia de fuentes no impide publicar.
 Los datos generados por IA no están verificados independientemente.
@@ -30,7 +30,187 @@ from pathlib import Path
 import requests
 from PIL import Image, ImageDraw, ImageFont
 
-AERO_CATALOG = [{'id': 'AD-001', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona Rolls-Royce Trent 1000?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Rolls-Royce Trent 1000; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Rolls-Royce Trent 1000'}, {'id': 'AD-002', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de Rolls-Royce Trent 1000?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Rolls-Royce Trent 1000; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Rolls-Royce Trent 1000'}, {'id': 'AD-003', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene Rolls-Royce Trent 1000?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Rolls-Royce Trent 1000; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Rolls-Royce Trent 1000'}, {'id': 'AD-004', 'category': 'Motores y propulsión', 'title': '¿Por qué importa Rolls-Royce Trent 1000 en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Rolls-Royce Trent 1000; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Rolls-Royce Trent 1000'}, {'id': 'AD-005', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre Rolls-Royce Trent 1000?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Rolls-Royce Trent 1000; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Rolls-Royce Trent 1000'}, {'id': 'AD-006', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona General Electric GEnx?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre General Electric GEnx; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'General Electric GEnx'}, {'id': 'AD-007', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de General Electric GEnx?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre General Electric GEnx; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'General Electric GEnx'}, {'id': 'AD-008', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene General Electric GEnx?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre General Electric GEnx; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'General Electric GEnx'}, {'id': 'AD-009', 'category': 'Motores y propulsión', 'title': '¿Por qué importa General Electric GEnx en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre General Electric GEnx; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'General Electric GEnx'}, {'id': 'AD-010', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre General Electric GEnx?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre General Electric GEnx; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'General Electric GEnx'}, {'id': 'AD-011', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona CFM56-5B?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CFM56-5B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CFM56-5B'}, {'id': 'AD-012', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de CFM56-5B?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CFM56-5B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CFM56-5B'}, {'id': 'AD-013', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene CFM56-5B?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CFM56-5B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CFM56-5B'}, {'id': 'AD-014', 'category': 'Motores y propulsión', 'title': '¿Por qué importa CFM56-5B en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CFM56-5B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CFM56-5B'}, {'id': 'AD-015', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre CFM56-5B?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CFM56-5B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CFM56-5B'}, {'id': 'AD-016', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona LEAP-1A?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre LEAP-1A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'LEAP-1A'}, {'id': 'AD-017', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de LEAP-1A?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre LEAP-1A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'LEAP-1A'}, {'id': 'AD-018', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene LEAP-1A?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre LEAP-1A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'LEAP-1A'}, {'id': 'AD-019', 'category': 'Motores y propulsión', 'title': '¿Por qué importa LEAP-1A en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre LEAP-1A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'LEAP-1A'}, {'id': 'AD-020', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre LEAP-1A?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre LEAP-1A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'LEAP-1A'}, {'id': 'AD-021', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona Pratt & Whitney PW1100G?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Pratt & Whitney PW1100G; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Pratt & Whitney PW1100G'}, {'id': 'AD-022', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de Pratt & Whitney PW1100G?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Pratt & Whitney PW1100G; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Pratt & Whitney PW1100G'}, {'id': 'AD-023', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene Pratt & Whitney PW1100G?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Pratt & Whitney PW1100G; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Pratt & Whitney PW1100G'}, {'id': 'AD-024', 'category': 'Motores y propulsión', 'title': '¿Por qué importa Pratt & Whitney PW1100G en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Pratt & Whitney PW1100G; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Pratt & Whitney PW1100G'}, {'id': 'AD-025', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre Pratt & Whitney PW1100G?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Pratt & Whitney PW1100G; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Pratt & Whitney PW1100G'}, {'id': 'AD-026', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona GE90?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GE90; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GE90'}, {'id': 'AD-027', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de GE90?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GE90; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GE90'}, {'id': 'AD-028', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene GE90?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GE90; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GE90'}, {'id': 'AD-029', 'category': 'Motores y propulsión', 'title': '¿Por qué importa GE90 en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GE90; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GE90'}, {'id': 'AD-030', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre GE90?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GE90; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GE90'}, {'id': 'AD-031', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona Trent XWB?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Trent XWB; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Trent XWB'}, {'id': 'AD-032', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de Trent XWB?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Trent XWB; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Trent XWB'}, {'id': 'AD-033', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene Trent XWB?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Trent XWB; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Trent XWB'}, {'id': 'AD-034', 'category': 'Motores y propulsión', 'title': '¿Por qué importa Trent XWB en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Trent XWB; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Trent XWB'}, {'id': 'AD-035', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre Trent XWB?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Trent XWB; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Trent XWB'}, {'id': 'AD-036', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona CF34?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CF34; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CF34'}, {'id': 'AD-037', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de CF34?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CF34; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CF34'}, {'id': 'AD-038', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene CF34?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CF34; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CF34'}, {'id': 'AD-039', 'category': 'Motores y propulsión', 'title': '¿Por qué importa CF34 en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CF34; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CF34'}, {'id': 'AD-040', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre CF34?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CF34; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CF34'}, {'id': 'AD-041', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona PT6A?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre PT6A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'PT6A'}, {'id': 'AD-042', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de PT6A?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre PT6A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'PT6A'}, {'id': 'AD-043', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene PT6A?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre PT6A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'PT6A'}, {'id': 'AD-044', 'category': 'Motores y propulsión', 'title': '¿Por qué importa PT6A en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre PT6A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'PT6A'}, {'id': 'AD-045', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre PT6A?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre PT6A; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'PT6A'}, {'id': 'AD-046', 'category': 'Motores y propulsión', 'title': '¿Cómo funciona APU de un avión comercial?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre APU de un avión comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'APU de un avión comercial'}, {'id': 'AD-047', 'category': 'Motores y propulsión', 'title': '¿Qué determina el rendimiento de APU de un avión comercial?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre APU de un avión comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'APU de un avión comercial'}, {'id': 'AD-048', 'category': 'Motores y propulsión', 'title': '¿Qué limitaciones tiene APU de un avión comercial?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre APU de un avión comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'APU de un avión comercial'}, {'id': 'AD-049', 'category': 'Motores y propulsión', 'title': '¿Por qué importa APU de un avión comercial en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre APU de un avión comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'APU de un avión comercial'}, {'id': 'AD-050', 'category': 'Motores y propulsión', 'title': '¿Qué errores comunes existen sobre APU de un avión comercial?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre APU de un avión comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'APU de un avión comercial'}, {'id': 'AD-051', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona sustentación de un ala?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sustentación de un ala; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sustentación de un ala'}, {'id': 'AD-052', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de sustentación de un ala?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sustentación de un ala; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sustentación de un ala'}, {'id': 'AD-053', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene sustentación de un ala?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sustentación de un ala; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sustentación de un ala'}, {'id': 'AD-054', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa sustentación de un ala en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sustentación de un ala; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sustentación de un ala'}, {'id': 'AD-055', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre sustentación de un ala?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sustentación de un ala; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sustentación de un ala'}, {'id': 'AD-056', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona resistencia inducida?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre resistencia inducida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'resistencia inducida'}, {'id': 'AD-057', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de resistencia inducida?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre resistencia inducida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'resistencia inducida'}, {'id': 'AD-058', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene resistencia inducida?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre resistencia inducida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'resistencia inducida'}, {'id': 'AD-059', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa resistencia inducida en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre resistencia inducida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'resistencia inducida'}, {'id': 'AD-060', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre resistencia inducida?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre resistencia inducida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'resistencia inducida'}, {'id': 'AD-061', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona winglets?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre winglets; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'winglets'}, {'id': 'AD-062', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de winglets?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre winglets; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'winglets'}, {'id': 'AD-063', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene winglets?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre winglets; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'winglets'}, {'id': 'AD-064', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa winglets en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre winglets; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'winglets'}, {'id': 'AD-065', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre winglets?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre winglets; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'winglets'}, {'id': 'AD-066', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona flaps y slats?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre flaps y slats; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'flaps y slats'}, {'id': 'AD-067', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de flaps y slats?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre flaps y slats; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'flaps y slats'}, {'id': 'AD-068', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene flaps y slats?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre flaps y slats; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'flaps y slats'}, {'id': 'AD-069', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa flaps y slats en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre flaps y slats; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'flaps y slats'}, {'id': 'AD-070', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre flaps y slats?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre flaps y slats; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'flaps y slats'}, {'id': 'AD-071', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona velocidad de pérdida?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre velocidad de pérdida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'velocidad de pérdida'}, {'id': 'AD-072', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de velocidad de pérdida?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre velocidad de pérdida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'velocidad de pérdida'}, {'id': 'AD-073', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene velocidad de pérdida?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre velocidad de pérdida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'velocidad de pérdida'}, {'id': 'AD-074', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa velocidad de pérdida en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre velocidad de pérdida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'velocidad de pérdida'}, {'id': 'AD-075', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre velocidad de pérdida?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre velocidad de pérdida; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'velocidad de pérdida'}, {'id': 'AD-076', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona onda de choque transónica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de choque transónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de choque transónica'}, {'id': 'AD-077', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de onda de choque transónica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de choque transónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de choque transónica'}, {'id': 'AD-078', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene onda de choque transónica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de choque transónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de choque transónica'}, {'id': 'AD-079', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa onda de choque transónica en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de choque transónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de choque transónica'}, {'id': 'AD-080', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre onda de choque transónica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de choque transónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de choque transónica'}, {'id': 'AD-081', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona efecto suelo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre efecto suelo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'efecto suelo'}, {'id': 'AD-082', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de efecto suelo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre efecto suelo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'efecto suelo'}, {'id': 'AD-083', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene efecto suelo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre efecto suelo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'efecto suelo'}, {'id': 'AD-084', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa efecto suelo en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre efecto suelo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'efecto suelo'}, {'id': 'AD-085', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre efecto suelo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre efecto suelo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'efecto suelo'}, {'id': 'AD-086', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona centro de gravedad?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre centro de gravedad; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'centro de gravedad'}, {'id': 'AD-087', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de centro de gravedad?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre centro de gravedad; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'centro de gravedad'}, {'id': 'AD-088', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene centro de gravedad?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre centro de gravedad; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'centro de gravedad'}, {'id': 'AD-089', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa centro de gravedad en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre centro de gravedad; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'centro de gravedad'}, {'id': 'AD-090', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre centro de gravedad?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre centro de gravedad; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'centro de gravedad'}, {'id': 'AD-091', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona ángulo de ataque?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ángulo de ataque; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ángulo de ataque'}, {'id': 'AD-092', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de ángulo de ataque?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ángulo de ataque; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ángulo de ataque'}, {'id': 'AD-093', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene ángulo de ataque?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ángulo de ataque; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ángulo de ataque'}, {'id': 'AD-094', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa ángulo de ataque en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ángulo de ataque; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ángulo de ataque'}, {'id': 'AD-095', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre ángulo de ataque?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ángulo de ataque; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ángulo de ataque'}, {'id': 'AD-096', 'category': 'Aerodinámica y vuelo', 'title': '¿Cómo funciona formación de estelas turbulentas?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre formación de estelas turbulentas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'formación de estelas turbulentas'}, {'id': 'AD-097', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué determina el rendimiento de formación de estelas turbulentas?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre formación de estelas turbulentas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'formación de estelas turbulentas'}, {'id': 'AD-098', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué limitaciones tiene formación de estelas turbulentas?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre formación de estelas turbulentas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'formación de estelas turbulentas'}, {'id': 'AD-099', 'category': 'Aerodinámica y vuelo', 'title': '¿Por qué importa formación de estelas turbulentas en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre formación de estelas turbulentas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'formación de estelas turbulentas'}, {'id': 'AD-100', 'category': 'Aerodinámica y vuelo', 'title': '¿Qué errores comunes existen sobre formación de estelas turbulentas?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre formación de estelas turbulentas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'formación de estelas turbulentas'}, {'id': 'AD-101', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona sistema hidráulico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema hidráulico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema hidráulico'}, {'id': 'AD-102', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de sistema hidráulico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema hidráulico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema hidráulico'}, {'id': 'AD-103', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene sistema hidráulico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema hidráulico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema hidráulico'}, {'id': 'AD-104', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa sistema hidráulico en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema hidráulico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema hidráulico'}, {'id': 'AD-105', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre sistema hidráulico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema hidráulico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema hidráulico'}, {'id': 'AD-106', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona sistema fly-by-wire?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema fly-by-wire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema fly-by-wire'}, {'id': 'AD-107', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de sistema fly-by-wire?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema fly-by-wire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema fly-by-wire'}, {'id': 'AD-108', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene sistema fly-by-wire?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema fly-by-wire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema fly-by-wire'}, {'id': 'AD-109', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa sistema fly-by-wire en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema fly-by-wire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema fly-by-wire'}, {'id': 'AD-110', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre sistema fly-by-wire?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema fly-by-wire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema fly-by-wire'}, {'id': 'AD-111', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona tren de aterrizaje?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tren de aterrizaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tren de aterrizaje'}, {'id': 'AD-112', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de tren de aterrizaje?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tren de aterrizaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tren de aterrizaje'}, {'id': 'AD-113', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene tren de aterrizaje?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tren de aterrizaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tren de aterrizaje'}, {'id': 'AD-114', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa tren de aterrizaje en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tren de aterrizaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tren de aterrizaje'}, {'id': 'AD-115', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre tren de aterrizaje?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tren de aterrizaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tren de aterrizaje'}, {'id': 'AD-116', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona frenos de carbono?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre frenos de carbono; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'frenos de carbono'}, {'id': 'AD-117', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de frenos de carbono?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre frenos de carbono; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'frenos de carbono'}, {'id': 'AD-118', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene frenos de carbono?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre frenos de carbono; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'frenos de carbono'}, {'id': 'AD-119', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa frenos de carbono en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre frenos de carbono; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'frenos de carbono'}, {'id': 'AD-120', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre frenos de carbono?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre frenos de carbono; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'frenos de carbono'}, {'id': 'AD-121', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona protección contra hielo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre protección contra hielo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'protección contra hielo'}, {'id': 'AD-122', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de protección contra hielo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre protección contra hielo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'protección contra hielo'}, {'id': 'AD-123', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene protección contra hielo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre protección contra hielo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'protección contra hielo'}, {'id': 'AD-124', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa protección contra hielo en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre protección contra hielo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'protección contra hielo'}, {'id': 'AD-125', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre protección contra hielo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre protección contra hielo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'protección contra hielo'}, {'id': 'AD-126', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona sistema neumático?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema neumático; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema neumático'}, {'id': 'AD-127', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de sistema neumático?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema neumático; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema neumático'}, {'id': 'AD-128', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene sistema neumático?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema neumático; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema neumático'}, {'id': 'AD-129', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa sistema neumático en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema neumático; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema neumático'}, {'id': 'AD-130', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre sistema neumático?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre sistema neumático; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'sistema neumático'}, {'id': 'AD-131', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona presurización de cabina?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre presurización de cabina; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'presurización de cabina'}, {'id': 'AD-132', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de presurización de cabina?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre presurización de cabina; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'presurización de cabina'}, {'id': 'AD-133', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene presurización de cabina?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre presurización de cabina; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'presurización de cabina'}, {'id': 'AD-134', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa presurización de cabina en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre presurización de cabina; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'presurización de cabina'}, {'id': 'AD-135', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre presurización de cabina?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre presurización de cabina; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'presurización de cabina'}, {'id': 'AD-136', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona generadores eléctricos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre generadores eléctricos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'generadores eléctricos'}, {'id': 'AD-137', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de generadores eléctricos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre generadores eléctricos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'generadores eléctricos'}, {'id': 'AD-138', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene generadores eléctricos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre generadores eléctricos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'generadores eléctricos'}, {'id': 'AD-139', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa generadores eléctricos en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre generadores eléctricos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'generadores eléctricos'}, {'id': 'AD-140', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre generadores eléctricos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre generadores eléctricos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'generadores eléctricos'}, {'id': 'AD-141', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona inspección de álabes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre inspección de álabes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'inspección de álabes'}, {'id': 'AD-142', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de inspección de álabes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre inspección de álabes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'inspección de álabes'}, {'id': 'AD-143', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene inspección de álabes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre inspección de álabes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'inspección de álabes'}, {'id': 'AD-144', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa inspección de álabes en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre inspección de álabes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'inspección de álabes'}, {'id': 'AD-145', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre inspección de álabes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre inspección de álabes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'inspección de álabes'}, {'id': 'AD-146', 'category': 'Mantenimiento y sistemas', 'title': '¿Cómo funciona fatiga estructural?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre fatiga estructural; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'fatiga estructural'}, {'id': 'AD-147', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué determina el rendimiento de fatiga estructural?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre fatiga estructural; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'fatiga estructural'}, {'id': 'AD-148', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué limitaciones tiene fatiga estructural?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre fatiga estructural; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'fatiga estructural'}, {'id': 'AD-149', 'category': 'Mantenimiento y sistemas', 'title': '¿Por qué importa fatiga estructural en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre fatiga estructural; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'fatiga estructural'}, {'id': 'AD-150', 'category': 'Mantenimiento y sistemas', 'title': '¿Qué errores comunes existen sobre fatiga estructural?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre fatiga estructural; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'fatiga estructural'}, {'id': 'AD-151', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona despegue con viento cruzado?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre despegue con viento cruzado; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'despegue con viento cruzado'}, {'id': 'AD-152', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de despegue con viento cruzado?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre despegue con viento cruzado; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'despegue con viento cruzado'}, {'id': 'AD-153', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene despegue con viento cruzado?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre despegue con viento cruzado; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'despegue con viento cruzado'}, {'id': 'AD-154', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa despegue con viento cruzado en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre despegue con viento cruzado; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'despegue con viento cruzado'}, {'id': 'AD-155', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre despegue con viento cruzado?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre despegue con viento cruzado; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'despegue con viento cruzado'}, {'id': 'AD-156', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona cálculo de combustible?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cálculo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cálculo de combustible'}, {'id': 'AD-157', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de cálculo de combustible?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cálculo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cálculo de combustible'}, {'id': 'AD-158', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene cálculo de combustible?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cálculo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cálculo de combustible'}, {'id': 'AD-159', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa cálculo de combustible en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cálculo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cálculo de combustible'}, {'id': 'AD-160', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre cálculo de combustible?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cálculo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cálculo de combustible'}, {'id': 'AD-161', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona aproximación estabilizada?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación estabilizada; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación estabilizada'}, {'id': 'AD-162', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de aproximación estabilizada?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación estabilizada; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación estabilizada'}, {'id': 'AD-163', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene aproximación estabilizada?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación estabilizada; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación estabilizada'}, {'id': 'AD-164', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa aproximación estabilizada en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación estabilizada; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación estabilizada'}, {'id': 'AD-165', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre aproximación estabilizada?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación estabilizada; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación estabilizada'}, {'id': 'AD-166', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona desvío al alternativo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre desvío al alternativo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'desvío al alternativo'}, {'id': 'AD-167', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de desvío al alternativo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre desvío al alternativo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'desvío al alternativo'}, {'id': 'AD-168', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene desvío al alternativo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre desvío al alternativo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'desvío al alternativo'}, {'id': 'AD-169', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa desvío al alternativo en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre desvío al alternativo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'desvío al alternativo'}, {'id': 'AD-170', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre desvío al alternativo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre desvío al alternativo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'desvío al alternativo'}, {'id': 'AD-171', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona separación en pista?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación en pista; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación en pista'}, {'id': 'AD-172', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de separación en pista?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación en pista; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación en pista'}, {'id': 'AD-173', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene separación en pista?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación en pista; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación en pista'}, {'id': 'AD-174', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa separación en pista en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación en pista; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación en pista'}, {'id': 'AD-175', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre separación en pista?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación en pista; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación en pista'}, {'id': 'AD-176', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona CRM de tripulación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CRM de tripulación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CRM de tripulación'}, {'id': 'AD-177', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de CRM de tripulación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CRM de tripulación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CRM de tripulación'}, {'id': 'AD-178', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene CRM de tripulación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CRM de tripulación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CRM de tripulación'}, {'id': 'AD-179', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa CRM de tripulación en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CRM de tripulación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CRM de tripulación'}, {'id': 'AD-180', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre CRM de tripulación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre CRM de tripulación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'CRM de tripulación'}, {'id': 'AD-181', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona peso y balance?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre peso y balance; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'peso y balance'}, {'id': 'AD-182', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de peso y balance?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre peso y balance; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'peso y balance'}, {'id': 'AD-183', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene peso y balance?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre peso y balance; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'peso y balance'}, {'id': 'AD-184', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa peso y balance en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre peso y balance; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'peso y balance'}, {'id': 'AD-185', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre peso y balance?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre peso y balance; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'peso y balance'}, {'id': 'AD-186', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona operación ETOPS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre operación ETOPS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'operación ETOPS'}, {'id': 'AD-187', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de operación ETOPS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre operación ETOPS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'operación ETOPS'}, {'id': 'AD-188', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene operación ETOPS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre operación ETOPS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'operación ETOPS'}, {'id': 'AD-189', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa operación ETOPS en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre operación ETOPS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'operación ETOPS'}, {'id': 'AD-190', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre operación ETOPS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre operación ETOPS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'operación ETOPS'}, {'id': 'AD-191', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona reporte de incidentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reporte de incidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reporte de incidentes'}, {'id': 'AD-192', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de reporte de incidentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reporte de incidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reporte de incidentes'}, {'id': 'AD-193', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene reporte de incidentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reporte de incidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reporte de incidentes'}, {'id': 'AD-194', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa reporte de incidentes en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reporte de incidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reporte de incidentes'}, {'id': 'AD-195', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre reporte de incidentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reporte de incidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reporte de incidentes'}, {'id': 'AD-196', 'category': 'Operaciones y seguridad', 'title': '¿Cómo funciona gestión de amenazas y errores?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de amenazas y errores; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de amenazas y errores'}, {'id': 'AD-197', 'category': 'Operaciones y seguridad', 'title': '¿Qué determina el rendimiento de gestión de amenazas y errores?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de amenazas y errores; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de amenazas y errores'}, {'id': 'AD-198', 'category': 'Operaciones y seguridad', 'title': '¿Qué limitaciones tiene gestión de amenazas y errores?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de amenazas y errores; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de amenazas y errores'}, {'id': 'AD-199', 'category': 'Operaciones y seguridad', 'title': '¿Por qué importa gestión de amenazas y errores en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de amenazas y errores; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de amenazas y errores'}, {'id': 'AD-200', 'category': 'Operaciones y seguridad', 'title': '¿Qué errores comunes existen sobre gestión de amenazas y errores?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de amenazas y errores; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de amenazas y errores'}, {'id': 'AD-201', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona cizalladura del viento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cizalladura del viento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cizalladura del viento'}, {'id': 'AD-202', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de cizalladura del viento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cizalladura del viento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cizalladura del viento'}, {'id': 'AD-203', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene cizalladura del viento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cizalladura del viento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cizalladura del viento'}, {'id': 'AD-204', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa cizalladura del viento en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cizalladura del viento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cizalladura del viento'}, {'id': 'AD-205', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre cizalladura del viento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre cizalladura del viento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'cizalladura del viento'}, {'id': 'AD-206', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona microburst?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre microburst; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'microburst'}, {'id': 'AD-207', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de microburst?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre microburst; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'microburst'}, {'id': 'AD-208', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene microburst?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre microburst; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'microburst'}, {'id': 'AD-209', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa microburst en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre microburst; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'microburst'}, {'id': 'AD-210', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre microburst?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre microburst; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'microburst'}, {'id': 'AD-211', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona engelamiento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre engelamiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'engelamiento'}, {'id': 'AD-212', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de engelamiento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre engelamiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'engelamiento'}, {'id': 'AD-213', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene engelamiento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre engelamiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'engelamiento'}, {'id': 'AD-214', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa engelamiento en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre engelamiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'engelamiento'}, {'id': 'AD-215', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre engelamiento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre engelamiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'engelamiento'}, {'id': 'AD-216', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona turbulencia en aire claro?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre turbulencia en aire claro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'turbulencia en aire claro'}, {'id': 'AD-217', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de turbulencia en aire claro?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre turbulencia en aire claro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'turbulencia en aire claro'}, {'id': 'AD-218', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene turbulencia en aire claro?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre turbulencia en aire claro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'turbulencia en aire claro'}, {'id': 'AD-219', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa turbulencia en aire claro en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre turbulencia en aire claro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'turbulencia en aire claro'}, {'id': 'AD-220', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre turbulencia en aire claro?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre turbulencia en aire claro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'turbulencia en aire claro'}, {'id': 'AD-221', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona tormentas convectivas?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tormentas convectivas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tormentas convectivas'}, {'id': 'AD-222', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de tormentas convectivas?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tormentas convectivas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tormentas convectivas'}, {'id': 'AD-223', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene tormentas convectivas?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tormentas convectivas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tormentas convectivas'}, {'id': 'AD-224', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa tormentas convectivas en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tormentas convectivas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tormentas convectivas'}, {'id': 'AD-225', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre tormentas convectivas?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre tormentas convectivas; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'tormentas convectivas'}, {'id': 'AD-226', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona corrientes en chorro?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre corrientes en chorro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'corrientes en chorro'}, {'id': 'AD-227', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de corrientes en chorro?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre corrientes en chorro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'corrientes en chorro'}, {'id': 'AD-228', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene corrientes en chorro?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre corrientes en chorro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'corrientes en chorro'}, {'id': 'AD-229', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa corrientes en chorro en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre corrientes en chorro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'corrientes en chorro'}, {'id': 'AD-230', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre corrientes en chorro?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre corrientes en chorro; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'corrientes en chorro'}, {'id': 'AD-231', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona visibilidad RVR?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre visibilidad RVR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'visibilidad RVR'}, {'id': 'AD-232', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de visibilidad RVR?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre visibilidad RVR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'visibilidad RVR'}, {'id': 'AD-233', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene visibilidad RVR?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre visibilidad RVR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'visibilidad RVR'}, {'id': 'AD-234', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa visibilidad RVR en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre visibilidad RVR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'visibilidad RVR'}, {'id': 'AD-235', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre visibilidad RVR?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre visibilidad RVR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'visibilidad RVR'}, {'id': 'AD-236', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona niebla de radiación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre niebla de radiación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'niebla de radiación'}, {'id': 'AD-237', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de niebla de radiación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre niebla de radiación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'niebla de radiación'}, {'id': 'AD-238', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene niebla de radiación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre niebla de radiación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'niebla de radiación'}, {'id': 'AD-239', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa niebla de radiación en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre niebla de radiación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'niebla de radiación'}, {'id': 'AD-240', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre niebla de radiación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre niebla de radiación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'niebla de radiación'}, {'id': 'AD-241', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona ceniza volcánica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ceniza volcánica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ceniza volcánica'}, {'id': 'AD-242', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de ceniza volcánica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ceniza volcánica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ceniza volcánica'}, {'id': 'AD-243', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene ceniza volcánica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ceniza volcánica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ceniza volcánica'}, {'id': 'AD-244', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa ceniza volcánica en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ceniza volcánica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ceniza volcánica'}, {'id': 'AD-245', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre ceniza volcánica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ceniza volcánica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ceniza volcánica'}, {'id': 'AD-246', 'category': 'Meteorología aeronáutica', 'title': '¿Cómo funciona onda de montaña?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de montaña; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de montaña'}, {'id': 'AD-247', 'category': 'Meteorología aeronáutica', 'title': '¿Qué determina el rendimiento de onda de montaña?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de montaña; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de montaña'}, {'id': 'AD-248', 'category': 'Meteorología aeronáutica', 'title': '¿Qué limitaciones tiene onda de montaña?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de montaña; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de montaña'}, {'id': 'AD-249', 'category': 'Meteorología aeronáutica', 'title': '¿Por qué importa onda de montaña en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de montaña; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de montaña'}, {'id': 'AD-250', 'category': 'Meteorología aeronáutica', 'title': '¿Qué errores comunes existen sobre onda de montaña?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre onda de montaña; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'onda de montaña'}, {'id': 'AD-251', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona ADS-B?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ADS-B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ADS-B'}, {'id': 'AD-252', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de ADS-B?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ADS-B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ADS-B'}, {'id': 'AD-253', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene ADS-B?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ADS-B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ADS-B'}, {'id': 'AD-254', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa ADS-B en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ADS-B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ADS-B'}, {'id': 'AD-255', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre ADS-B?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ADS-B; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ADS-B'}, {'id': 'AD-256', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona transpondedor modo S?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre transpondedor modo S; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'transpondedor modo S'}, {'id': 'AD-257', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de transpondedor modo S?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre transpondedor modo S; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'transpondedor modo S'}, {'id': 'AD-258', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene transpondedor modo S?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre transpondedor modo S; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'transpondedor modo S'}, {'id': 'AD-259', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa transpondedor modo S en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre transpondedor modo S; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'transpondedor modo S'}, {'id': 'AD-260', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre transpondedor modo S?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre transpondedor modo S; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'transpondedor modo S'}, {'id': 'AD-261', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona ILS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ILS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ILS'}, {'id': 'AD-262', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de ILS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ILS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ILS'}, {'id': 'AD-263', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene ILS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ILS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ILS'}, {'id': 'AD-264', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa ILS en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ILS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ILS'}, {'id': 'AD-265', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre ILS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ILS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ILS'}, {'id': 'AD-266', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona aproximación RNP?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación RNP; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación RNP'}, {'id': 'AD-267', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de aproximación RNP?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación RNP; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación RNP'}, {'id': 'AD-268', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene aproximación RNP?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación RNP; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación RNP'}, {'id': 'AD-269', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa aproximación RNP en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación RNP; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación RNP'}, {'id': 'AD-270', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre aproximación RNP?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aproximación RNP; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aproximación RNP'}, {'id': 'AD-271', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona GNSS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GNSS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GNSS'}, {'id': 'AD-272', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de GNSS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GNSS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GNSS'}, {'id': 'AD-273', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene GNSS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GNSS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GNSS'}, {'id': 'AD-274', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa GNSS en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GNSS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GNSS'}, {'id': 'AD-275', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre GNSS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre GNSS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'GNSS'}, {'id': 'AD-276', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona VOR?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre VOR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'VOR'}, {'id': 'AD-277', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de VOR?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre VOR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'VOR'}, {'id': 'AD-278', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene VOR?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre VOR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'VOR'}, {'id': 'AD-279', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa VOR en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre VOR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'VOR'}, {'id': 'AD-280', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre VOR?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre VOR; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'VOR'}, {'id': 'AD-281', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona TCAS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre TCAS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'TCAS'}, {'id': 'AD-282', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de TCAS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre TCAS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'TCAS'}, {'id': 'AD-283', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene TCAS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre TCAS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'TCAS'}, {'id': 'AD-284', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa TCAS en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre TCAS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'TCAS'}, {'id': 'AD-285', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre TCAS?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre TCAS; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'TCAS'}, {'id': 'AD-286', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona separación radar?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación radar; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación radar'}, {'id': 'AD-287', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de separación radar?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación radar; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación radar'}, {'id': 'AD-288', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene separación radar?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación radar; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación radar'}, {'id': 'AD-289', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa separación radar en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación radar; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación radar'}, {'id': 'AD-290', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre separación radar?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre separación radar; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'separación radar'}, {'id': 'AD-291', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona NOTAM?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre NOTAM; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'NOTAM'}, {'id': 'AD-292', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de NOTAM?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre NOTAM; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'NOTAM'}, {'id': 'AD-293', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene NOTAM?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre NOTAM; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'NOTAM'}, {'id': 'AD-294', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa NOTAM en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre NOTAM; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'NOTAM'}, {'id': 'AD-295', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre NOTAM?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre NOTAM; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'NOTAM'}, {'id': 'AD-296', 'category': 'Navegación y control aéreo', 'title': '¿Cómo funciona altitud de transición?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre altitud de transición; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'altitud de transición'}, {'id': 'AD-297', 'category': 'Navegación y control aéreo', 'title': '¿Qué determina el rendimiento de altitud de transición?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre altitud de transición; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'altitud de transición'}, {'id': 'AD-298', 'category': 'Navegación y control aéreo', 'title': '¿Qué limitaciones tiene altitud de transición?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre altitud de transición; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'altitud de transición'}, {'id': 'AD-299', 'category': 'Navegación y control aéreo', 'title': '¿Por qué importa altitud de transición en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre altitud de transición; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'altitud de transición'}, {'id': 'AD-300', 'category': 'Navegación y control aéreo', 'title': '¿Qué errores comunes existen sobre altitud de transición?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre altitud de transición; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'altitud de transición'}, {'id': 'AD-301', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona factor de ocupación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre factor de ocupación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'factor de ocupación'}, {'id': 'AD-302', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de factor de ocupación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre factor de ocupación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'factor de ocupación'}, {'id': 'AD-303', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene factor de ocupación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre factor de ocupación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'factor de ocupación'}, {'id': 'AD-304', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa factor de ocupación en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre factor de ocupación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'factor de ocupación'}, {'id': 'AD-305', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre factor de ocupación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre factor de ocupación; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'factor de ocupación'}, {'id': 'AD-306', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona costo de combustible?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costo de combustible'}, {'id': 'AD-307', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de costo de combustible?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costo de combustible'}, {'id': 'AD-308', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene costo de combustible?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costo de combustible'}, {'id': 'AD-309', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa costo de combustible en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costo de combustible'}, {'id': 'AD-310', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre costo de combustible?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costo de combustible; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costo de combustible'}, {'id': 'AD-311', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona leasing aeronáutico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre leasing aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'leasing aeronáutico'}, {'id': 'AD-312', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de leasing aeronáutico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre leasing aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'leasing aeronáutico'}, {'id': 'AD-313', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene leasing aeronáutico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre leasing aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'leasing aeronáutico'}, {'id': 'AD-314', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa leasing aeronáutico en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre leasing aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'leasing aeronáutico'}, {'id': 'AD-315', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre leasing aeronáutico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre leasing aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'leasing aeronáutico'}, {'id': 'AD-316', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona rentabilidad de una ruta?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre rentabilidad de una ruta; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'rentabilidad de una ruta'}, {'id': 'AD-317', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de rentabilidad de una ruta?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre rentabilidad de una ruta; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'rentabilidad de una ruta'}, {'id': 'AD-318', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene rentabilidad de una ruta?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre rentabilidad de una ruta; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'rentabilidad de una ruta'}, {'id': 'AD-319', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa rentabilidad de una ruta en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre rentabilidad de una ruta; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'rentabilidad de una ruta'}, {'id': 'AD-320', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre rentabilidad de una ruta?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre rentabilidad de una ruta; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'rentabilidad de una ruta'}, {'id': 'AD-321', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona carga aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre carga aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'carga aérea'}, {'id': 'AD-322', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de carga aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre carga aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'carga aérea'}, {'id': 'AD-323', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene carga aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre carga aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'carga aérea'}, {'id': 'AD-324', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa carga aérea en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre carga aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'carga aérea'}, {'id': 'AD-325', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre carga aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre carga aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'carga aérea'}, {'id': 'AD-326', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona ingresos auxiliares?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ingresos auxiliares; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ingresos auxiliares'}, {'id': 'AD-327', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de ingresos auxiliares?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ingresos auxiliares; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ingresos auxiliares'}, {'id': 'AD-328', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene ingresos auxiliares?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ingresos auxiliares; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ingresos auxiliares'}, {'id': 'AD-329', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa ingresos auxiliares en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ingresos auxiliares; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ingresos auxiliares'}, {'id': 'AD-330', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre ingresos auxiliares?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre ingresos auxiliares; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'ingresos auxiliares'}, {'id': 'AD-331', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona utilización diaria de aeronaves?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre utilización diaria de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'utilización diaria de aeronaves'}, {'id': 'AD-332', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de utilización diaria de aeronaves?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre utilización diaria de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'utilización diaria de aeronaves'}, {'id': 'AD-333', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene utilización diaria de aeronaves?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre utilización diaria de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'utilización diaria de aeronaves'}, {'id': 'AD-334', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa utilización diaria de aeronaves en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre utilización diaria de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'utilización diaria de aeronaves'}, {'id': 'AD-335', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre utilización diaria de aeronaves?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre utilización diaria de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'utilización diaria de aeronaves'}, {'id': 'AD-336', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona costos de mantenimiento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costos de mantenimiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costos de mantenimiento'}, {'id': 'AD-337', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de costos de mantenimiento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costos de mantenimiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costos de mantenimiento'}, {'id': 'AD-338', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene costos de mantenimiento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costos de mantenimiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costos de mantenimiento'}, {'id': 'AD-339', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa costos de mantenimiento en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costos de mantenimiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costos de mantenimiento'}, {'id': 'AD-340', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre costos de mantenimiento?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre costos de mantenimiento; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'costos de mantenimiento'}, {'id': 'AD-341', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona planificación de flota?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre planificación de flota; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'planificación de flota'}, {'id': 'AD-342', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de planificación de flota?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre planificación de flota; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'planificación de flota'}, {'id': 'AD-343', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene planificación de flota?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre planificación de flota; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'planificación de flota'}, {'id': 'AD-344', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa planificación de flota en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre planificación de flota; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'planificación de flota'}, {'id': 'AD-345', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre planificación de flota?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre planificación de flota; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'planificación de flota'}, {'id': 'AD-346', 'category': 'Economía y aerolíneas', 'title': '¿Cómo funciona precio del queroseno?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre precio del queroseno; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'precio del queroseno'}, {'id': 'AD-347', 'category': 'Economía y aerolíneas', 'title': '¿Qué determina el rendimiento de precio del queroseno?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre precio del queroseno; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'precio del queroseno'}, {'id': 'AD-348', 'category': 'Economía y aerolíneas', 'title': '¿Qué limitaciones tiene precio del queroseno?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre precio del queroseno; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'precio del queroseno'}, {'id': 'AD-349', 'category': 'Economía y aerolíneas', 'title': '¿Por qué importa precio del queroseno en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre precio del queroseno; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'precio del queroseno'}, {'id': 'AD-350', 'category': 'Economía y aerolíneas', 'title': '¿Qué errores comunes existen sobre precio del queroseno?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre precio del queroseno; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'precio del queroseno'}, {'id': 'AD-351', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona certificación de tipo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre certificación de tipo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'certificación de tipo'}, {'id': 'AD-352', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de certificación de tipo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre certificación de tipo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'certificación de tipo'}, {'id': 'AD-353', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene certificación de tipo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre certificación de tipo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'certificación de tipo'}, {'id': 'AD-354', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa certificación de tipo en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre certificación de tipo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'certificación de tipo'}, {'id': 'AD-355', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre certificación de tipo?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre certificación de tipo; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'certificación de tipo'}, {'id': 'AD-356', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona libertades del aire?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre libertades del aire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'libertades del aire'}, {'id': 'AD-357', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de libertades del aire?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre libertades del aire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'libertades del aire'}, {'id': 'AD-358', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene libertades del aire?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre libertades del aire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'libertades del aire'}, {'id': 'AD-359', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa libertades del aire en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre libertades del aire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'libertades del aire'}, {'id': 'AD-360', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre libertades del aire?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre libertades del aire; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'libertades del aire'}, {'id': 'AD-361', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona derechos de tráfico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre derechos de tráfico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'derechos de tráfico'}, {'id': 'AD-362', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de derechos de tráfico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre derechos de tráfico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'derechos de tráfico'}, {'id': 'AD-363', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene derechos de tráfico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre derechos de tráfico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'derechos de tráfico'}, {'id': 'AD-364', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa derechos de tráfico en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre derechos de tráfico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'derechos de tráfico'}, {'id': 'AD-365', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre derechos de tráfico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre derechos de tráfico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'derechos de tráfico'}, {'id': 'AD-366', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona normativa de emisiones CORSIA?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre normativa de emisiones CORSIA; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'normativa de emisiones CORSIA'}, {'id': 'AD-367', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de normativa de emisiones CORSIA?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre normativa de emisiones CORSIA; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'normativa de emisiones CORSIA'}, {'id': 'AD-368', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene normativa de emisiones CORSIA?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre normativa de emisiones CORSIA; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'normativa de emisiones CORSIA'}, {'id': 'AD-369', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa normativa de emisiones CORSIA en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre normativa de emisiones CORSIA; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'normativa de emisiones CORSIA'}, {'id': 'AD-370', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre normativa de emisiones CORSIA?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre normativa de emisiones CORSIA; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'normativa de emisiones CORSIA'}, {'id': 'AD-371', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona reglas de cabotaje?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de cabotaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de cabotaje'}, {'id': 'AD-372', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de reglas de cabotaje?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de cabotaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de cabotaje'}, {'id': 'AD-373', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene reglas de cabotaje?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de cabotaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de cabotaje'}, {'id': 'AD-374', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa reglas de cabotaje en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de cabotaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de cabotaje'}, {'id': 'AD-375', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre reglas de cabotaje?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de cabotaje; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de cabotaje'}, {'id': 'AD-376', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona autoridad aeronáutica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre autoridad aeronáutica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'autoridad aeronáutica'}, {'id': 'AD-377', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de autoridad aeronáutica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre autoridad aeronáutica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'autoridad aeronáutica'}, {'id': 'AD-378', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene autoridad aeronáutica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre autoridad aeronáutica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'autoridad aeronáutica'}, {'id': 'AD-379', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa autoridad aeronáutica en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre autoridad aeronáutica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'autoridad aeronáutica'}, {'id': 'AD-380', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre autoridad aeronáutica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre autoridad aeronáutica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'autoridad aeronáutica'}, {'id': 'AD-381', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona investigación de accidentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre investigación de accidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'investigación de accidentes'}, {'id': 'AD-382', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de investigación de accidentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre investigación de accidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'investigación de accidentes'}, {'id': 'AD-383', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene investigación de accidentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre investigación de accidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'investigación de accidentes'}, {'id': 'AD-384', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa investigación de accidentes en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre investigación de accidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'investigación de accidentes'}, {'id': 'AD-385', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre investigación de accidentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre investigación de accidentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'investigación de accidentes'}, {'id': 'AD-386', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona acuerdos bilaterales?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre acuerdos bilaterales; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'acuerdos bilaterales'}, {'id': 'AD-387', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de acuerdos bilaterales?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre acuerdos bilaterales; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'acuerdos bilaterales'}, {'id': 'AD-388', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene acuerdos bilaterales?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre acuerdos bilaterales; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'acuerdos bilaterales'}, {'id': 'AD-389', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa acuerdos bilaterales en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre acuerdos bilaterales; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'acuerdos bilaterales'}, {'id': 'AD-390', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre acuerdos bilaterales?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre acuerdos bilaterales; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'acuerdos bilaterales'}, {'id': 'AD-391', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona gestión de slots?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de slots; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de slots'}, {'id': 'AD-392', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de gestión de slots?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de slots; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de slots'}, {'id': 'AD-393', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene gestión de slots?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de slots; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de slots'}, {'id': 'AD-394', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa gestión de slots en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de slots; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de slots'}, {'id': 'AD-395', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre gestión de slots?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre gestión de slots; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'gestión de slots'}, {'id': 'AD-396', 'category': 'Regulación y política aeronáutica', 'title': '¿Cómo funciona reglas de descanso de tripulaciones?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de descanso de tripulaciones; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de descanso de tripulaciones'}, {'id': 'AD-397', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué determina el rendimiento de reglas de descanso de tripulaciones?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de descanso de tripulaciones; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de descanso de tripulaciones'}, {'id': 'AD-398', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué limitaciones tiene reglas de descanso de tripulaciones?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de descanso de tripulaciones; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de descanso de tripulaciones'}, {'id': 'AD-399', 'category': 'Regulación y política aeronáutica', 'title': '¿Por qué importa reglas de descanso de tripulaciones en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de descanso de tripulaciones; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de descanso de tripulaciones'}, {'id': 'AD-400', 'category': 'Regulación y política aeronáutica', 'title': '¿Qué errores comunes existen sobre reglas de descanso de tripulaciones?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre reglas de descanso de tripulaciones; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'reglas de descanso de tripulaciones'}, {'id': 'AD-401', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona combustible SAF?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre combustible SAF; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'combustible SAF'}, {'id': 'AD-402', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de combustible SAF?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre combustible SAF; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'combustible SAF'}, {'id': 'AD-403', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene combustible SAF?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre combustible SAF; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'combustible SAF'}, {'id': 'AD-404', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa combustible SAF en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre combustible SAF; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'combustible SAF'}, {'id': 'AD-405', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre combustible SAF?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre combustible SAF; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'combustible SAF'}, {'id': 'AD-406', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona hidrógeno aeronáutico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hidrógeno aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hidrógeno aeronáutico'}, {'id': 'AD-407', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de hidrógeno aeronáutico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hidrógeno aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hidrógeno aeronáutico'}, {'id': 'AD-408', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene hidrógeno aeronáutico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hidrógeno aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hidrógeno aeronáutico'}, {'id': 'AD-409', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa hidrógeno aeronáutico en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hidrógeno aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hidrógeno aeronáutico'}, {'id': 'AD-410', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre hidrógeno aeronáutico?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hidrógeno aeronáutico; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hidrógeno aeronáutico'}, {'id': 'AD-411', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona propulsión eléctrica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre propulsión eléctrica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'propulsión eléctrica'}, {'id': 'AD-412', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de propulsión eléctrica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre propulsión eléctrica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'propulsión eléctrica'}, {'id': 'AD-413', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene propulsión eléctrica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre propulsión eléctrica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'propulsión eléctrica'}, {'id': 'AD-414', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa propulsión eléctrica en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre propulsión eléctrica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'propulsión eléctrica'}, {'id': 'AD-415', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre propulsión eléctrica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre propulsión eléctrica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'propulsión eléctrica'}, {'id': 'AD-416', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona motores de ciclo abierto?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre motores de ciclo abierto; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'motores de ciclo abierto'}, {'id': 'AD-417', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de motores de ciclo abierto?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre motores de ciclo abierto; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'motores de ciclo abierto'}, {'id': 'AD-418', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene motores de ciclo abierto?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre motores de ciclo abierto; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'motores de ciclo abierto'}, {'id': 'AD-419', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa motores de ciclo abierto en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre motores de ciclo abierto; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'motores de ciclo abierto'}, {'id': 'AD-420', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre motores de ciclo abierto?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre motores de ciclo abierto; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'motores de ciclo abierto'}, {'id': 'AD-421', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona materiales compuestos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre materiales compuestos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'materiales compuestos'}, {'id': 'AD-422', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de materiales compuestos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre materiales compuestos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'materiales compuestos'}, {'id': 'AD-423', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene materiales compuestos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre materiales compuestos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'materiales compuestos'}, {'id': 'AD-424', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa materiales compuestos en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre materiales compuestos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'materiales compuestos'}, {'id': 'AD-425', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre materiales compuestos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre materiales compuestos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'materiales compuestos'}, {'id': 'AD-426', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona impresión 3D de componentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre impresión 3D de componentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'impresión 3D de componentes'}, {'id': 'AD-427', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de impresión 3D de componentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre impresión 3D de componentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'impresión 3D de componentes'}, {'id': 'AD-428', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene impresión 3D de componentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre impresión 3D de componentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'impresión 3D de componentes'}, {'id': 'AD-429', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa impresión 3D de componentes en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre impresión 3D de componentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'impresión 3D de componentes'}, {'id': 'AD-430', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre impresión 3D de componentes?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre impresión 3D de componentes; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'impresión 3D de componentes'}, {'id': 'AD-431', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona baterías de aeronaves?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre baterías de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'baterías de aeronaves'}, {'id': 'AD-432', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de baterías de aeronaves?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre baterías de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'baterías de aeronaves'}, {'id': 'AD-433', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene baterías de aeronaves?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre baterías de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'baterías de aeronaves'}, {'id': 'AD-434', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa baterías de aeronaves en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre baterías de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'baterías de aeronaves'}, {'id': 'AD-435', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre baterías de aeronaves?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre baterías de aeronaves; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'baterías de aeronaves'}, {'id': 'AD-436', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona optimización de trayectorias?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre optimización de trayectorias; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'optimización de trayectorias'}, {'id': 'AD-437', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de optimización de trayectorias?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre optimización de trayectorias; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'optimización de trayectorias'}, {'id': 'AD-438', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene optimización de trayectorias?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre optimización de trayectorias; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'optimización de trayectorias'}, {'id': 'AD-439', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa optimización de trayectorias en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre optimización de trayectorias; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'optimización de trayectorias'}, {'id': 'AD-440', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre optimización de trayectorias?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre optimización de trayectorias; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'optimización de trayectorias'}, {'id': 'AD-441', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona contrails y clima?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre contrails y clima; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'contrails y clima'}, {'id': 'AD-442', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de contrails y clima?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre contrails y clima; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'contrails y clima'}, {'id': 'AD-443', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene contrails y clima?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre contrails y clima; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'contrails y clima'}, {'id': 'AD-444', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa contrails y clima en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre contrails y clima; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'contrails y clima'}, {'id': 'AD-445', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre contrails y clima?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre contrails y clima; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'contrails y clima'}, {'id': 'AD-446', 'category': 'Ciencia e innovación', 'title': '¿Cómo funciona aviación supersónica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aviación supersónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aviación supersónica'}, {'id': 'AD-447', 'category': 'Ciencia e innovación', 'title': '¿Qué determina el rendimiento de aviación supersónica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aviación supersónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aviación supersónica'}, {'id': 'AD-448', 'category': 'Ciencia e innovación', 'title': '¿Qué limitaciones tiene aviación supersónica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aviación supersónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aviación supersónica'}, {'id': 'AD-449', 'category': 'Ciencia e innovación', 'title': '¿Por qué importa aviación supersónica en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aviación supersónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aviación supersónica'}, {'id': 'AD-450', 'category': 'Ciencia e innovación', 'title': '¿Qué errores comunes existen sobre aviación supersónica?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre aviación supersónica; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'aviación supersónica'}, {'id': 'AD-451', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona hermanos Wright?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hermanos Wright; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hermanos Wright'}, {'id': 'AD-452', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de hermanos Wright?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hermanos Wright; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hermanos Wright'}, {'id': 'AD-453', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene hermanos Wright?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hermanos Wright; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hermanos Wright'}, {'id': 'AD-454', 'category': 'Historia de la aviación', 'title': '¿Por qué importa hermanos Wright en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hermanos Wright; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hermanos Wright'}, {'id': 'AD-455', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre hermanos Wright?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre hermanos Wright; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'hermanos Wright'}, {'id': 'AD-456', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona Boeing 747?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Boeing 747; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Boeing 747'}, {'id': 'AD-457', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de Boeing 747?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Boeing 747; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Boeing 747'}, {'id': 'AD-458', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene Boeing 747?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Boeing 747; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Boeing 747'}, {'id': 'AD-459', 'category': 'Historia de la aviación', 'title': '¿Por qué importa Boeing 747 en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Boeing 747; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Boeing 747'}, {'id': 'AD-460', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre Boeing 747?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Boeing 747; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Boeing 747'}, {'id': 'AD-461', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona Concorde?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Concorde; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Concorde'}, {'id': 'AD-462', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de Concorde?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Concorde; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Concorde'}, {'id': 'AD-463', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene Concorde?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Concorde; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Concorde'}, {'id': 'AD-464', 'category': 'Historia de la aviación', 'title': '¿Por qué importa Concorde en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Concorde; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Concorde'}, {'id': 'AD-465', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre Concorde?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Concorde; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Concorde'}, {'id': 'AD-466', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona DC-3?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre DC-3; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'DC-3'}, {'id': 'AD-467', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de DC-3?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre DC-3; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'DC-3'}, {'id': 'AD-468', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene DC-3?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre DC-3; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'DC-3'}, {'id': 'AD-469', 'category': 'Historia de la aviación', 'title': '¿Por qué importa DC-3 en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre DC-3; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'DC-3'}, {'id': 'AD-470', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre DC-3?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre DC-3; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'DC-3'}, {'id': 'AD-471', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona Airbus A320?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Airbus A320; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Airbus A320'}, {'id': 'AD-472', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de Airbus A320?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Airbus A320; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Airbus A320'}, {'id': 'AD-473', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene Airbus A320?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Airbus A320; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Airbus A320'}, {'id': 'AD-474', 'category': 'Historia de la aviación', 'title': '¿Por qué importa Airbus A320 en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Airbus A320; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Airbus A320'}, {'id': 'AD-475', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre Airbus A320?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre Airbus A320; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'Airbus A320'}, {'id': 'AD-476', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona primer vuelo comercial?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer vuelo comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer vuelo comercial'}, {'id': 'AD-477', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de primer vuelo comercial?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer vuelo comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer vuelo comercial'}, {'id': 'AD-478', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene primer vuelo comercial?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer vuelo comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer vuelo comercial'}, {'id': 'AD-479', 'category': 'Historia de la aviación', 'title': '¿Por qué importa primer vuelo comercial en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer vuelo comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer vuelo comercial'}, {'id': 'AD-480', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre primer vuelo comercial?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer vuelo comercial; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer vuelo comercial'}, {'id': 'AD-481', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona primer avión a reacción?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer avión a reacción; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer avión a reacción'}, {'id': 'AD-482', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de primer avión a reacción?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer avión a reacción; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer avión a reacción'}, {'id': 'AD-483', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene primer avión a reacción?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer avión a reacción; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer avión a reacción'}, {'id': 'AD-484', 'category': 'Historia de la aviación', 'title': '¿Por qué importa primer avión a reacción en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer avión a reacción; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer avión a reacción'}, {'id': 'AD-485', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre primer avión a reacción?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primer avión a reacción; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primer avión a reacción'}, {'id': 'AD-486', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona evolución de navegación aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de navegación aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de navegación aérea'}, {'id': 'AD-487', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de evolución de navegación aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de navegación aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de navegación aérea'}, {'id': 'AD-488', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene evolución de navegación aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de navegación aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de navegación aérea'}, {'id': 'AD-489', 'category': 'Historia de la aviación', 'title': '¿Por qué importa evolución de navegación aérea en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de navegación aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de navegación aérea'}, {'id': 'AD-490', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre evolución de navegación aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de navegación aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de navegación aérea'}, {'id': 'AD-491', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona primeros vuelos transatlánticos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primeros vuelos transatlánticos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primeros vuelos transatlánticos'}, {'id': 'AD-492', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de primeros vuelos transatlánticos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primeros vuelos transatlánticos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primeros vuelos transatlánticos'}, {'id': 'AD-493', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene primeros vuelos transatlánticos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primeros vuelos transatlánticos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primeros vuelos transatlánticos'}, {'id': 'AD-494', 'category': 'Historia de la aviación', 'title': '¿Por qué importa primeros vuelos transatlánticos en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primeros vuelos transatlánticos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primeros vuelos transatlánticos'}, {'id': 'AD-495', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre primeros vuelos transatlánticos?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre primeros vuelos transatlánticos; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'primeros vuelos transatlánticos'}, {'id': 'AD-496', 'category': 'Historia de la aviación', 'title': '¿Cómo funciona evolución de seguridad aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de seguridad aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de seguridad aérea'}, {'id': 'AD-497', 'category': 'Historia de la aviación', 'title': '¿Qué determina el rendimiento de evolución de seguridad aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de seguridad aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de seguridad aérea'}, {'id': 'AD-498', 'category': 'Historia de la aviación', 'title': '¿Qué limitaciones tiene evolución de seguridad aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de seguridad aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de seguridad aérea'}, {'id': 'AD-499', 'category': 'Historia de la aviación', 'title': '¿Por qué importa evolución de seguridad aérea en aviación?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de seguridad aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de seguridad aérea'}, {'id': 'AD-500', 'category': 'Historia de la aviación', 'title': '¿Qué errores comunes existen sobre evolución de seguridad aérea?', 'script': '', 'source': '', 'lesson': 'Explica un dato técnico comprobable sobre evolución de seguridad aérea; distingue magnitudes, unidades, condiciones y limitaciones. No inventes cifras.', 'image_query': 'evolución de seguridad aérea'}]
+CATALOG_B85 = """c-pmnOONC@lIC9#`dpP2??>-p&|BTTvp~<FXR0xa#bOV1iSEH@N>osiS7t8u$K){&aTw&SE(47Ju{ASF9*^{g{4?&QJ2NZ7j2}fB?QQ?-
+|NPEXzx(~~{`hY{o}Hcl?uXx%rnjpQKheMawR2_gVYPWS#iybSbsJ)DYG<21&`<WR_m+Pw#Nuh#d@X$Fir#j;ThSld!B(~@qAf$LOe`u#{~`Ti
+S4P+N^qc(WFvQZPKYQDCp`kzj>0|3%NxxJEqCn(g(VoPFmdk$~8p9+yTMo7<ohd>wbb<e=jJ6LSe)oTWcn$vog8%d8TOEqd7RwN8Lp+P6@x&!E
+*I1!|%Ohklh?lxA9Q@i<rly^5LcNH#<K?)`*QT&tIg}5k3Z3=?&*6cAzk<O33oq)yl$Mrf`8&|>#KM%lTifl|Kv6%<B96hm)_v<}y|po2v4R-
+T0{8?PI+Lp*(kH64U-~!)4ET-W9-B`?WnKhI=bEB+k^W@bp&_}Wy3NOkV{mWrV@)hQ@fzaV6qWVq?gh<R-
+c1n$cBebQd~sSEX}zYK?viQfjab@9zhkH6tm$VANtkbq_CTM`5!;x1#Q}HC(hr|(LEoku?B?G?K@TYN4&L!nv=Xg6jSI8^=Vw~cHr~L7*7Y>Fw
+ehy#i`m9d4W&!#Sw*wRb1qKhhi!^dd!x0{*)83|@!Q)6{y3~`m8M=e`v0}-+`?P+`#zTswh0%wFbpKMB7GM>3S~OG_2%2!@!#p^qmebbhIJE-
+h&+W4wh2ltkGVCWcS~A*I*+7N+Zczsl^fmKrhEBy)nPb+6}A;uc|>I#_!T1=#_W4Tx(ZA6&2#B|E;)IC1qNNI{}D~gCy=$%C{LR#s*_*!_L2T%
+_^n^t&)QRP0xN7QG#cS@AO`fJ%W)j|AeN2@CGF-
+>XWkv5je)(@eRmShm3$4+<LIXhi>mFlbg|LfcyoAQ;O|t*Fm1bC+LFG*FMSN5RcgZT$zhN*+8*m!wAtyES%#92R@c(<I{JewWZd*tqv(_fFK9C
+^l$sx{tTgnb@U<%pe;W}j%uSx&Eb87YCK&v4?eXqxC-
+Q|kEM2Tsh@Xzp#XxHOa4a}%vof217ol2)j&9$>&{R(8i919XgQ?ciik3ZNtVB5C=3ibD`eizJP3etZKbye>gMX!UTNpN@<&??wYBygaeGH@bUh
+E-
+^!Ms)+=H$*^4UQK|HiI8;6<;$mbjB;ZaOHds81Ngt5fa9if{$Z0zNA}?xuI)lOFoNwoAe}R*mm4zQcQ@~V5(@dsU{Oa43^SI=Sj7<U2m$*GabZ
+|{>DyGV%FP_y>KOYQ(5(sJeLo)3HNG;v)H+j&slFeTHV5QHiN5q7g-
+46C8l@%JZ!!+l~7&Nf3sxU#hPS|5pOpMnTp<)%0(3FO!63Hr9aJdfq1ZyV<y4DEBC{SY+JR&I!qk{tni(6Zq<krM|gIYv?R|T;9>J+;d)g>;Rt
+CA>ZQu2N<Q0VbY(fJ2_t*@52WjFe(RNPp?NGY=vPX&&~(>GFKo?d?ePzj&93$X9iWYYz0TndX0x^FdCBae<}?Fao6bofdOU@h9Kv%rVH=Ul1ID
+3QH#%frE@79=3$}+o23qL}bLj^-
+PGfr)#}Jli3`v{F5e}Kf1cQI4Gd)<+CY~I>szsOJ=uJg7uxpIg?l?jogM6<`@nDt0utq^@QsgzI^_lX)XcIgRkcOaMo$2kX+S0*mY-
+u~!ONvqJO|xZ~!>BsU0Rw)n2X5=|5^dshXMAs?So=h{$>If^%Lm(p3%$ufN@E;ztk}^JBn7FX-
+*9!vk>_%l0S5b0>okgXZTv8LIm$q)W$)G*d`7$JVj!>7K5lw9BKzHw8X?v%n?hX{XUQ@880hO93W|J)u62`--
+Lp28M>p9?8iRV1!DqsPMK+t(&u*&l%H>Xv=;m9jY=&=r3NLIk)P6D6mdwh9X`ROFU1Q(V#K5V&W3=6*I`pm@M2faCtOHrX{Fvl;qmDAbVBhEQd
+DBl+Vg*De(WTl}oEenM;k}1E1o`?bhwr2heu|&g#<TJt^LS2n5XN9CbuY5(SA!V1ru1as7xm^#m(+qm)CF~7!7&CHY>l>6*`6c7iRZLFdO73DR
+7xZ25M>OgTE7}|^iv9Z2EFPnJq*;9He0kC*sE;UY{T&VVP&4<zMVcXbT4TPsz!^FQ^Y~P$x7jWAbD91ojNz<2yG1PjY8(Kubgz7>DF|GSvYzJj
+mnX?pDG6MR<9_w#+wDFl(MG28YH)rK7-icO9Ih{EIQ&0HrN(ud|0im(%q^OCl2|U-jwjGS{@;bLA+PVTxPa39Ji;tRTU4Rc8#r-
+f_FDj2;R+^P8lpE6d;>yKbn=OF`SeUx_%%zVjivD6*-
+3o241Nz+1HEihu8OvT`X!#{xEqA@<k>?zKxqNCCBRNK(>4mt9+LH4%!&lORYX^WEmt*VhkL(O~r6zeTjQquMQukkAYTaZb=?!X<j88k=;qASFL
++~j}ph=UhAu(?W3(*DRLQkbW_}?$x#n|fIJ3S6D{QbOdHN3G!%wZp_C#iuVjWA%H!lQ$hq>f=)A2g8Jf8gYj={xAS%64mR`fkNpQO94DER@v3k
+FGu3ewOt$dg~23h5avP;*vch)rvPg!VCn(hZ_Ltt<9x$#SDtA#25&d;JPH_uC=kV(}zL>z;w)UDQ1fa3fxMlCkqTFDI5BHc$91F6xbMn`taa7>
+Y!fh{s0bOz7?x){hy^}!9B=PHclVsw)TKo0lJUcwkmwcbQViY4~mWpJ#$(89o6>!a|lCR?j{R}|gG!7faW;QImc7~~su#X@D;etf|@(!oP?>S)
+zIvKYi$mAhqI)h#AgSW0z_vO-}mRSe*rzJAO`yNF!+LSo&u+r);o%~3bDmpBIZK9@00U%|GMMdgb+tevU?ygY#g1pV$z-
+#tX0G`eH#(e!rPZi+>x6e^G1rn($`L+0|rHbYT2ICd{#9%N;jo_{B4s*;~t7*(6ArxRFU(3M@im{T9Q2uLa$P4ii}Z`1Cz?Y)lC$3S1^$$Tvb(
+tF5EA+cLqE+A>?DP_-5wzSv%95CQl%9s#8Gn2(Rw(`M~e4mbx#UN^8d=hAkg-KyY$x6&{jQ3K-0A|RKlF*`W=}%MgDR&9vnu0P<-po-
+J7<7&PWk0s`fQ&rTnpjO5S?QeTM`&YU@05YB?YpqHQSw~y<e;a6L@{{Ez73%X{P5F?Ugrg9J2dR33IV*=)dZ$6YV!ZskG+kYFWn?h!Wc7FmIcn
+>fB`?x;vQ$F=2fqRwTs4Q@{RALje)&Tw<#FI6Ksid%QM?a>a4gv!@`?P+4i&8U|VpRt?Nd|9a7eAEnG8p-
+FQP61F7khC4D>xsh#H*C+5+nV0!A85tX&fN2z0gGkCC8aq~qIEK^vOjkFNi@2d~p9wCoGzR6<-Zc|@qQPPXK4vouZ0q&-
+b0oLeKyo}VDF0ow>(!;Zjt~Sx>^r<7XF|c>J>bL8G3p|X77o+Q_a*!|vQ=?bC)YTTDb<J3<(-h5M*RPJA?iHTL0|9@2c9yxKVBxs8Nz(4=gH-
+0l4UxUL-~cadGv4W8Kf7sT8^eiP-
+U^6m6aHcfKYS*8+!H6VS1Ue~WSEEYAr!T12C29uW8K@;TlqcyCVM4+34V0Qc7=Hee3p%;Pn?=~e@E{_@fRc2Qr1f{bHDjgjBLx~+bn61QU|=+c
+`rsY9h|>APiM*YF?7GD$6eTO%P4zCicVnH;Mhz$+US`Ve`ec-A6^=Z5);yhi01ZR$Y3>9_)z>$sYj&+NQOK&S!^V-
+7Z#7S(?6ttW;gU|FjHnt3aBuA?g=GM`46v8#zWt?-S2<;sbg%V{m>Av538{L$(q<d{IoP>-
+~IIZ`26CSE`v+o!?LDo9!>m#*3pqhLu*b8nwHqT4(4oshIVMg_3ngRoOD87E3Jl`7W2w#H$J^aAsO1^l(8#ti2)q@;mEP<=s@+(ORf+*s<=ega
+?WyXn>^XU^EhD}aCOoKjBZ`CkRUyuWIBI;b2iddTG18Jd2{!Y#h_hd-`0MlBW0Uy&!apovUXF&fZdz~OcWGJCl}^R(<K>6Tl|-
+yQE4apsbauxu`iZVMmiSjksGgdA{J}c)l$yG5;B8DF^>xd{O<HGn!Ihc^sW^P?sbFkZYX6Y1gi<P?etE)S!^)q_t-c8Cwda?7~U%)-
+blFJOAvzdzP0|GFZs%NW51&9ZHOWDd>#L$YymZk0S5OR`+A*Z6<2hAnu2@U($&fk2i{E;19oxxcNBeuMS|h>1w%FNa7PkC_4y9b#lR`Fp3qd>{
+crQ!)smGb`X=|+8YArdPoy)K9N)-
+OKYtoWY(o$&XiB~qYu3Es#c@R`8LWy#$Z{5O3?`@%J(y3$I{4DC#zJ;Pke9yX(meX(BE$?|dJYc^G@vcHrjp_oU)a`3(`nTO-
+a!t70_sP`uLc>Z6ZqtiK`LW)mYZ*#%g}-
+AFm(**9b%P?v)<B`sksG(BGaNgL=yvbj~dfbOz5S%*H~P*iq1;*hw)_2+n6Qc^C%Mt_Qe@&t?(d=j<}JI{UZBxy#fzY#sHqH4=eki*qxP3DE9A
+_CgZu?MIM6+`h(anR&Ktsi!4>8)H0tWM}GMZvKX{WjZr-^Uc0sF@)*>wDPn-G;BRHvXW1Fgb{+dZ*_Byw|FsMsY%gsL<TY^jN*Bw)r!fSEi!N-
++FdNU3vcB#JaSSG)!%WQ-KFc({dPsc~I6T(m>C&*1Fb3}yKB_h6%`LhR7wih&eEaB9Pa<0PBIrBn9_N4o#{4~WthyntMh2zbd|_KaUjVU#C<g0
+Z{SpSBRbyjv5R}U^^-DLplFaA9XME^hQN@6P9-A>}_Ngent3^vpiMiqcRo}D2)G?qJio=-lG>3)FHGMi!!+>0>T#Aje3opqa3Or8-
+iDIy>;Mig`pTacu*x1x~#QS0G%(hW1)2ees8)x&vHsKn62$*%s$?G>?W1Z(A_?{>R>qd9?3KPq)d5*5jHvN4|5d(CKdQ6Llp|+CiJ@tAm?Ap)?
+%auuggaHN@jYrX?=#pGW%I^>trZE}1DeWSQK|^#D>50;Erap%NQ`3R4FbkLFJF$CSM1pdb={zP7>?>Vds;6sY#~uq0^y4LIiJ6{~U8FIH=dj9F
+(rx)HQcv6n<zU!FTbgyAD8_LP7+@eq)ko8GsdS7*hpofPhlSJK(Y-`5SYULj8!EXulGkOMWppOTtkpeaF=)y-6S0kUDbbN!(WO@;F-
+U+0)0&p9gxrL*f|cKVTMYas(kdIJi}yHn4CoCkUN~>@TWwZh3QrfCFC|`#)XpG{LA-
+^YeRh(#lHMv8>ZBEOTsB7^@ttHbXm^mKkbWb&&#AuNS!H$6dukYvdpvgE4y}`TfM|-
+++l`bB&Zo@M!*nlo2<Wv=V_Ca6NVsERO46%z)k25pV&K4-
+QII$eXFrTVSF@Jn<W)31w=GfIOGg=CaKX5dB)Ja0<#1h+=L=G!I17*a>*p9Bb({kR_!9WO((u=EJpx%dBqzo}8G)Vbk^b`4lbqLm;dv}D$XB>v
+G7I}CamspN=QFK&=uMX7q1}`*fY;caC3!e3{itg>=B6F^wvQ+V3y3XAvBu`NMmo@W5*m%`ImS%Nm3Ge89<mrT&}$>&E(H)4#(Uf7&*Bb}7$iiG
+83!G3amXT0ndc(lS^9BVOpZAU2gqYkK~3kC{*ij>O-W>>T^ce4+K{2O-
+7F>$>>EJuakZ>el0?OS6qliMT}l)+5}TzLPNf3PWPw3GSD3}Tq9y0~Zl2jha9y^JT5qUgz%KAN@gY2#tx`g!PpI>}h`Z=w;1C_B<8YDWfbgQo2
+Kwl@wY2Uz+)Wb$bp^hLT(p!1EOQ;ADONUe(|`4IxQ8wV?pl#QO5$wuB`$(AS0iD^-PPnQWyv4iOC19W#-
+A$Jad#=xOxvBNg0J<R`i>FDU;_Rc5pY{abkZLmLc>~r?Kn|z^IU3^Ea&pTK;PkMw9#yyKXXlesxTy#Y;Exdo9ztJ7{q%#7qM9SkfC|{4ssBb+c
+WSc+9myDCFRoG_>J@}>F_YQCAjpp*SkArvcaI^@u&wWJEyJhbEI6pqJ{yvP<i4=zmVWwYr9-
+kY_CaTkS=i{A_LW;nKH2|ZjO{{?^y@QAxjQ(zyNC^Pn<vDYCPmy?xuzTxrWn*I4CK%zO^e;n5m0*2Jyd_GzRfTrGpk`E#g|{U2tnFt~>AbPr^(
+V7-T#HIJK1LltC#BoNR!#DL2nKB5VigV_-oI=7C$3abKL4pRBRip1Z;1NF+K)9D{kU6FEj^MB7|4XCwzfxjRGC^vG0;G6l{TOM1M7b72Oux;Nj
+}&gU4{bdUiC7q99LA6;cer6b0Wp`!a8MGVjd8rW|Ck$!0Ecff_%`k?lABr!;ru*7^c3%=9Q)`MMJHdV4z_Us~yLA%llj%d04H?JmTL;ScfT}DB
+&lRO6X8qO>2=*BPjLE<AdG-<{au~}K4Ew%J04-7P*--L3Ak?k^RwNhISUdF<F-
+uzbThI}6+jKRCrdD+;#&TcRwpITX1Z_7Tq(q(W}%wmGUzSG{?1^sf|JezzMb)tv?x`!p~+BIesc>+VeOt0@~LZI%?K-
++@5KAT>W2C5L%cEnq97?g9BTjIgBn{O$!BaKpn;^;lip^bsWJMh_$t&Of0@A9_yArBsl!RKffeSka$^%7OGxm`6UKe{njUawWZr-
+%UpGh(D8<@CUkjyQ#0#V4x{TpuEi!Ms*gREWVMe_b0tDHy5_s^xqR7~mVYTiZCEa%{XQ50%f*ooyFc4B9Ph`K8pdrZb-cXMb497i8(4qpjC|;u
+uVzzUieCbF^!h+#<Y0_VaalT0HL{jKM=ZFH=T~Bm;)Zj`NWJKeTo}$^!v?aRz8Msjl<I8c%=U&VZO2$g9E@b9rE(-
+|0Yqvt{$r&$?pg(7ri*FD=wr0h8)7Q=7_6GtQUBcd5gAmt!*DDeSPVxHxGm-ektfhp>%j&6GdRgX<n#v&xYbw}&(a@e=#mL~bo*XG1rhInMiu<
+4f2_(`A`SHj@no{puv>a=Xp8B+U#QpP+SbXWH}2!Tq#@Qh3khfq}lpzPB{<3jHK&=vlGcvwc`htIN_Y><|MC?#=1ncq|Vty;<8d>agUPaBI5m@
+AgxM!s9)ZF@U$H17vGCawGYa2DWs*k1t0o!}WbSjSB|+4m-%M>3YK_i*C^{7A#11@i_iaJw@>deGKe9@DRNoEoO>e?Sc*-Y4MfGHn8jsRS4Mo-
+o|r|@7BBwHR-dxlXrm@SGhEJX_^wJj!vJ%2!nrqI{c|uRvE(IU24DA+0~$%{rhyBG6wMCbbzm%UM**)cFDfpe5sA}i{uK<&9^1qitFh#E*S7j{
+GByzTeKX+TiLf&RXN_+y~Ht?fDXl?UvxSNz;=C_jm}B`>8)3cMtGV_9|L<0NMTRcM`k9Qah6TA+?=5c#Lg?LWRB3rKw=t`47OQDlN#CCk3DxvF
+U<5OeTe%Ibqwe&enZR9reSC-AES74qm_oXVuq8ImhHaIWQA?P9jqNc3^G26o<cf-Ugj`0q}8spk(?RiF{qdZwRUWGjt@j9>*%fDd{w+Y<qXmg#
+0x-|icZE=zDlYe^_#Bvmw%--
+b)xLKN|(Gpp9=>39KXr`{STwT>6$g?8^$pkV^R)sT;XFpFwlr^YSLJz6?836|1&A+QfnC;BaXqmR4I_$7~eMI^u2<=fbzpW&1QhXy+V)j==|P>
+8Eu+G+hqvL?xBnUM0BWknNnnr*`^w`R^wM33hx!&3d@t2V6ag?6iG+hF3sOFOi`aGVE}Gb9th8sFsWI*pZ<BWE0>1V)l5!_<BTx)pts43^q09-
+9sS4Qlg&7{wmppt2K*j6xU?d9>KZdS`$$y}`Xq`SL?Kw0fUfisRJCj4hZK((Wg{;(Sz(gY-}NC={B{;AYzqM2(@SQfWo!$Vm{u-
+MX2`F0ktcQX00Ru}1!~v+@t=Ruo3BI!TlS^qp#J0E{`S{j@*G4Vg+aK2Wv8d#5(bm=T&B@hHcXM;43hIG4-7P-
+=Zs^>*g)F4bXxN?*k0)<Iz$+QccW6v|A+hW&#n-QsJF4PeI{-EJGvM+*fT`;rFY>a{lJTb-
+|=ANo~<C}Xg}t04bA6;Z36Ba`uUIloWTV|RIr8LD=dsD0Mc?>I?D;g<-_J{#<6?vNkb5?&aj}b#IJbzd&-%a+-
+q4fufHdYK|4oMZe(iXY9MWa2f(L6r0i^onmWdE4s8tNh2~Kg*|zyA9q7cx67sz8-
+_ymwUBb`3YnD?QakS!TXi4WCvwi9|<}j3w^1wh}!P2rH8xL%^-
+!5(0yLFBh_j_q$Affn|wJ~)o=L6M;evHMD$e<NfPT2(KIC%`}4R(ktCxRilL3!*Uhv@i21d@x%4X!=IGgx4dZ&4T3GBjgguD0XUC%w072T=^x9
+dKw<#)mAec3p}XFHBP!bwAvLlrez!DpfqPM`bEWX+k}=!;V&`7tG@T0lq#%ADE6KrnT*i<hHB~DP_!UMIWT;IrpDy-
+g)+1lcjm}OkUU~oNH8wBrR!Oflc0_(N;Jeri=l+&;$zTp$|)&((Po*OKqCUWNYKNgEj^d)RnkBVZ*I7Xhj`Q{$N>YyV7*lNU%abq2dSw3@)H0N
+jC#}4>r#{@j4~Er)6ml?0%{kuxphJ=Gmo@Z23hTL|<uapDVX*7ikP47Qsp(LsB_K5O}i)QC*(4lO_fViE5c;YE7KlWb^EGx8@QuIz;98q^ktY4
+Eh*Y)T2`@91DZZZws$1T-rengK`hsn5=-=(c_zZXWWe<Duqfrp92K=<_xwk?MHTnno<3-
+E0f8#+({P$cdoE2)2_+~Q0Xz{VX7Fg3;39h8V09CrA0`)u#RV%M!PMG%5YleF~Z;jv8yRB&P=1_yI~9jcB&MJLv%54SCFG}dYI#A38WuygWo)J
+p_kNn*>&(knZa{;8Z&Ggt~GWDy>t&#FuxmWo;a1V;(D9M967)MgL|Va#3@?SN8aqvl|u|12pF^SvsLBnXMsV!MJq%{Pscd1Np78O*4)=BQ?1nu
+78v9^TyTxMJ^GTzylu7*$w~}4B-lX)7~FeJnRB#b6<-
+&+mabdqOqZw1c^72};O%MJ)6c`^3){PCUg}^M(tEofxEl?fto301n(RfMkVp596IK*GB@tfOCY&om6w%62GrpJhE?j|}B|Nc%E(Q+Nw4z<Pu8&
+f#IoQZr5M47)0*O&k$KB4QkAb}e?ki6^tXWjDW|y+a=&viQ(=ql^#eiLDl!-Pv>EM#Kf0%*>+owPqmpF|RwgJ~z^qa-xly*<{inNjZt#@7<`QA
+qt1Bb@cLOIl_ZlaB(<5XilZ<hk{W;}fAxY|5681!4b%(=3jjO(;y!p8$5*(K{u)VV<C(8s_c5jWDylPWjz;uz=DEx;{#xQFgA&!CTi1wBzUoiF
+JTFnTdLklT&_O7Ftpd!ujhIEx7c`wsU<5w$4#ocN1U-=a@8k3zARHU{!sSG>;gKklLSNw(ZHxoVESCyc=Zb*AZ&69+Z7zhgaSti)9-
+Ob3Z$FjX1UGKh|op<?RbNG1tA5n31O9Qqj8E7X<BEu|jWPZAZ9r`$&m19PoQs^UXca-hBBfJ5zku8gYh2xIUNU(&l4lqLJA$MPmx6$gt3Wi8b#
+4j5pqCrNq$baZ>Tm@Q?Ja6PzfR)!SSY~G~9Y%u6|Xc-
+k*kkiDBaZ+ZbPOsWW7K5hDKS~*EX3+(oLe$(#mP4Mo(vS8sfZ*Pr>3RZkTU_~N{)Jky6_<`fOu0G(?qz_%J=fLi7OiPy;*E!U>X(OTVxW{=i9$
+c+BXXg|DqoZD9h5PEh=<7d+K_lRFRZh5&_7HXgLs8EeOQEgk)lGZV2(lhjw8RMlR1Sqw>^yu1{~FjWJYKj&d_IQ((;xZ1_jc9YA$F_70&!;+Xd
+2{FaM}hdiD^-
+VBIQ=<Er2$FfunIm1KCg(#AuN631ZPDW3*1b!eNXaZ^6q^YD%?2JT*E92cqkfGfRul<dMZ3x(7z#UR}FBqj*#%d<1p%P2#_O#iB-
+9RCZc(D|OoLo6`J?=+l$99zb*cV%d*uxpeoQ}5&OiFTur$c_lXu84tyu<8-
+AN62F^FJ{9`eayKrRqtd8?2GB>=WU&`*`+q08=$M2n9pH=LA^Zji%!C0VQ7UzFJ+o_5*{QvIbVM@D1+MbSYU9kPW!UUL0Th@`&~3cz4;nB6SFp
+-jBZBv0m2xx>)FuWlzEhHs0_D46z_!`u}7ITMvvg;IY*Y~aUK}po729f^a|g6laxi%(*LHu;Z;o*U)N_C+C7T_2KDxIxf|ljG$i`@7MWN+q{L{
+sJbI~nkT?eM?zFFIV=|1=(fX0Qr&YSJ$S#5ylzUL7PU4-6AnvCn!9}y88&Z<_o=2u0W&y!{-
+<SH>my;<ZbWKWWp`1qH4RNLO)a@mTK?3xg+Eu&&PHK0t9A0|ck>MUWXkoRN?l=bw>;)!AIU#zQc*KH@EF{uJHs4yjyWG=U`WVntb)7~yOD`?bE
+Sqs1+*>L(Iw#LT${4sS)h(Qc<Z&zSu+Rozj}pfqUY~v|xnb(Ch~sASB_Z=*kYrF_`~hyhQqHB10X<Q(d2pXO;MBQ=w`0lzcgTIoGm{dHPCbEsJ
+{t@+pylv0P0JaT%2a>C10<xU(Kw3Ds@0u&Trkil>OFPn*li(7=H_ct4QZs_pTkg^!K<1>9U+auy9XYZt(Nj?$fel2e>U74_mh5N&=Cd@)Qhtdk
+FQyq=5yNbH@!D`Iv3Z(dsEW?aj;6<R7wr-WNz3doT@pIUDR~T5bGpC#i87!kxrFc4&5{a$5mFj0Vi?7z@O?jqSw%~`OiLdzjo>CM7yMAa~o(~<
+l#7V4CLkMeg?LMeQ7vh)OpW#Rc#*w%bLkEkYU8#5e^vGs}qm&SRxjhwA<39eihA9mnF29DhBFWp<Xb1zDV*r*|do_R54IDCw{3(M@{mO+W_*7s
+15h7cD(0)ayth7(9L;#FyOb4vwB?7%Y>$diBUJj>@Z~v+}(*^Rc`(EdG}UISjlGW6|to9IAsjnJtRq^_2H40Q*OR+@Jd|C+qX^eXtbyBfB;{f!
+JdYtTaZzewmX-
+1;SEg;(D`YAUd84(t*RfmR^EqZ#ed8c^!uJL2JPbX!})r?@Wa59S|0eyWM~z!pE3sS@<eCzIE<2M8+y5_7{<B5Il4paB8$PgI{lkHkhMeF5m~l
+u0*z4_Uxae=6)(bV=TXN%0$w1IT4}C>?~T?Q@Rk||;s!W?1^rN+p{I<H!IpgsyjUMO#@Qt2U+G<~??k?XBnIaWa`RgW>-
+k<Gw97r@Fc|mnD^#17-
+oedtm%0m0?JjcV6YnDr!Mr*{0^DO+Q*yBX6RFuoW@5|lc9I3v4WzhAnqiKPMyIgDw&7F{3;jna)lA7U^xDLA${cCj+UhdN4wJ^<o#;b(HU6V34
+add|y)`*r=fjjSaG39;A(hp>ZZ%}Pepu5>8lzj74C?-21{l;UFbFOIBl^K+HF%@%?6aRN2J0Hq9A8U?YzOohZ4BV4eiW%-
+D?^BtZDa(<%5GQC>1*TmQO3Xl`pbX&>n}xPOHyL{ZC!f`bg8xD1Eeu{cZgOgk92SA&6hq)%fh$xFd(O9&`i^r<LhBwZ!ZI}S~`y6>CWT{j3DUO
+XUI34@(AhaeKjld)qTlO!f=cQ2KOAdDAELHZi%xRq#j7|b=z6QF^DH>G}D-
+nR~!B|w2@;5$zI|ZL^O+dOlM|cK~^>ArLnk|BGN9`B$>SoFsOi!h1BELo1{!Obe&ow%}v)fW{7+pB#uEmUB@vczhYD4`k|4z3+m>@d#GZdZca6
+l(<~b@(ZhONLB&pR5q3%g`5<Ww9*{fpl9|lP@xpYRw=~3sY1A&V1Eeu{kY>}S=h^g*J9=vKgLjj};Gh}8+dye67Mmm>)uGB&5Vnsx1oGxgS&+c
+KF*a$Y8{!M&qRm>5u$u)2_goh+ag_@he4{%^VsI`nL)Uo2Q8g|L?eQt;PX|b1aDd$3RN_j!?b;bd30Jw7AO__McJ~^;G>bIVpmVgV96`%fYq*0
+n2JadRVvWZ{vNEHohLRIYx-<^AH+7Cm^_gri*f-F9^R{98M5^Vv|7(W(_MRjL2hc~PF>@;BY__s1SH;pn;uyp`=!;p-
+`WefF+t3bpvyZ34R54IMP6|IY+_GYvv+a0H481_xn)x!r)b`^nAh@?@U@*BUn!$3gW0D71g38}f#XteoOPm4QR8#KO;HBpe>qE8KJbzYKNgSk(
+fxLk1aC)z#acM&j)|mI5!2sVu6$5pN)z@>8l+?d(xlgkje6i#TTfQ+v$MFxJqu~A&e%MARs+njFV!6n_F$W*$54wi(bLeA0fozshzPmA-zgG@j
+-boPya|1=_*`*`(@a!)j-YeW+-5w!}!Mas>H#xUg+>NX+x-
+2D0a~NPy?~rmGNnlw;$C90`8rw)os`;$bM~@Q6Al?J7BTuK~EKwGErR8y)`l7O(L?K9bXOJd3HEb-W%9p^EAx#EtbPr_=+&P-x-k9~aTep-
+)d!H-8eJ5!Q-
+UaFkl)h<k^V=hd?p*z#UMON<E>%UyV;t2i*@_9JmE`lBg~+=ZU{J44y>tCgO^!KB%MDV3#UmQIH=|Wr?nj7Y5U=s{$TkL1`6st(t!!y|m^20t^
+SE%yD8I6jZo}zso99f4JbNf(;BG<Zdx(<L$I&;Lt;ro;NUvDij_ypJW<ZBoU~o^=TcTZCzb)ojJM%bNFaOn=mDf(sJ470T2k0zYSvQ*9X-
+NDe^n%(9JWL*fd4C3JpPbIX3ch!}wDx=5H6(-
+nd5Am)Q&BZ!xi*~#hY$54+FT_=Z>eISF7QMi@yxnjDqMMlfpoOXS0=EBJO=ah$|1{br5COWX;x0BjY5A%4+8?^vApV~DXAIUzs)t`xlFfV98_#
+FHtjsj2!nnN+w&#2OO>>+HY{?cC+{YW!Mi~-
+=y@2Xt3$(Htz>QcOhdrFCyYS@qDn+Z@}hbk9w@qS=H@U*8DLPMj2C{HoJ?cRHi7&*k{BF7gCX%oKQHNuV~@e&fqrfCEoRVP4iZNoUY(sm#U0WV
+;A5KUC_<0!hGf1^L)P?d8(WYawhiyJn_ui|h~rpr9<4<?zxh&*W!&E-zP_5-I$8-S;kYwzUzPv-k3S{LkCU;uy?~^e*~cV7*-
+G^0llh0@pVN>Qu{KtwF_AQIE+$}Q^-
+av4_a$YkZ8?7^{)q=ce;r*1zBWG;OCNaJs3YZmo4U{Y#54;YiQ=sfsqtr!j9U3e_C>px+D?1(q4>pd6jQp~i#}rLhkhtpHgL_Sp<*O!PA^N-
+PK!k}pTmdZFVi$d-b`+$Iz?i(qXIs>J`@jq-
+*&(M>8D?R{q@7I*7OfHeprR|Pvt}R6Yb(SAhmmac4)W!P(Gx?^L{)23s>^ewtkj+ueVrPcjR*++r#E~o5raznD^)70yrPv4~OQg!ltrmtgn3RY
+(t^HCyiZ%O91FrGVpA9!%Vy2)rBT+h+$x^;IB4xvZ(m#vhl2>2Rc3^Y3XLH4O7s)!*iKn;IDNejl_lVtAPh#rDk%QFFYu7CHI?0CwbGzt<q-
+ppTG*+h#Sq3X6KKQ*4^ASQF@S7GO?QUc~0YqigDQONlY;Cx9BOD#*t4!@+o|fW5oG;ni#Y@g-qrgxHyiE>Za$rbzSKitxP^d8UuQ-Il!bo1#ia
+z5;4?mQc%*g8hS9eST;xZo#RX(@b4Qn&-=>b&~+Kb&6-
+A<(Cy`tDF?alq=`XODxKB9>HP9$^tN7j8DW>~I2V+`nRy&A*cY1POmE|(JOy;H){?$t#!JTKVYOQ8I7T0Xd<lyx)A7#|$9k}mv}=5?Of20^5(9
+RH9$~sPu`*lBsSae$dQo0&ZKEmy^Jy-94DvPnExB%^7w1w;WjSLj(`oj)Zo<_O;uu(!?zAQ`krtFDqVVQ(>u{9|vYkgAgL|u#$Yg8M-
+()RYfw3HH>@#S|2Z&=}?@+MQxUtRGG-
+1BmJa=`TaPoIFF=#4{i6<MkjuW>d_j7pUre9|BTeF?;NB0c3d)gD(KpSvzmcd_<8U=LQPtg^DTL7uu&$BpSu+P;tZ#URx?32cArGq%Y9)>z(F?
+07)$KYNloi*Zs5dD>&N%|P6^(igZ>FbV;kjDVydK8zNTf-jXP8^$+83n1Kud^VPULO{l#{vU>r8VP6J;*g(Z>B)q%dE&8M*U$980>4E1CK@Q$D
+ZsJTB~VeXdPZpT^=Ee0aWQ%C8rc8mM!Z6W_&u9k)%x2NUin+78r1)rX^-+V1v{YE0e+0eMb-jb*FxQcyfDa4f{b|L%M--7W^T)7(|t3<y}p8h2
+DMV`zR)7YyH5!%`vd2cBCF-0D->L`JmV)5%IXTpJiM$&y6PCE<K5Achq6>7~t~^>LX`Tq{yZzOR-
+L^R17R)SevdKv;*T$;)HF(g;GfQ*C9m`EHAEy91`mQbquaH_E!h8$w|IQjM+pt#<WD?B~YAMQsoE>&f<e@0jy_@@+FP7bGES~XPGsgbRo_gc56
+|F|Mlm;Y7W53%&^V4RyhdRVZq(%otNJGq%qmZCN9r+&egW>C<_eu4eqWj`(X@l3Dc*+)`s2aoE@R-
+;&+%d2J}|vCn3Ye)`2uco>@5^%AS3WPlF=?TukRt?<<+j3fqXgO!*zrnz5^?A=4*H`R0nt1TrRi?B#($zt5H@&^qql_I_Ab*8G6oEFj=lXPUz=
+dA*WTMCVSp`Sc3$B6&I+tDk20=zNAr5+^akHsf3wWA<jvk1l<iG{Rou;3-
+3mu56Ypz+)^h;INMOk}1q_Lg!x!N4Nb9^Tc9LVuWpiO7pYbYk|zcMN&#%&uZpS>dVAf^+`C59kwA?8Qz08$^Z4{E4P0ss-
+X&9uC%`c95C1#jnB)_KB-=j-dc22^9<%aMjL~w^1Sf^xJEb4(Q0H)BX?3+yEv#t-9h3Q*xP(&4Jq0+=QmmINgp*W%ARI3z(C_V-
+I!+|rH#WdmA7&|WE`B*gM5TG22~gDWS_PyOCnMoS6{zPOI54yM>#;SuQh%-
+W;1wB<r2RE7icHfftN0F#^ZBx=5xSct8_K9h=H@^yQD>v<}gIDCAgKZUUnU%j={xq?^CI^OsuzFl4`4BoSoZ^GG~fqC~x&ioUm=URBGt;=G)qN
+Sx_|GL7h2CvT6q1d_Qpv?3F?h;Zfj{{ZzU!<UFu*{9*H44n9L6>jB~zSUk#Uy<Lg++m(S`-YEf0d6xGP#lYQU2=sYBtl90uMNysjG-
+=($%tn(b@^^p(23zG>tBuUujc=ugm^vz-N;{hY1{&A6Qa%hv?o97iQsB2HEdkd($|GbkfcN?A<SA{UvBT)A?($m3I~YKqZ}42QG7da-hKzHcO8
+@BKePRW0BB2{neT+H=SD8ar4pO$n6Ok4vNHI;7=22yVptwH6Je1jtuuZ^qu9vi2>C5a*%~hs6Dq`Rg#kWzP|NM`?+4M785AV|;b(*$hc@($5^$
+*3Le9>%vV_#=c2UasU`b}yz*PKetYD!EozDxW&`++NIIVxr%CkU6G+w~NUn>MQZfs0^e6PBB2&O_u%Lz}u~ZqupB9{o`KJXpWtrywo1-
+~7h1WLnRdwJ2*}I@&7n%+k_H^gLQAGBxrk#n}5${M&Yqwv|w0bSHrrYfPlS63OS~?iyLKFNpt#WnW5>EWvaoot~c_!mmHFmuS_v&-
+O<;CO?{WaMh3PgX<n#v-+_sP5q{b_7783Y5HKUv0Y2AUuAxH^+{RO@If<d#7wANQ`weNN~Hey-
+9frkM;Giz?z1FambQv!mYBjW!q{!O(t8?8&LWeOunb&{u{5>wPSInnoJ${re4VYXa7-
+9XD|mHHvKAWdV}gOdQ6@@^GRaLP>toM)zFjrzpO5+pOY^v3@NX4rUc<d(QVwP6aS)PWY=%m!>K!7D0oCX8O{3C#nY&l?p;pcpIZPRYd7mlx&2K
+O9T1uX%R9dy(hK!N#-
+3%bmw`a;bY!;DouTmS9t}vAhitk<?&XD5{&)|Z=Ki4@}>d<VyeRL@tOUqw`CWB{X7gY?Nsxo4FJ>G{~CCJ#PCZ*bMJBJ4b{Zem)r!k=`GmVnWV
+}rk^iov_m$Lo{g97vqdPIqabr1e$`6%<zK(`j5V_}3~AM6xToupqf=;!5&{%ZFj9KhFn9V?Y%-
+c)sSbE5tITgQvSxg?jU~)A(7+dDJnuaD<lgVeRMAr)C6G0z3&*ZlI#-
+)^V6J1{3!XO24mhY7p7kNdXwUqv$7g?;(tVyw?>?%Yz_$o*D!>Qg`TBkttUVWro==$2mZ-
+?=;a^Qx1~KF0CduUrTAn%T;q;<1H)aQODq_qOemriZp5CQSr%C**u3_ZAibTjKRE6D2kGr_cBvK9JcE5io1zo;BZ~3v)oKBzM3XP3#n4}S;+xl
+_4K!+^fAa+>QoUPuu5yRT(>?hPcf6RokJUgdYz?ccKZqFuWQpOefLL5V?b{dk~i8V&pC;s@`ksx+eZ(BbgOIH#tkM@mhjdE$hW4^x4Jq+8-
+uEensT?emG$FN^TgHmQpMoi>kT$>+WN`sLrh#utpt?g@SaX&18u;)*3(34*+Q0GyRly@Es9<Mm!cS5`amXww`nFPY#YuMVPrdn6FFTWT{wCeL{
+-hvF{(U~4YmOnS$bu0B6Mqf@{zstKhD-GYY%-
+4vZ7x{92KDSJyLV>j30XjeGIZnznYxg_9eFLLzxmr^~J;OiEOY9z_Zzw?(tpoGU7L+21!%AQa89@1_KOqjx4t_a4Rp8!Jb~<vC_#8pEG5+?V*m
+rz0Kg9GvmPSOc(kPVGQJ5h8&orPUPyGb$~7gQRS&>qmlm>Q|F^@%xZU)S{2z(8G(6yhG(!zZ-ppLs4KS~JUc$$R9#6(Qg?7?v6v0~fB!%6wD2t"""
 # VALORES HARDCODE PARA PRUEBAS LOCALES (ficticios, nunca credenciales reales).
 # Los secretos de GitHub prevalecen sobre estos valores.
 # Para pruebas locales se puede sustituir el valor de demostración.
@@ -53,11 +233,11 @@ def credential(name, demo):
         raise RuntimeError(f'Configura {name} como secreto de GitHub o valor de prueba local')
     return value
 
-BRAND = 'AERO_DATOS'
+BRAND = 'DATAVIRAL'
 
 
 def catalog():
-    return AERO_CATALOG
+    return json.loads(zlib.decompress(base64.b85decode(''.join(CATALOG_B85.split()))))
 
 
 def _parse_ai_json(text):
@@ -130,8 +310,8 @@ def ajustar_texto_visual(texto, max_caracteres=40, max_palabras=6):
 
 # Los textos son ideas completas, nunca fragmentos cortados.
 VISUAL_MIN_WORDS = 3
-VISUAL_MAX_WORDS = 12
-VISUAL_MAX_CHARS = 72
+VISUAL_MAX_WORDS = 9
+VISUAL_MAX_CHARS = 52
 GENERIC_VISUALS = (
     'sabias esto', 'ahora ya lo sabes', 'dato sorprendente',
     'descubre algo nuevo', 'una idea util', 'increible pero cierto',
@@ -178,7 +358,7 @@ def validar_microfrases(visuals, script, title='', fact='', lesson=''):
         if not (VISUAL_MIN_WORDS <= len(words) <= VISUAL_MAX_WORDS):
             raise ValueError(f'Escena {index}: requiere entre 3 y 9 palabras, tiene {len(words)}')
         if len(clean) > VISUAL_MAX_CHARS:
-            raise ValueError(f'Escena {index}: supera 72 caracteres; reformular, no truncar')
+            raise ValueError(f'Escena {index}: supera 52 caracteres; reformular, no truncar')
         if clean.endswith(('...', '…', ':', ',', ';')):
             raise ValueError(f'Escena {index}: mensaje incompleto')
         norm = _visual_normalizado(clean).strip(' .!?¿¡')
@@ -387,7 +567,7 @@ def _free_prompt(ep, mode):
         'Aprendizaje: ' + str(ep.get('lesson', ''))[:210] + '. '
     )
     instruction = (
-        'Eres divulgador aeronáutico riguroso en español. Público: pilotos, mecánicos, despachadores, ATC y personal aeroportuario. No inventes especificaciones, magnitudes, procedimientos ni normas. Si faltan datos exactos, explica el principio verificable. Las recomendaciones de seguridad no reemplazan manuales aprobados.  Crea UN guion de 42 a 50 palabras '
+        'Eres guionista educativo en español. Crea UN guion de 42 a 50 palabras '
         'que explique un hecho concreto sin inventar cifras. Escribe cinco '
         'microfrases de 3 a 9 palabras y máximo 52 caracteres cada una, '
         'específicas y relacionadas con las afirmaciones del guion, no títulos '
@@ -422,7 +602,7 @@ def _openrouter_text(key, model, prompt, *, max_tokens=2600):
         'Authorization': f'Bearer {key}',
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://github.com',
-        'X-Title': 'Dato Wow - AeroDatos',
+        'X-Title': 'Dato Wow - DataViral',
     }
     base = {
         'model': model,
@@ -515,238 +695,248 @@ def _parse_five_visuals(raw):
     return [found[i] for i in range(1,6)]
 
 
-def _proposiciones_breves(texto):
-    """Extrae proposiciones literales completas; jamás trunca por caracteres.
+def _validar_mensaje_individual(frase, narracion):
+    """Aplicar límites de escena sin obligar a disponer de cinco mensajes."""
+    if not isinstance(frase, str):
+        return None
+    frase = re.sub(r'\s+', ' ', frase).strip().strip('"“”').strip(' .,:;!?¿¡')
+    if not 3 <= len(frase.split()) <= VISUAL_MAX_WORDS or len(frase) > VISUAL_MAX_CHARS:
+        return None
+    normal = _visual_normalizado(frase)
+    if any(generic in normal for generic in GENERIC_VISUALS):
+        return None
+    universo = _palabras_relevantes(' '.join(str(narracion.get(k, '')) for k in
+                                   ('script', 'title', 'fact', 'lesson')))
+    if not (_palabras_relevantes(frase) & universo):
+        return None
+    if not re.search(r'[a-záéíóúñ]', frase, flags=re.I):
+        return None
+    return frase
 
-    Se separan oraciones y cláusulas explícitas. Un fragmento solamente sirve
-    si satisface todas las reglas del validador final.
+
+def _fragmentos_completos(texto):
+    """Conservar solo cláusulas que puedan funcionar solas, sin cortar por longitud."""
+    text = re.sub(r'\s+', ' ', str(texto or '')).strip()
+    if not text:
+        return
+    pieces = re.split(r'(?<=[.!?;])\s+|\s*[;:]\s*', text)
+    for piece in pieces:
+        piece = piece.strip(' \t\n.,;:¡!¿?')
+        if piece:
+            yield piece
+        # Solo separar cláusulas con puntuación explícita, nunca a mitad de palabra.
+        for part in re.split(r',\s+(?=(?:pero|aunque|además|sin embargo|por eso|mientras)\b)', piece, flags=re.I):
+            part = re.sub(r'^(?:pero|aunque|además|sin embargo|por eso),?\s+', '', part.strip(' ,.;:!?¿¡'), flags=re.I)
+            if part and part != piece:
+                yield part
+
+
+def _mensajes_recuperados(narration, respuestas=()):
+    """Aprovechar escenas válidas incluso si otras exceden el límite.
+
+    Complementar solo con proposiciones literales del relato, el dato y la
+    lección; nunca repetir frases ni inventar información para llegar a cinco.
     """
-    texto = re.sub(r'\s+', ' ', str(texto or '')).strip()
-    for frase in re.split(r'(?<=[.!?;])\s+|\s*[;:]\s*', texto):
-        for parte in re.split(r',\s+(?=(?:pero|aunque|además|sin embargo|por eso|mientras)\b)', frase, flags=re.I):
-            parte = parte.strip(' \t\n.,;:¡!¿?"“”')
-            parte = re.sub(r'^(?:pero|aunque|además|sin embargo|por eso),?\s+', '', parte, flags=re.I)
-            if parte and VISUAL_MIN_WORDS <= len(parte.split()) <= VISUAL_MAX_WORDS and len(parte) <= VISUAL_MAX_CHARS:
-                yield parte
+    seen = set()
+    valid = []
+
+    def append_one(texto):
+        frase = _validar_mensaje_individual(texto, narration)
+        if frase is None:
+            return
+        norm = _visual_normalizado(frase)
+        if norm in seen:
+            return
+        seen.add(norm)
+        valid.append(frase)
+
+    for response in respuestas:
+        for frase in response:
+            append_one(frase)
+            # Recuperar también cláusulas completas de una frase demasiado larga.
+            for piece in _fragmentos_completos(frase):
+                append_one(piece)
+    for field in ('script', 'fact', 'lesson'):
+        for piece in _fragmentos_completos(narration.get(field, '')):
+            append_one(piece)
+    if len(valid) < 5:
+        raise ValueError(f'solo se recuperaron {len(valid)} mensajes completos y distintos (requiere 5)')
+    return validar_microfrases(valid[:5], narration['script'], narration['title'], narration['fact'], narration['lesson'])
 
 
-def _mensajes_parciales(raw):
-    """Conserva líneas de mensajes aun si faltan campos o JSON se truncó."""
-    resultados = []
-    try:
-        parsed = _parse_five_visuals(raw)
-        if isinstance(parsed, list):
-            return [x for x in parsed if isinstance(x, str)]
-    except (ValueError, TypeError, KeyError):
-        pass
-    for linea in str(raw or '').splitlines():
-        m = re.match(r'^\s*(?:MENSAJE[_ ]?|ESCENA[_ ]?|[-*]\s*)\s*([1-5])\s*[.):-]\s*(.+?)\s*$', linea, re.I)
-        if m:
-            resultados.append(m.group(2).strip().strip('"“”'))
-    return resultados
+def _completar_mensajes_con_ia(narration, respuestas, models, router_quota_exhausted=False):
+    """Recuperación incremental: usa frases válidas y pide SOLO las faltantes.
 
-
-def _recuperar_mensajes(narracion, respuestas=()):
-    """Acumula frases válidas de TODOS los modelos y del propio guion.
-
-    No se descarta una respuesta entera por una sola escena defectuosa.
-    Respeta el orden aproximado del guion y conserva diversidad de mensajes.
+    Las respuestas nuevas se validan; nunca se aceptan afirmaciones sin relación
+    con el guion. El guardarraíl factual definitivo sigue siendo revisión humana.
     """
-    vistos = set()
-    candidatos = []
-    universo = _palabras_relevantes(' '.join(str(narracion[k]) for k in ('script','title','fact','lesson')))
-
-    def agregar(frase):
-        if not isinstance(frase, str):
-            return
-        frase = re.sub(r'\s+', ' ', frase).strip().strip('"“”')
-        clave = _visual_normalizado(frase).strip(' .!?¿¡')
-        if not clave or clave in vistos:
-            return
-        if not VISUAL_MIN_WORDS <= len(frase.split()) <= VISUAL_MAX_WORDS:
-            return
-        if len(frase) > VISUAL_MAX_CHARS or frase.endswith(('...', '…', ':', ',', ';')):
-            return
-        if any(generic in clave for generic in GENERIC_VISUALS):
-            return
-        if not (_palabras_relevantes(frase) & universo):
-            return
-        vistos.add(clave)
-        candidatos.append(frase)
-
-    # Primero, material válido propuesto por los modelos aunque otra escena falle.
-    for respuesta in respuestas:
-        if isinstance(respuesta, list):
-            for frase in respuesta:
-                agregar(frase)
-                if isinstance(frase, str):
-                    for breve in _proposiciones_breves(frase):
-                        agregar(breve)
-    # Después, proposiciones literales del guion y sus afirmaciones asociadas.
-    for campo in ('script', 'fact', 'lesson', 'title'):
-        for breve in _proposiciones_breves(narracion[campo]):
-            agregar(breve)
-
-    if len(candidatos) < 5:
-        raise ValueError(f'solo se recuperaron {len(candidatos)} mensajes válidos distintos (se requieren 5)')
-    return validar_microfrases(candidatos[:5], narracion['script'],
-                               narracion['title'], narracion['fact'], narracion['lesson'])
+    pool = [list(x) for x in respuestas]
+    attempts = 0
+    for provider, model, api_key in models:
+        if provider == 'openrouter' and router_quota_exhausted:
+            continue
+        if attempts >= 8:
+            break
+        try:
+            return _mensajes_recuperados(narration, pool)
+        except ValueError:
+            pass
+        # Selecciona cuántas frases completas existen, sin tomar fragmentos largos.
+        acc = []
+        for batch in pool:
+            acc.extend(batch)
+        existing = []
+        seen = set()
+        for text in acc:
+            validated = _validar_mensaje_individual(text, narration)
+            if validated and _visual_normalizado(validated) not in seen:
+                existing.append(validated)
+                seen.add(_visual_normalizado(validated))
+        n = max(1, 5 - len(existing))
+        prompt = (
+            f'Genera EXACTAMENTE {n} frases educativas NUEVAS y DIFERENTES, '
+            'cada una con entre 3 y 7 palabras y 45 caracteres como MÁXIMO. '
+            'No incluyas introducciones, numeración, citas, ni explicaciones. '
+            'Cada frase debe expresar una idea completa y comprobable SOLO en '
+            'este guion, sin añadir cifras, causalidades ni hechos nuevos. '
+            'Si una frase se pasa de largo, REFORMÚLALA en vez de cortarla. '
+            'Una frase por línea. Evita repetir estos mensajes: '
+            + json.dumps(existing, ensure_ascii=False) + '\n'
+            + 'TÍTULO: ' + narration['title'] + '\n'
+            + 'GUION: ' + narration['script'] + '\n'
+            + 'DATO: ' + narration['fact'] + '\n'
+            + 'ENSEÑANZA: ' + narration['lesson']
+        )
+        attempts += 1
+        try:
+            raw = _ai_request(provider, api_key, model, prompt, max_tokens=650)
+        except (ValueError, RuntimeError, requests.RequestException) as exc:
+            if provider == 'openrouter' and 'Cuota gratuita de la cuenta OpenRouter agotada' in str(exc):
+                router_quota_exhausted = True
+            print(f'IA complemento {attempts}: {model}: {str(exc)[:130]}', flush=True)
+            continue
+        lines = []
+        for line in raw.splitlines():
+            line = re.sub(r'^\s*(?:[-*•]|(?:MENSAJE[_ ]?)?\d{1,2}[.)\-:]?)\s*', '', line).strip(' "“”')
+            if line:
+                lines.append(line)
+        pool.append(lines)
+        print(f'IA complemento {attempts}: {model} devolvió {len(lines)} posibles frases', flush=True)
+    return _mensajes_recuperados(narration, pool)
 
 
 def _mensajes_locales_desde_guion(narration):
-    """Respaldo extractivo, sin introducir afirmaciones que no estén en guion."""
-    return _recuperar_mensajes(narration)
+    return _mensajes_recuperados(narration)
 
 
-# Orden de proveedores configurable, sin nuevas dependencias.
-# Las cuentas gratuitas están sujetas a cuotas propias; no se garantiza cuota infinita.
-GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
+def _mensajes_parciales_respuesta(raw):
+    """Recuperar propuestas 1–5 aunque alguna esté mal formada o sea larga."""
+    try:
+        arr = _parse_five_visuals(raw)
+        return [item for item in arr if isinstance(item, str)]
+    except (ValueError, TypeError, KeyError):
+        pass
+    pieces = []
+    for line in str(raw or '').splitlines():
+        match = re.match(r'^\s*(?:MENSAJE[_ ]?|ESCENA[_ ]?|[-*]\s*)\s*([1-5])\s*[.):-]\s*(.+?)\s*$', line, re.I)
+        if match:
+            pieces.append(match.group(2).strip().strip('"“”'))
+    return pieces
+
+
+# Descubrir modelos desde la API de Gemini, en vez de asumir IDs disponibles.
 GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta/models/'
 
 
-def _provider_credentials():
-    providers = []
-    for name, secret in (('groq', 'GROQ_API_KEY'), ('gemini', 'GEMINI_API_KEY'),
-                         ('openrouter', 'OPENROUTER_API_KEY')):
-        key = os.getenv(secret, '').strip()
-        if key:
-            providers.append((name, key))
-    if not providers:
-        raise RuntimeError('Configura al menos una clave: GROQ_API_KEY, GEMINI_API_KEY u OPENROUTER_API_KEY')
-    return providers
-
-
-def _discover_groq_models(key):
-    """Consulta el catálogo accesible para esta API key, sin suponer IDs vigentes."""
-    preferred = ('openai/gpt-oss-20b', 'openai/gpt-oss-120b',
-                 'llama-3.3-70b-versatile', 'llama-3.1-8b-instant')
-    response = requests.get('https://api.groq.com/openai/v1/models',
-                            headers={'Authorization': f'Bearer {key}'}, timeout=25)
-    response.raise_for_status()
-    available = {row.get('id') for row in response.json().get('data', [])
-                 if isinstance(row, dict) and isinstance(row.get('id'), str)}
-    chosen = os.getenv('GROQ_MODEL', '').strip()
-    # Only general text generation models: avoid audio, guard, vision, or tooling.
-    allowed = [mid for mid in preferred if mid in available]
-    if chosen and chosen in available and chosen not in allowed:
-        allowed.insert(0, chosen)
-    elif chosen in allowed:
-        allowed.remove(chosen)
-        allowed.insert(0, chosen)
-    return allowed[:3]
-
-
 def _discover_gemini_models(key):
-    """Lista modelos con generateContent y prioriza Flash-Lite (no TTS/imágenes)."""
-    preferred = ('gemini-3.1-flash-lite', 'gemini-3.5-flash-lite',
-                 'gemini-3.6-flash', 'gemini-3.8-flash')
-    found = set()
-    page = None
-    for _ in range(5):
+    """Selecciona únicamente modelos que la clave actual puede usar para generateContent."""
+    discovered = []
+    token = None
+    for _ in range(6):
         params = {'pageSize': 100}
-        if page:
-            params['pageToken'] = page
-        response = requests.get('https://generativelanguage.googleapis.com/v1beta/models',
-                                headers={'x-goog-api-key': key}, params=params, timeout=25)
-        response.raise_for_status()
-        payload = response.json()
-        for row in payload.get('models', []):
-            if 'generateContent' in row.get('supportedGenerationMethods', []):
-                name = str(row.get('name', '')).removeprefix('models/')
-                if name:
-                    found.add(name)
-        page = payload.get('nextPageToken')
-        if not page:
+        if token:
+            params['pageToken'] = token
+        response = requests.get(
+            'https://generativelanguage.googleapis.com/v1beta/models',
+            headers={'x-goog-api-key': key}, params=params, timeout=35,
+        )
+        if not response.ok:
+            raise RuntimeError(f'Gemini models.list HTTP {response.status_code}; verificar clave y API habilitada')
+        obj = response.json()
+        for row in obj.get('models', []):
+            mid = str(row.get('name', '')).removeprefix('models/')
+            methods = row.get('supportedGenerationMethods') or []
+            if ('generateContent' in methods and mid.startswith('gemini-')
+                    and not any(x in mid.lower() for x in ('image','audio','tts','embedding','live','robotics'))):
+                discovered.append(mid)
+        token = obj.get('nextPageToken')
+        if not token:
             break
-    chosen = os.getenv('GEMINI_MODEL', '').strip().removeprefix('models/')
-    allowed = [mid for mid in preferred if mid in found]
-    if chosen and chosen in found and chosen not in allowed:
-        allowed.insert(0, chosen)
-    elif chosen in allowed:
-        allowed.remove(chosen)
-        allowed.insert(0, chosen)
-    return allowed[:3]
+    # Preferir variantes Flash-Lite y Flash; no activar modelos Pro por defecto.
+    preferred = [m for m in discovered if 'flash-lite' in m.lower() and 'preview' not in m.lower()]
+    preferred += [m for m in discovered if 'flash' in m.lower() and 'lite' not in m.lower() and 'preview' not in m.lower()]
+    preferred += [m for m in discovered if 'flash' in m.lower() and m not in preferred]
+    requested = [x.strip().removeprefix('models/') for x in os.getenv('GEMINI_MODEL', '').split(',') if x.strip()]
+    chosen = [m for m in requested if m in discovered]
+    chosen += [m for m in preferred if m not in chosen]
+    models = list(dict.fromkeys(chosen))[:5]
+    print('Gemini: modelos habilitados para generateContent: ' + (', '.join(models) or 'ninguno'), flush=True)
+    if not models:
+        raise RuntimeError('Gemini no muestra modelos Flash accesibles para esta clave')
+    return models
 
 
-def _ai_candidates():
-    result = []
-    for provider, key in _provider_credentials():
-        if provider == 'groq':
-            try:
-                models = _discover_groq_models(key)
-                result.extend((provider, model, key) for model in models)
-                if not models:
-                    print('Groq: sin modelos de texto compatibles accesibles con esta clave', flush=True)
-            except (requests.RequestException, ValueError, KeyError) as exc:
-                print(f'Groq: no se pudo consultar catálogo: {str(exc)[:160]}', flush=True)
-        elif provider == 'gemini':
-            try:
-                models = _discover_gemini_models(key)
-                result.extend((provider, model, key) for model in models)
-                if not models:
-                    print('Gemini: sin modelos Flash compatibles accesibles con esta clave', flush=True)
-            except (requests.RequestException, ValueError, KeyError) as exc:
-                print(f'Gemini: no se pudo consultar catálogo: {str(exc)[:160]}', flush=True)
-        else:
-            try:
-                result.extend((provider, model, key) for model, _ in select_free_json_models(key, 5))
-            except (requests.RequestException, ValueError, RuntimeError) as exc:
-                print(f'OpenRouter: no se pudieron listar modelos gratuitos: {exc}', flush=True)
+def _gemini_text(key, model, prompt, *, max_tokens=1500):
+    url = GEMINI_API_ROOT + urllib.parse.quote(model, safe='') + ':generateContent'
+    response = requests.post(
+        url,
+        headers={'x-goog-api-key': key, 'Content-Type': 'application/json'},
+        json={'contents': [{'parts': [{'text': prompt}]}],
+              'generationConfig': {'maxOutputTokens': min(max_tokens, 2048), 'temperature': 0.2}},
+        timeout=110,
+    )
+    if not response.ok:
+        try:
+            err = response.json().get('error') or {}
+            detail = re.sub(r'\s+', ' ', str(err.get('message', '')))[:210]
+        except (ValueError, TypeError, AttributeError):
+            detail = ''
+        raise ValueError(f'Gemini {model}: HTTP {response.status_code}; {detail}')
+    data = response.json()
+    choices = data.get('candidates') or []
+    parts = ((choices[0].get('content') or {}).get('parts') or []) if choices else []
+    result = ''.join(str(p.get('text', '')) for p in parts if isinstance(p, dict)).strip()
     if not result:
-        raise RuntimeError('Ningún proveedor ofrece modelos compatibles accesibles; revisa las claves y las cuotas.')
+        raise ValueError('Gemini no devolvió texto visible')
     return result
 
 
-def _response_visible_text(response, provider):
-    if response.status_code in (401, 403):
-        raise ValueError(f'{provider}: clave o acceso rechazado (HTTP {response.status_code})')
-    if response.status_code == 429:
-        raise ValueError(f'{provider}: cuota o límite temporal (HTTP 429)')
-    if not response.ok:
-        raise ValueError(f'{provider}: HTTP {response.status_code}: {response.text[:200]}')
-    data = response.json()
-    if provider == 'gemini':
-        choices = data.get('candidates') or []
-        pieces = (choices[0].get('content') or {}).get('parts') or [] if choices else []
-        output = ''.join(part.get('text','') for part in pieces if isinstance(part, dict))
-    else:
-        choices = data.get('choices') or []
-        content = (choices[0].get('message') or {}).get('content', '') if choices else ''
-        output = (''.join(x.get('text','') for x in content if isinstance(x,dict))
-                  if isinstance(content,list) else content)
-    if not isinstance(output,str) or not output.strip():
-        raise ValueError(f'{provider}: respuesta sin texto visible')
-    return output.strip()
-
-
-def _provider_text(provider, model, key, prompt, *, max_tokens=1500):
-    if provider == 'openrouter':
+def _ai_model_candidates():
+    candidates = []
+    gemini_key = os.getenv('GEMINI_API_KEY', '').strip()
+    if gemini_key:
         try:
-            return _openrouter_text(key, model, prompt, max_tokens=max_tokens)
-        except RuntimeError as exc:
-            # Agotamiento de cuota: registrar el fallo, no abortar los otros proveedores.
-            if 'cuota gratuita' in str(exc).lower():
-                raise ValueError(str(exc)) from exc
-            raise
-    if provider == 'groq':
-        response = requests.post(
-            GROQ_URL,
-            headers={'Authorization': f'Bearer {key}', 'Content-Type':'application/json'},
-            json={'model':model, 'messages':[
-                {'role':'system', 'content':'Responde exclusivamente en español y con el formato pedido.'},
-                {'role':'user','content':prompt}],
-                'temperature':0.2, 'max_tokens':min(max_tokens, 2048)},
-            timeout=110)
-        return _response_visible_text(response, provider)
+            candidates.extend(('gemini', model, gemini_key)
+                              for model in _discover_gemini_models(gemini_key))
+        except (requests.RequestException, RuntimeError, ValueError) as exc:
+            print(f'Gemini: descubrimiento fallido: {str(exc)[:220]}', flush=True)
+    router_key = os.getenv('OPENROUTER_API_KEY', '').strip()
+    if router_key:
+        try:
+            candidates.extend(('openrouter', model, router_key)
+                              for model, _ in select_free_json_models(router_key, 7))
+        except (requests.RequestException, ValueError, RuntimeError) as exc:
+            print(f'OpenRouter: catálogo gratuito no disponible: {type(exc).__name__}', flush=True)
+    if not candidates:
+        raise RuntimeError('Ningún modelo disponible: revisar acceso de Gemini o cuota de OpenRouter.')
+    print('Modelos candidatos: ' + ', '.join(f'{p}:{m}' for p,m,_ in candidates), flush=True)
+    return candidates
+
+
+def _ai_request(provider, key, model, prompt, max_tokens):
     if provider == 'gemini':
-        response = requests.post(
-            GEMINI_API_ROOT + urllib.parse.quote(model, safe='') + ':generateContent',
-            headers={'x-goog-api-key':key,'Content-Type':'application/json'},
-            json={'contents':[{'parts':[{'text':prompt}]}],
-                  'generationConfig':{'maxOutputTokens':min(max_tokens,2048)}},
-            timeout=110)
-        return _response_visible_text(response, provider)
-    raise ValueError(f'Proveedor desconocido: {provider}')
+        return _gemini_text(key, model, prompt, max_tokens=max_tokens)
+    return _openrouter_text(key, model, prompt, max_tokens=max_tokens)
 
 
 def create_ai_episode(ep):
@@ -755,51 +945,49 @@ def create_ai_episode(ep):
     Evita pedir un gran JSON. Solo usa modelos con prompt/completion gratuitos;
     si alguno falla por saturación o salida truncada prueba el siguiente.
     """
-    candidates = _ai_candidates()
-    print('Proveedores disponibles: ' + ', '.join(f'{p}:{m}' for p,m,_ in candidates), flush=True)
+    candidates = _ai_model_candidates()
+    router_quota_exhausted = False
     intro = (
         f"Tema: {str(ep.get('title', ''))[:140]}. "
         f"Categoría: {str(ep.get('category', ''))[:70]}. "
         f"Enseñanza deseada: {str(ep.get('lesson', ''))[:160]}."
     )
     narration_prompt = (
-        'Eres especialista en divulgación aeronáutica para pilotos, mantenimiento, ATC y operaciones. Redacta un guion técnico sorprendente pero preciso, IDEALMENTE 42 A 50 PALABRAS '
-        'en español para narrar en 20 segundos. Escribe de cuatro a seis oraciones completas ' 
-        'con ideas concretas; deben avanzar de causa a conclusión y ser comprensibles ' 
+        'Redacta un guion educativo sorprendente y preciso, IDEALMENTE 42 A 50 PALABRAS '
+        'en español para narrar en 20 segundos. Abre con un gancho factual de 5 a 10 palabras, ' 
+        'que despierte una pregunta o contradiga una intuición, sin sensacionalismo. Escribe de cuatro a seis oraciones completas con ideas concretas; deben avanzar de causa a conclusión y ser comprensibles ' 
         'por sí solas. Sin cifras inventadas, sin introducciones vacías, '
-        'sin especificaciones inventadas, sin instrucciones operacionales no verificadas, sin afirmar cifras sin condiciones ni fuente. Responde SOLO cuatro líneas, '
+        'sin consejos médicos o de emergencia no verificados, ni promesas exageradas. Cierra con un aprendizaje claro y memorable. Responde SOLO cuatro líneas, '
         'sin Markdown: TITULO: ...\nGUION: ...\nDATO: ...\nLECCION: ...\n' + intro
     )
     narration = None
     narration_model = None
     last_problem = 'sin respuesta'
-    providers_exhausted = set()
-    for provider, model, key in candidates:
-        if provider in providers_exhausted:
+    for provider, model, api_key in candidates:
+        if provider == 'openrouter' and router_quota_exhausted:
             continue
         try:
-            raw = _provider_text(provider, model, key, narration_prompt, max_tokens=1500)
+            raw = _ai_request(provider, api_key, model, narration_prompt, max_tokens=1800)
             narration = _parse_narration(raw)
             narration_model = f'{provider}:{model}'
-            print(f'Narración validada con {narration_model}', flush=True)
+            print(f'Narración validada con {provider}:{model}', flush=True)
             break
-        except RuntimeError:
-            raise
-        except (ValueError, requests.RequestException, KeyError, TypeError) as exc:
+        except (RuntimeError, ValueError, requests.RequestException, KeyError, TypeError) as exc:
+            if provider == 'openrouter' and 'Cuota gratuita de la cuenta OpenRouter agotada' in str(exc):
+                router_quota_exhausted = True
+                print('OpenRouter: cuota de cuenta agotada; se omiten sus modelos', flush=True)
             last_problem = f'{provider}/{model}: {str(exc)[:140]}'
             print(f'IA etapa 1: {last_problem}', flush=True)
-            if provider == 'openrouter' and 'cuota gratuita' in str(exc).lower():
-                providers_exhausted.add(provider)
     if narration is None:
-        raise RuntimeError('Ningún proveedor configurado generó narración válida. '
+        raise RuntimeError('Ningún modelo gratuito generó narración válida. '
                            f'Último diagnóstico: {last_problem}. No se publicó nada.')
 
     # No volver a generar el guion cuando fallan los mensajes visuales.
     visuals_prompt = (
         'Basándote ÚNICAMENTE en el guion siguiente, escribe cinco frases educativas '
-        'completas para cinco escenas consecutivas. Idealmente 3 a 9 palabras, '
-        'máximo 72 caracteres y nunca más de 12 palabras, sin títulos vacíos, sin puntos suspensivos, sin introducir '
-        'hechos ajenos al guion. Deben explicar cinco aspectos o consecuencias distintas. '
+        'completas para cinco escenas consecutivas. Cada una entre 3 y 9 palabras, '
+        'máximo 52 caracteres, sin títulos vacíos, sin puntos suspensivos, sin introducir '
+        'hechos ajenos al guion. MENSAJE_1 debe ser un gancho concreto y fiel al guion; MENSAJE_5 debe cerrar el aprendizaje sin inventar nada. Deben explicar cinco aspectos o consecuencias distintas. '
         'Responde SOLO estas cinco líneas, sin Markdown ni explicaciones: '
         'MENSAJE_1: ...\nMENSAJE_2: ...\nMENSAJE_3: ...\nMENSAJE_4: ...\nMENSAJE_5: ...\n'
         f"TITULO: {narration['title']}\nGUION: {narration['script']}\n"
@@ -807,39 +995,51 @@ def create_ai_episode(ep):
     )
     visuals = None
     visual_model = None
-    propuestas_parciales = []
+    respuestas_parciales = []
     # Antes de otra solicitud, no hay parámetro costoso de razonamiento forzado:
     # muchos proveedores gratuitos no lo admiten; los prompts cortos reducen consumo.
     # El modelo que completó bien la narración recibe la primera oportunidad.
     visual_candidates = sorted(candidates, key=lambda row: f'{row[0]}:{row[1]}' != narration_model)
-    for provider, model, key in visual_candidates:
+    for provider, model, api_key in visual_candidates:
+        if provider == 'openrouter' and router_quota_exhausted:
+            continue
         try:
-            raw = _provider_text(provider, model, key, visuals_prompt, max_tokens=1100)
-            propuestas_parciales.append(_mensajes_parciales(raw))
+            raw = _ai_request(provider, api_key, model, visuals_prompt, max_tokens=1300)
+            respuestas_parciales.append(_mensajes_parciales_respuesta(raw))
             proposed = _parse_five_visuals(raw)
             visuals = validar_microfrases(proposed, narration['script'],
                                            narration['title'], narration['fact'], narration['lesson'])
             visual_model = f'{provider}:{model}'
-            print(f'Cinco mensajes validados con {visual_model}', flush=True)
+            print(f'Cinco mensajes validados con {provider}:{model}', flush=True)
             break
-        except RuntimeError:
-            raise
-        except (ValueError, requests.RequestException, KeyError, TypeError) as exc:
+        except (RuntimeError, ValueError, requests.RequestException, KeyError, TypeError) as exc:
+            if provider == 'openrouter' and 'Cuota gratuita de la cuenta OpenRouter agotada' in str(exc):
+                router_quota_exhausted = True
+                print('OpenRouter: cuota de cuenta agotada; se omiten sus modelos', flush=True)
             last_problem = f'{provider}/{model}: {str(exc)[:140]}'
             print(f'IA etapa 2: {last_problem}', flush=True)
     if visuals is None:
         # Evitar fallar por una segunda llamada cuando el propio guion
         # contiene cinco proposiciones breves. Nunca inventar información.
         try:
-            visuals = _recuperar_mensajes(narration, propuestas_parciales)
-            visual_model = 'recuperacion-local'
-            print('Cinco mensajes recuperados de propuestas parciales y del guion', flush=True)
+            visuals = _mensajes_recuperados(narration, respuestas_parciales)
+            visual_model = 'recuperacion-mixta'
+            print('Cinco mensajes recuperados de propuestas de IA y del guion (sin inventar datos)', flush=True)
         except ValueError as exc:
-            raise RuntimeError(
-                'Narración válida, pero no se obtuvieron cinco mensajes seguros. '
-                f'IA: {last_problem}. Respaldo local: {exc}. '
-                'No se publicó nada.'
-            ) from exc
+            print(f'Recuperación inicial insuficiente ({exc}); intentando completar solo mensajes faltantes', flush=True)
+            try:
+                visuals = _completar_mensajes_con_ia(
+                    narration, respuestas_parciales, visual_candidates,
+                    router_quota_exhausted=router_quota_exhausted
+                )
+                visual_model = 'recuperacion-incremental'
+                print('Cinco mensajes recuperados y validados mediante complemento incremental', flush=True)
+            except ValueError as final_exc:
+                raise RuntimeError(
+                    'Narración válida, pero no se obtuvieron cinco mensajes seguros. '
+                    f'OpenRouter: {last_problem}. Recuperación: {final_exc}. '
+                    'No se publicó nada.'
+                ) from final_exc
 
     result = dict(ep)
     result.update(
@@ -868,11 +1068,11 @@ def select_episode(episodes, gh=None, requested=None):
 
     states = {}
     if gh is not None:
-        raw, _ = gh.read('aerodatos/state.json')
+        raw, _ = gh.read('dataviral/state.json')
         if raw is not None:
             document = json.loads(raw)
             if not isinstance(document, dict) or not isinstance(document.get('episodes'), dict):
-                raise RuntimeError('Estado remoto de AeroDatos invalido; no se seleccionara episodio')
+                raise RuntimeError('Estado remoto de DataViral invalido; no se seleccionara episodio')
             states = document['episodes']
 
     blocked = {'publicado', 'enviando', 'incierto'}
@@ -884,7 +1084,7 @@ def select_episode(episodes, gh=None, requested=None):
         row = states.get(ep['id'], {})
         if not isinstance(row, dict):
             raise RuntimeError('Registro de estado invalido para ' + ep['id'])
-        statuses = [row.get(field) for field in ('reel', 'foto', 'feed_video')]
+        statuses = [row.get(field) for field in ('reel', 'foto', 'feed_video', 'story')]
         if any(status in blocked for status in statuses):
             if 'publicado' in statuses:
                 published_counts[category] = published_counts.get(category, 0) + 1
@@ -953,189 +1153,449 @@ def palette(i):
     ][i % 5]
 
 
+# Fotografía única: solo CC0 o dominio público y sin texto visible.
+# Para aceptar fotografías, el runner requiere Tesseract OCR:
+# sudo apt-get install -y tesseract-ocr
+# Si no está disponible, se detiene el video antes de publicar.
+import shutil
+import unicodedata
+import ipaddress
+import socket
+from PIL import ImageOps, ImageEnhance, ImageFilter
 
-# Solo fotografías CC0 o de dominio público: no precisan atribución obligatoria.
-# Se conserva la procedencia en creditos_imagenes.json para trazabilidad.
-IMAGE_LICENSES = {'cc0', 'pdm'}
-IMAGE_HEADERS = {
-    'User-Agent': 'AeroDatosEducationalBot/1.2 (https://github.com/acesped/aero_datos; contact via GitHub issues)',
-    'Accept': 'application/json, image/jpeg, image/png, image/webp, */*;q=0.5',
+PHOTO_HEADERS = {
+    'User-Agent': 'DatoWowEducationalBot/1.5 (https://github.com/acesped/dataviral)',
+    'Accept': 'application/json, image/jpeg, image/png, image/webp',
+}
+PHOTO_REJECT_METADATA = (
+    'poster', 'infographic', 'infografia', 'diagram', 'diagrama',
+    'chart', 'grafic', 'screenshot', 'captura', 'meme', 'banner',
+    'advertisement', 'publicidad', 'logo', 'watermark', 'marca de agua',
+    'typography', 'tipografia', 'text overlay', 'book cover',
+    'portada', 'signage', 'letrero', 'labelled', 'labeled',
+    'etiquetad', 'newspaper', 'periódico', 'periodico', 'mapa politico',
+)
+PHOTO_STOP = {
+    'esto','esta','este','para','porque','como','cuando','desde','sobre','entre',
+    'donde','tiene','puede','pueden','muchos','nuestra','nuestro','datos',
+    'dato','sabias','sabías','están','estan','segun','según','algunas',
+    'algunos','tambien','también','unos','unas','sino','pero','cada',
+    'todo','todos','ellas','ellos','del','las','los','con','una','que',
+}
+PHOTO_MIN_SCORE = int(os.getenv('DV_IMAGE_MIN_SCORE', '7'))
+PHOTO_MAX_QUERIES = int(os.getenv('DV_IMAGE_MAX_QUERIES', '10'))
+
+
+def _photo_words(value):
+    value = unicodedata.normalize('NFKD', str(value or '').lower())
+    value = ''.join(x for x in value if not unicodedata.combining(x))
+    return [x for x in re.findall(r'[a-z0-9]{4,}', value)
+            if x not in PHOTO_STOP]
+
+
+# Asociaciones de conceptos concretos con objetos fotografiables; no se usan
+# pistas genéricas de categoría para elegir fondos irrelevantes.
+PHOTO_CONCEPTS = {
+    'huella digital': 'fingerprint closeup', 'firma invisible': 'laptop browser fingerprinting',
+    'navegador': 'laptop web browser', 'internet': 'laptop internet router',
+    'privacidad': 'laptop privacy cybersecurity', 'contraseña': 'computer keyboard password',
+    'cerebro': 'human brain model', 'memoria': 'human brain model',
+    'atención': 'person concentrating', 'emociones': 'human facial expression',
+    'ansiedad': 'anxious human portrait', 'sueño': 'sleeping person',
+    'abejas': 'honeybee on flower', 'volcán': 'volcano eruption',
+    'océano': 'ocean water', 'pulpo': 'octopus underwater',
+    'satélite': 'satellite orbit earth', 'luna': 'moon surface',
+    'bacterias': 'bacteria microscope', 'corazón': 'human heart anatomy model',
+}
+PHOTO_QUERY_STOP = set('photo photograph photography images image picture stock high resolution realistic creative beautiful background vertical'.split())
+
+
+# Consultas fotografiables, no etiquetas editoriales abstractas.
+PHOTO_PHYSICAL_SCENES = {
+    'expedicion': ['scientific expedition', 'explorers mountains', 'researchers fieldwork'],
+    'exploracion': ['explorers landscape', 'research expedition'],
+    'aventura': ['explorers mountains', 'hiking expedition'],
+    'navegador': ['laptop computer', 'computer keyboard'],
+    'huella digital': ['fingerprint', 'laptop computer'],
+    'firma invisible': ['laptop computer', 'computer mouse'],
+    'privacidad': ['laptop computer', 'closed laptop'],
+    'dinero': ['coins money', 'banknotes'],
+    'memoria': ['human brain model', 'person reading book'],
+    'psicologia': ['human facial expression', 'person thinking'],
+    'atencion': ['person reading book', 'person concentrating'],
+    'cerebro': ['human brain model'],
+    'volcan': ['volcano landscape'],
+    'abejas': ['bee flower'],
+    'oceano': ['ocean waves'],
+    'satellite': ['satellite space'],
+    'satelite': ['satellite space'],
+    'historia': ['historical artifact'],
 }
 
 
-def _image_request(url, *, params=None, stream=False, timeout=20):
-    """Segundo intento moderado para límites transitorios; sin bucles agresivos."""
-    for attempt in range(2):
-        r = requests.get(url, params=params, headers=IMAGE_HEADERS, timeout=timeout, stream=stream)
-        if r.status_code in (429, 502, 503, 504) and attempt == 0:
-            r.close()
+def _visual_query_ai(ep):
+    """Gemini propone sujetos fotografiables, no conceptos abstractos.
+
+    No depende de OpenRouter (que puede estar sin cuota). La salida se limita
+    a consultas cortas y se valida antes de consultar buscadores de imágenes.
+    """
+    if os.getenv('DV_DISABLE_VISUAL_AI', '').lower() in ('1', 'true', 'yes'):
+        return []
+    key = os.getenv('GEMINI_API_KEY', '').strip()
+    if not key:
+        print('FOTO: Gemini no configurado; se usarán consultas locales', flush=True)
+        return []
+    prompt = (
+        'Eres un documentalista que busca fotografías CC0. A partir del tema '
+        'y guion en español, responde SOLO un JSON válido como '
+        '{"queries":["english object or activity","second photo subject",'
+        '"third photo subject"]}. Cada consulta EN INGLÉS con 2 a 4 '
+        'palabras y sustantivos físicos fotografiables. Deben representar '
+        'el fenómeno CONCRETO explicado, no su categoría ni una metáfora. '
+        'Evita pantallas con letras, carteles, logos, diagramas e infografías. '
+        'Ejemplo: si el tema es comparar ejercicios de fuerza y resistencia, '
+        'usa "person lifting weights", "runner training outdoors", '
+        '"athlete exercising gym"; nunca "training versus". '
+        f"Tema: {str(ep.get('title',''))[:140]}\n"
+        f"Guion: {str(ep.get('script',''))[:600]}\n"
+        f"Dato: {str(ep.get('fact',''))[:150]}"
+    )
+    # El alias -latest se comprobó en ejecuciones previas, pero el modelo puede cambiar.
+    preferred = ['gemini-flash-lite-latest', 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite']
+    configured = [x.strip() for x in os.getenv('DV_IMAGE_GEMINI_MODELS','').split(',') if x.strip()]
+    for model in list(dict.fromkeys(configured + preferred)):
+        try:
+            raw = _gemini_text(key, model, prompt, max_tokens=400)
+            obj = _parse_ai_json(raw)
+            lines = obj.get('queries') or []
+            if not isinstance(lines, list):
+                raise ValueError('queries no es lista')
+            valid = []
+            for q in lines:
+                if not isinstance(q, str):
+                    continue
+                q = re.sub(r'\s+', ' ', q).strip(' .,!?:;')
+                if (2 <= len(q.split()) <= 5 and len(q) <= 70
+                        and re.fullmatch(r'[A-Za-z0-9 -]+', q)
+                        and not any(w.lower() in PHOTO_QUERY_STOP for w in q.split())):
+                    valid.append(q)
+            if valid:
+                print(f'FOTO: Gemini sugirió {valid!r}', flush=True)
+                return valid[:4]
+        except (ValueError, RuntimeError, requests.RequestException) as exc:
+            print(f'FOTO: Gemini {model} no pudo proponer consultas: {str(exc)[:130]}', flush=True)
+    return []
+
+
+def _photo_queries(ep):
+    """Varias consultas concretas, primero IA Gemini y después sujetos locales."""
+    manual = str(ep.get('image_query') or '').strip()
+    title = str(ep.get('title') or '')
+    narrative = ' '.join(str(ep.get(k) or '') for k in ('title', 'script', 'fact', 'lesson'))
+    normalized = unicodedata.normalize('NFKD', narrative.lower())
+    normalized = ''.join(ch for ch in normalized if not unicodedata.combining(ch))
+    queries = []
+    if manual:
+        queries.append(manual)
+    queries.extend(_visual_query_ai(ep))
+    for concept, examples in PHOTO_PHYSICAL_SCENES.items():
+        if re.search(r'(?<![a-z])' + re.escape(concept) + r'(?![a-z])', normalized):
+            queries.extend(examples)
+    # Respaldo específico para temas que antes daban «entrenamiento versus».
+    if any(word in normalized for word in ('entrenamiento', 'entrenar', 'ejercicio', 'fuerza', 'resistencia')):
+        if any(word in normalized for word in ('dinero', 'finanzas', 'inversion', 'mercado', 'econom')):
+            queries.extend(['financial analyst laptop', 'person using calculator'])
+        else:
+            queries.extend(['athlete exercising gym', 'person lifting weights', 'runner training outdoors'])
+    if any(word in normalized for word in ('expedicion', 'exploracion', 'explorador')):
+        queries.extend(['scientific expedition outdoors', 'explorers mountains'])
+    # No usar por defecto fragmentos abstractos del título como «X versus».
+    unique, seen = [], set()
+    for q in queries:
+        q = re.sub(r'\s+', ' ', str(q or '')).strip()[:80]
+        if q and q.casefold() not in seen:
+            unique.append(q)
+            seen.add(q.casefold())
+    if not unique:
+        raise RuntimeError('FOTO: no se obtuvo un sujeto físico concreto para el tema; no se usará una foto genérica.')
+    return unique[:max(3, min(12, PHOTO_MAX_QUERIES))]
+
+
+def _photo_get(url, *, params=None, stream=False):
+    for retry in range(2):
+        response = requests.get(url, params=params, headers=PHOTO_HEADERS,
+                                timeout=(10, 22), stream=stream)
+        if response.status_code in (429, 502, 503, 504) and retry == 0:
+            response.close()
             time.sleep(2)
             continue
-        r.raise_for_status()
-        return r
-    raise RuntimeError('Servicio de imágenes no disponible')
+        response.raise_for_status()
+        return response
+    raise RuntimeError('Proveedor de imágenes sin respuesta')
 
 
-def _safe_photo_download(url, target):
-    from urllib.parse import urlparse
-    parsed = urlparse(url)
-    # Rechazar enlaces inseguros y direcciones internas; solo proveedores públicos conocidos.
-    host = (parsed.hostname or '').lower()
-    if parsed.scheme != 'https' or not host or host in ('localhost',) or host.endswith('.local'):
-        return False
-    try:
-        with _image_request(url, stream=True, timeout=22) as r:
-            kind = r.headers.get('Content-Type', '').lower()
-            if not any(t in kind for t in ('image/jpeg', 'image/png', 'image/webp')):
-                return False
-            payload = bytearray()
-            for chunk in r.iter_content(65536):
-                if chunk:
-                    payload.extend(chunk)
-                if len(payload) > 10_000_000:
-                    return False
-        from PIL import ImageOps
-        with Image.open(io.BytesIO(payload)) as img:
-            img = ImageOps.exif_transpose(img)
-            if img.width < 420 or img.height < 300:
-                return False
-            img.convert('RGB').save(target, 'JPEG', quality=86)
-        return True
-    except Exception as exc:
-        print(f'Imagen descartada: {type(exc).__name__}: {str(exc)[:150]}', flush=True)
-        return False
+def _photo_html(value):
+    import html as _html
+    return _html.unescape(re.sub(r'<[^>]*>', ' ', str(value or '')))
 
 
-def _strip_html(value):
-    return re.sub(r'<[^>]*>', '', str(value or '')).strip()
-
-
-def _commons_candidates(query):
-    params = {'action':'query', 'format':'json', 'generator':'search',
-              'gsrsearch':'filetype:bitmap ' + query, 'gsrnamespace':6,
-              'gsrlimit':18, 'prop':'imageinfo', 'iiprop':'url|extmetadata',
-              'iiurlwidth':900}
-    with _image_request('https://commons.wikimedia.org/w/api.php', params=params) as r:
-        pages = r.json().get('query', {}).get('pages', {})
+def _commons_photos(query):
+    params = dict(action='query', format='json', generator='search',
+                  gsrsearch=query + ' filetype:bitmap', gsrnamespace=6,
+                  gsrlimit=16, prop='imageinfo', iiprop='url|extmetadata',
+                  iiurlwidth=1000)
+    with _photo_get('https://commons.wikimedia.org/w/api.php', params=params) as response:
+        pages = (response.json().get('query') or {}).get('pages') or {}
     for page in pages.values():
         info = (page.get('imageinfo') or [{}])[0]
-        meta = info.get('extmetadata') or {}
-        lic = _strip_html((meta.get('LicenseShortName') or {}).get('value','')).lower().replace(' ','')
-        free_of_attribution = ('cc0' in lic or 'publicdomain' in lic or
-                               lic in ('pd','pdm','dominiopúblico','dominiopublico') or
-                               lic.startswith('pd-'))
-        if not free_of_attribution or any(x in lic for x in ('cc-by','-nc','-nd')):
+        metadata = info.get('extmetadata') or {}
+        license_name = _photo_html((metadata.get('LicenseShortName') or {}).get('value')).lower().replace(' ', '')
+        # Evitar material CC-BY/SA: elegir exclusivamente CC0 o PD marcadas.
+        permitted = ('cc0' in license_name or 'publicdomain' in license_name
+                     or license_name in ('pd', 'pdm') or license_name.startswith('pd-'))
+        if not permitted or any(x in license_name for x in ('cc-by', '-nc', '-nd')):
             continue
         url = info.get('thumburl') or info.get('url')
         if url:
-            yield {'url':url, 'title':page.get('title',''),
-                   'author':_strip_html((meta.get('Artist') or {}).get('value','')),
-                   'license':lic, 'source':info.get('descriptionurl','')}
+            yield dict(url=url, title=page.get('title', ''),
+                       description=_photo_html((metadata.get('ImageDescription') or {}).get('value'))[:400],
+                       source=info.get('descriptionurl', ''), license=license_name,
+                       provider='Wikimedia Commons')
 
 
-def _openverse_candidates(query):
-    with _image_request('https://api.openverse.org/v1/images/',
-                        params={'q':query, 'license':'cc0,pdm', 'page_size':20}, timeout=20) as r:
-        items = r.json().get('results', [])
-    for item in items:
-        lic = str(item.get('license') or '').lower()
-        if lic not in IMAGE_LICENSES:
+def _openverse_photos(query):
+    with _photo_get('https://api.openverse.org/v1/images/',
+                    params=dict(q=query, license='cc0,pdm', page_size=16)) as response:
+        results = response.json().get('results') or []
+    for item in results:
+        if str(item.get('license') or '').lower() not in ('cc0', 'pdm'):
             continue
         url = item.get('url') or item.get('thumbnail')
         if url:
-            yield {'url':url, 'title':item.get('title',''), 'author':item.get('creator',''),
-                   'license':lic, 'source':item.get('foreign_landing_url','')}
+            yield dict(url=url, title=item.get('title') or '',
+                       description=item.get('description') or '',
+                       source=item.get('foreign_landing_url') or '',
+                       license=item.get('license'), provider='Openverse')
 
 
-def _image_queries(ep):
-    """Priorizar el objeto real; convertir temas amplios en búsquedas aeronáuticas en inglés."""
-    original = re.sub(r'\s+', ' ', str(ep.get('image_query') or ep.get('title',''))).strip()[:110]
-    category = str(ep.get('category','')).lower()
-    category_queries = {
-        'motores': 'aircraft jet engine aviation',
-        'aerodinámica': 'airplane wing aerodynamics aircraft flight',
-        'mantenimiento': 'aircraft maintenance hangar aviation technician',
-        'operaciones': 'commercial aviation airport operations',
-        'meteorología': 'aircraft aviation weather clouds',
-        'navegación': 'aircraft cockpit navigation instruments',
-        'economía': 'commercial airline passenger aircraft airport',
-        'regulación': 'commercial aircraft aviation airport',
-        'ciencia': 'aerospace aircraft engineering',
-        'historia': 'historic airplane aviation museum',
-    }
-    general = next((v for k,v in category_queries.items() if k in category), 'aviation aircraft')
-    terms = [original + ' aircraft aviation' if original else general, original, general]
-    # Una designación de motor/avión requiere su propio modelo; nunca mostrar otro como sustituto.
-    models = re.findall(r'\b(?:CFM56(?:-5B)?|PW1100G|GEnx|GE90|CF34|PT6A|A320|747|787|Trent\s*(?:1000|XWB)|LEAP-1A|Concorde)\b', original, re.I)
-    if models:
-        terms = [original + ' aircraft', original]
-    return [q for i,q in enumerate(terms) if q and q not in terms[:i]], models
+def _photo_score(item, ep, query_index):
+    """No aceptar fotos sólo por pertenecer al resultado de una búsqueda.
+
+    Wikimedia y Openverse pueden devolver imágenes irrelevantes; el título y la
+    descripción deben coincidir con los términos concretos de la consulta.
+    """
+    meta = ' '.join(str(item.get(x) or '') for x in ('title', 'description'))
+    normalized = unicodedata.normalize('NFKD', meta.lower())
+    normalized = ''.join(x for x in normalized if not unicodedata.combining(x))
+    if any(re.search(r'(?<![a-z])' + re.escape(term) + r'(?![a-z])', normalized)
+           for term in PHOTO_REJECT_METADATA):
+        return -1
+    subject_query = item.get('_matched_query', '')
+    qwords = set(_photo_words(subject_query)) - PHOTO_QUERY_STOP
+    # Eliminar términos genéricos de búsqueda y pedir evidencia explícita.
+    ignored = {'human', 'person', 'people', 'natural', 'nature', 'science',
+               'technology', 'computer', 'close', 'closeup', 'background',
+               'woman', 'man', 'young', 'digital', 'electronic'}
+    focused = qwords - ignored
+    matches = set(_photo_words(meta)) & (focused if focused else qwords)
+    if not matches:
+        return -1
+    return 30 * len(matches) + 4 * len(set(_photo_words(meta)) & qwords) - query_index * 3
 
 
-def prepare_photos(ep, folder):
-    """Busca hasta 5 fotografías CC0/PD, con trazabilidad y respaldo animado."""
-    queries, models = _image_queries(ep)
-    photos, credits, used = [], [], set()
-    print(f'Imágenes: consultas={queries!r} (solo CC0/dominio público)', flush=True)
-    for query in queries:
-        if len(photos) == 5:
-            break
-        for backend in (_commons_candidates, _openverse_candidates):
-            if len(photos) == 5:
-                break
+def _photo_has_text(path):
+    """Descarta fotografías con palabras detectadas; nunca certifica ausencia total.
+
+    La confianza de OCR aislado se verifica en dos modos para disminuir ruido.
+    """
+    exe = shutil.which('tesseract')
+    if not exe:
+        print('FOTO RECHAZADA: falta tesseract-ocr. Instalar con apt-get en Actions.', flush=True)
+        return True
+    try:
+        import csv
+        for psm in ('11', '6'):
+            res = subprocess.run([exe, str(path), 'stdout', '--psm', psm, 'tsv'],
+                                 capture_output=True, text=True, timeout=22, check=True)
+            for row in csv.DictReader(io.StringIO(res.stdout), delimiter='\t'):
+                token = (row.get('text') or '').strip()
+                try:
+                    confidence = float(row.get('conf', '-1'))
+                except ValueError:
+                    continue
+                letters = re.sub(r'[^A-Za-zÀ-ÿ0-9]', '', token)
+                if confidence >= 75 and len(letters) >= 3:
+                    print(f'FOTO RECHAZADA: texto detectado (OCR, modo {psm})', flush=True)
+                    return True
+    except (OSError, subprocess.SubprocessError, ValueError):
+        print('FOTO RECHAZADA: error al comprobar texto mediante OCR', flush=True)
+        return True
+    return False
+
+
+def _public_photo_url(url):
+    """Bloquea URLs no HTTPS, credenciales, puertos raros y direcciones internas.
+
+    Openverse devuelve fotos alojadas en muchos dominios legítimos. La antigua
+    lista cerrada descartaba casi todas las imágenes sin siquiera descargarlas.
+    """
+    from urllib.parse import urlparse
+    parsed = urlparse(url)
+    if parsed.scheme != 'https' or not parsed.hostname or parsed.username or parsed.password:
+        return False
+    try:
+        if parsed.port not in (None, 443):
+            return False
+    except ValueError:
+        return False
+    host = parsed.hostname.lower().rstrip('.')
+    if host == 'localhost' or host.endswith(('.local', '.internal', '.localhost')):
+        return False
+    try:
+        addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+        if not addresses:
+            return False
+        for address in addresses:
+            ip = ipaddress.ip_address(address[4][0])
+            if not ip.is_global:
+                return False
+    except (OSError, ValueError):
+        return False
+    return True
+
+
+def _download_photo(url, target):
+    """Descarga fotos de dominios HTTPS públicos, incluidos los de Openverse.
+
+    Valida cada redirección. Mantiene el límite de 10 MB y el filtro OCR.
+    """
+    try:
+        if not _public_photo_url(url):
+            print('FOTO DESCARTADA: URL no pública o dominio no resoluble', flush=True)
+            return False
+        current = url
+        for _ in range(6):
+            with requests.get(current, headers=PHOTO_HEADERS,
+                              timeout=(10, 28), stream=True,
+                              allow_redirects=False) as response:
+                if response.status_code in (301, 302, 303, 307, 308):
+                    location = response.headers.get('Location', '')
+                    next_url = urllib.parse.urljoin(current, location)
+                    if not location or not _public_photo_url(next_url):
+                        print('FOTO DESCARTADA: redirección insegura', flush=True)
+                        return False
+                    current = next_url
+                    continue
+                response.raise_for_status()
+                mime = response.headers.get('Content-Type', '').lower()
+                if not any(kind in mime for kind in ('image/jpeg', 'image/png', 'image/webp')):
+                    print(f'FOTO DESCARTADA: tipo MIME {mime[:55]}', flush=True)
+                    return False
+                payload = bytearray()
+                for chunk in response.iter_content(65536):
+                    if chunk:
+                        payload.extend(chunk)
+                    if len(payload) > 10_000_000:
+                        print('FOTO DESCARTADA: tamaño superior a 10 MB', flush=True)
+                        return False
+                with Image.open(io.BytesIO(payload)) as image:
+                    if image.width < 480 or image.height < 360:
+                        print('FOTO DESCARTADA: resolución insuficiente', flush=True)
+                        return False
+                    image = ImageOps.exif_transpose(image).convert('RGB')
+                    image.thumbnail((1600, 1600))
+                    image.save(target, 'JPEG', quality=89)
+                if _photo_has_text(target):
+                    target.unlink(missing_ok=True)
+                    return False
+                return True
+        print('FOTO DESCARTADA: demasiadas redirecciones', flush=True)
+    except Exception as exc:
+        print(f'FOTO DESCARTADA: {type(exc).__name__}: {str(exc)[:180]}', flush=True)
+    target.unlink(missing_ok=True)
+    return False
+
+
+def prepare_photo(ep, folder):
+    """Selecciona una sola foto aprobada para las cinco escenas."""
+    queries = _photo_queries(ep)
+    print(f'FOTO: búsquedas del episodio {ep["id"]}: {queries}', flush=True)
+    if not shutil.which('tesseract'):
+        raise RuntimeError('No está instalado tesseract-ocr. Instálalo en GitHub Actions para habilitar fotografías sin texto.')
+    candidates, seen = [], set()
+    stats = {'resultados': 0, 'metadatos_rechazados': 0,
+             'descargas_fallidas_o_texto': 0, 'proveedores_fallidos': 0}
+    for qindex, query in enumerate(queries):
+        for provider in (_commons_photos, _openverse_photos):
             try:
-                candidates = list(backend(query))
-                print(f'Imágenes: {backend.__name__} encontró {len(candidates)} candidatas para {query!r}', flush=True)
-                for candidate in candidates:
-                    if len(photos) == 5:
-                        break
-                    url = candidate['url']
-                    if url in used:
+                count = 0
+                for item in provider(query):
+                    count += 1
+                    if item['url'] in seen:
                         continue
-                    used.add(url)
-                    title = (str(candidate.get('title',''))+' '+str(candidate.get('source',''))).lower()
-                    if models and not all(x.lower().replace(' ','') in title.replace(' ','') for x in models):
-                        continue
-                    path = folder / f'foto_{len(photos)}.jpg'
-                    if _safe_photo_download(url, path):
-                        photos.append(path)
-                        credits.append(candidate)
-            except Exception as exc:
-                print(f'Fuente fotográfica no disponible: {backend.__name__}: {type(exc).__name__}: {str(exc)[:120]}', flush=True)
-    (folder/'creditos_imagenes.json').write_text(json.dumps(credits, ensure_ascii=False, indent=2), encoding='utf-8')
-    print(f'Imágenes: {len(photos)}/5 fotos descargadas; '+
-          ('usando fotografías reales' if photos else 'usando fondos animados de respaldo'), flush=True)
-    return photos, credits
-
-
-def _photo_background(image_path, w=720, h=1280):
-    from PIL import ImageOps, ImageEnhance
-    with Image.open(image_path) as raw:
-        base=ImageOps.fit(raw.convert('RGB'),(w,h),method=Image.Resampling.LANCZOS)
-        base=ImageEnhance.Brightness(base).enhance(0.48)
-        return base
+                    seen.add(item['url'])
+                    item['_matched_query'] = query
+                    score = _photo_score(item, ep, qindex)
+                    if score >= 0:
+                        candidates.append((score, item))
+                    else:
+                        stats['metadatos_rechazados'] += 1
+                stats['resultados'] += count
+                print(f'FOTO: {provider.__name__}: {count} resultados para {query!r}', flush=True)
+            except (requests.RequestException, ValueError, KeyError) as exc:
+                stats['proveedores_fallidos'] += 1
+                print(f'FOTO: error {provider.__name__}: {type(exc).__name__}: {str(exc)[:130]}', flush=True)
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    chosen = folder / 'foto_principal.jpg'
+    chosen.unlink(missing_ok=True)
+    credits = []
+    print(f'FOTO: {len(candidates)} candidatas aptas por metadatos; OCR={bool(shutil.which("tesseract"))}', flush=True)
+    for score, item in candidates[:20]:
+        if _download_photo(item['url'], chosen):
+            credits = [dict(item, relevance_score=score, text_check='tesseract_no_text_detected')]
+            break
+        stats['descargas_fallidas_o_texto'] += 1
+    (folder / 'creditos_imagenes.json').write_text(
+        json.dumps(credits, ensure_ascii=False, indent=2), encoding='utf-8')
+    if credits:
+        print(f'FOTO SELECCIONADA: {credits[0]["title"][:100]} ({credits[0]["provider"]}) | consulta={credits[0].get("_matched_query")!r}', flush=True)
+        return chosen, credits
+    raise RuntimeError(
+        'No se encontró una fotografía apta para este episodio. '
+        f'Diagnóstico: {stats}; candidatas={len(candidates)}. '
+        'Se cancela el video para evitar publicar fondos de colores sin foto. '
+        'Consulta los mensajes FOTO DESCARTADA y FOTO: error anteriores.'
+    )
 
 
 def scene(ep, number, dest, photo=None):
     W, H = 720, 1280
     bg, accent = palette(number + int(ep['id'][-3:]))
-    img = _photo_background(photo, W, H) if photo else Image.new('RGB', (W, H), bg)
+    if photo is None or not Path(photo).is_file():
+        raise RuntimeError('No hay fotografía de fondo: se prohíbe crear escenas con fondos planos.')
+    # Una misma fotografía real, sin texto detectado previamente por OCR,
+    # permanece durante las cinco escenas. Se muestra siempre en blanco y negro.
+    with Image.open(photo) as source:
+        source = ImageOps.exif_transpose(source)
+        img = ImageOps.fit(source.convert('RGB'), (W, H), method=Image.Resampling.LANCZOS)
+    img = ImageOps.grayscale(img)
+    img = ImageEnhance.Contrast(img).enhance(1.15)
+    img = ImageEnhance.Brightness(img).enhance(0.55)
+    img = img.convert('RGB')
     d = ImageDraw.Draw(img, 'RGBA')
-    rng = random.Random(ep['id'] + str(number))
-    for _ in range(8 if photo else 22):
-        x, y = rng.randrange(-150, 800), rng.randrange(-150, 1400)
-        r = rng.randrange(15, 145)
-        d.ellipse((x-r, y-r, x+r, y+r), outline=(*accent, rng.randrange(22, 90)), width=rng.randrange(2, 8))
+    # Película negra sutil: aumenta el contraste sin ocultar el tema de la foto.
+    d.rectangle((0, 0, W, H), fill=(0, 0, 0, 45))
+    # Sin círculos decorativos: la imagen fotográfica permanece limpia.
     d.rounded_rectangle((52, 72, 668, 152), 24, fill=(255, 255, 255, 18), outline=(*accent, 200), width=3)
-    d.text((77, 91), 'AERO_DATOS', font=font(33, True), fill=(255, 255, 255))
+    d.text((77, 91), 'DATO_WOW', font=font(33, True), fill=(255, 255, 255))
     d.text((55, 187), ep['category'].upper(), font=font(19, True), fill=accent)
-    # Zona segura central: sin párrafos de narración ni frases truncadas.
+    # Franja oscura garantiza el contraste del texto educativo.
+    d.rounded_rectangle((45, 420, 675, 835), 24, fill=(4, 7, 22, 160))
     titulares = microfrases(ep)
     texto_centrado_seguro(d, titulares[number], centro_y=610, ancho=560, max_lineas=3)
     d.line((58, 1128, 662, 1128), fill=accent, width=5)
-    d.text((92, 1154), 'aero datos - conocimiento en 20 segundos', font=font(21, True), fill='white')
+    d.text((92, 1154), 'dato wow - conocimiento en 20 segundos', font=font(23, True), fill='white')
     img.save(dest, quality=92)
-
 
 def ambient(path: Path, seconds=20):
     rate = 16000
@@ -1156,7 +1616,7 @@ def ambient(path: Path, seconds=20):
 
 async def narrate(script: str, path: Path):
     import edge_tts
-    communicate = edge_tts.Communicate(script, voice=os.getenv('AERO_VOICE', 'es-ES-AlvaroNeural'), rate='+12%')
+    communicate = edge_tts.Communicate(script, voice=os.getenv('DV_VOICE', 'es-ES-AlvaroNeural'), rate='+12%')
     await communicate.save(str(path))
     if not path.exists() or path.stat().st_size < 500:
         raise RuntimeError('No se generó una narración válida')
@@ -1171,12 +1631,14 @@ def render(ep, out: Path, require_voice=False):
         print(f"AVISO: {ep['id']} sin fuentes propuestas; contenido no verificado independientemente.", flush=True)
     folder = out / ep['id']
     folder.mkdir(parents=True, exist_ok=True)
-    photos, image_credits = prepare_photos(ep, folder)
+    shared_photo, image_credits = prepare_photo(ep, folder)
+    if shared_photo is None:
+        raise RuntimeError('El video requiere una fotografía de fondo; cancelado.')
     ep['image_credits'] = image_credits
     frames = []
     for i in range(5):
         path = folder / f'escena_{i}.jpg'
-        scene(ep, i, path, photos[i % len(photos)] if photos else None)
+        scene(ep, i, path, photo=shared_photo)
         frames.append(path)
     cover = out / f"{ep['id']}.jpg"
     cover.write_bytes(frames[0].read_bytes())
@@ -1190,13 +1652,24 @@ def render(ep, out: Path, require_voice=False):
             raise RuntimeError(f'Narración obligatoria falló: {exc}') from exc
         print(f'AVISO: preview sin voz por: {exc}', file=sys.stderr)
     args = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y']
+    motion = os.getenv('DV_SUBTLE_ZOOM', 'true').strip().lower() in ('1','true','yes','on')
     for frame in frames:
-        args += ['-loop', '1', '-framerate', '12', '-t', '4', '-i', str(frame)]
+        args += ['-loop', '1', '-framerate', '30', '-t', '4', '-i', str(frame)]
     args += ['-i', str(ambient_path)]
     voice_available = narration.exists() and narration.stat().st_size > 500
     if voice_available:
         args += ['-i', str(narration)]
-    video_filters = ''.join(f'[{i}:v]fps=12,scale=720:1280,setsar=1[v{i}];' for i in range(5))
+    # Zoom muy leve (hasta ~6%) sobre la MISMA foto; los textos no cambian de tamaño perceptiblemente.
+    # d=1 genera un fotograma por fotograma de entrada; 30 fps x 4 s por escena.
+    if motion:
+        video_filters = ''.join(
+            f"[{i}:v]zoompan=z='min(zoom+0.0005,1.06)':"
+            f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
+            f"d=1:s=720x1280:fps=30,setsar=1[v{i}];"
+            for i in range(5)
+        )
+    else:
+        video_filters = ''.join(f'[{i}:v]fps=30,scale=720:1280,setsar=1[v{i}];' for i in range(5))
     video_filters += ''.join(f'[v{i}]' for i in range(5)) + 'concat=n=5:v=1:a=0[v];'
     if voice_available:
         video_filters += '[5:a]volume=0.28[amb];[6:a]volume=1.4[voice];[amb][voice]amix=inputs=2:duration=first:dropout_transition=0[a]'
@@ -1210,6 +1683,7 @@ def render(ep, out: Path, require_voice=False):
     subprocess.run(args, check=True, timeout=240)
     print(f'Video: {movie} ({movie.stat().st_size:,} bytes)')
     print(f'Portada: {cover}')
+    print(f'Edición DATO WOW: mismo fondo B/N, sin círculos, zoom suave={motion}, 5 escenas de 4 segundos', flush=True)
     return movie, cover
 
 
@@ -1241,7 +1715,7 @@ class Github:
         return base64.b64decode(data['content']), data['sha']
 
     def write(self, path, content: bytes, previous_sha=None):
-        payload = {'message': f'AeroDatos: {path}', 'branch': self.branch,
+        payload = {'message': f'DataViral: {path}', 'branch': self.branch,
                    'content': base64.b64encode(content).decode()}
         if previous_sha:
             payload['sha'] = previous_sha
@@ -1292,43 +1766,37 @@ def publish_container(user_id, token, video_url, caption):
                   data={'creation_id': container})['id']
 
 
-def publish_story_container(user_id, token, video_url):
-    """Crea una Story de video independiente mediante Instagram Login API.
 
-    No incluye caption ni share_to_feed: esos campos son del Reel.
-    Un fallo tras media_publish puede ser ambiguo; el estado remoto se deja
-    en 'incierto' para impedir una duplicación accidental.
-    """
-    fields = {'media_type': 'STORIES', 'video_url': video_url}
-    container = ig_api('POST', f'{user_id}/media', token=token, data=fields)['id']
+def publish_story_container(user_id, token, video_url):
+    """Publica el mismo MP4 como Story; requiere permisos/cuenta compatibles."""
+    cid = ig_api('POST', f'{user_id}/media', token=token,
+                 data={'media_type':'STORIES','video_url':video_url})['id']
     for _ in range(30):
         time.sleep(10)
-        status = ig_api('GET', container, token=token,
-                        data={'fields': 'status_code,status'})
+        status = ig_api('GET', cid, token=token, data={'fields':'status_code,status'})
         if status.get('status_code') == 'FINISHED':
             break
         if status.get('status_code') in ('ERROR', 'EXPIRED'):
-            raise RuntimeError(f'Contenedor Story Instagram {container}: {status}')
+            raise RuntimeError(f'Story contenedor {cid}: {status}')
     else:
-        raise RuntimeError(f'Timeout contenedor Story IG {container}; reconciliar antes de reintentar')
+        raise RuntimeError(f'Story contenedor {cid} sin confirmación: no reenviar automáticamente')
     return ig_api('POST', f'{user_id}/media_publish', token=token,
-                  data={'creation_id': container})['id']
-
+                  data={'creation_id':cid})['id']
 
 
 def upload_video_to_public_github(gh, movie: Path, episode_id: str):
     """Sube un MP4 con nombre inmutable, sin modificar el estado histórico.
 
     Evita el conflicto 409 si un nombre de carpeta ya existe como archivo.
-    Solo cambia la carpeta de medios; el estado sigue en aerodatos/state.json.
+    Solo cambia la carpeta de medios; el estado sigue en dataviral/state.json.
     """
     movie_bytes = movie.read_bytes()
     digest = hashlib.sha256(movie_bytes).hexdigest()[:16]
     filename = f'{episode_id}-{digest}.mp4'
     # Nombres independientes del antiguo dataviral/media. Si un antecesor
     # de cualquiera es un archivo, probamos el siguiente directorio.
-    roots = ('aerodatos_assets/media', 'aerodatos_video_assets/media',
-             'aerodatos_public_videos/media')
+    roots = ('datoviral_assets/media', 'datoviral_video_assets/media',
+             'datoviral_public_videos/media')
     for root in roots:
         remote = f'{root}/{filename}'
         try:
@@ -1357,45 +1825,6 @@ def upload_video_to_public_github(gh, movie: Path, episode_id: str):
                        'Revisar manualmente la estructura del repositorio; no se publicó en Instagram.')
 
 
-def check_instagram_identity(token=None, user_id=None, expected=None):
-    """Verifica en Meta el usuario e ID, sin publicar ni mostrar secretos."""
-    token = token if token is not None else credential('INSTAGRAM_TOKEN', TEST_INSTAGRAM_TOKEN)
-    user_id = str(user_id if user_id is not None else credential('INSTAGRAM_USER_ID', TEST_INSTAGRAM_USER_ID)).strip()
-    expected = (expected if expected is not None else os.environ.get('IG_EXPECTED_USERNAME', '')).strip().lstrip('@').lower()
-    if not expected:
-        raise RuntimeError('Falta IG_EXPECTED_USERNAME en GitHub Actions')
-    if not user_id.isdigit():
-        raise RuntimeError('INSTAGRAM_USER_ID debe ser numérico')
-    try:
-        me = ig_api('GET', 'me', token=token, data={'fields': 'id,user_id,username'})
-    except RuntimeError as exc:
-        detail = str(exc).lower()
-        unsupported = 'user_id' in detail and any(x in detail for x in
-            ('nonexisting field', 'non-existing field', 'unknown field', 'field is not supported'))
-        if not unsupported:
-            raise
-        me = ig_api('GET', 'me', token=token, data={'fields': 'id,username'})
-    username = str(me.get('username', '')).strip().lstrip('@').lower()
-    if username != expected:
-        raise RuntimeError('TOKEN DE OTRA CUENTA: se esperaba @' + expected +
-                           ' pero Meta autorizó @' + (username or 'desconocido') +
-                           '. Reautoriza INSTAGRAM_TOKEN para @' + expected)
-    ids = {str(me.get(k, '')).strip() for k in ('id', 'user_id') if str(me.get(k, '')).strip().isdigit()}
-    if user_id not in ids:
-        # Identificadores no se imprimen completos en logs públicos.
-        safe = lambda v: ('…' + v[-4:]) if v else '(ausente)'
-        raise RuntimeError('INSTAGRAM_USER_ID INCORRECTO para @' + expected +
-            ': secret termina en ' + safe(user_id) +
-            '; Meta devuelve id ' + safe(str(me.get('id',''))) +
-            ' y user_id ' + safe(str(me.get('user_id',''))) +
-            '. Corrige el secret usando el ID del mismo flujo Instagram Login. '
-            'El video no se publicará con credenciales inconsistentes.')
-    print('Instagram verificado: @' + username +
-          '; identificador coincide con ' + ('user_id' if user_id == str(me.get('user_id','')) else 'id'),
-          flush=True)
-    return me
-
-
 def publish(ep, movie, cover, approval):
     if approval != ep['id']:
         raise ValueError('Se exige aprobación explícita del mismo ID de episodio')
@@ -1413,14 +1842,23 @@ def publish(ep, movie, cover, approval):
     expected = os.environ.get('IG_EXPECTED_USERNAME', '').strip().lstrip('@').lower()
     if not expected:
         raise RuntimeError('Falta IG_EXPECTED_USERNAME: define la variable de GitHub para publicar')
-    check_instagram_identity(token, user_id, expected)
+    me = ig_api('GET', 'me', token=token, data={'fields': 'id,username'})
+    actual_id = str(me.get('id', '')).strip()
+    actual_username = str(me.get('username', '')).strip().lstrip('@').lower()
+    if actual_id != user_id:
+        raise RuntimeError('INSTAGRAM_USER_ID no coincide con la cuenta autorizada por INSTAGRAM_TOKEN')
+    if actual_username != expected:
+        raise RuntimeError(
+            f'Cuenta Instagram diferente: esperado=@{expected}, recibido=@{actual_username}'
+        )
+    print(f'Cuenta Instagram verificada: @{actual_username}', flush=True)
     gh = Github()
     gh.assert_public()
-    path = 'aerodatos/state.json'
+    path = 'dataviral/state.json'
     raw, sha = gh.read(path)
     state = json.loads(raw) if raw is not None else {'schema':1,'episodes':{}}
     row = state['episodes'].get(ep['id'], {})
-    if any(row.get(key) in ('enviando','incierto','publicado') for key in ('reel', 'foto', 'feed_video')):
+    if any(row.get(key) in ('enviando','incierto','publicado') for key in ('reel', 'foto', 'feed_video', 'story')):
         raise RuntimeError('Hay publicación previa o incierta: bloqueo anti-duplicados')
     def save():
         nonlocal sha
@@ -1433,18 +1871,10 @@ def publish(ep, movie, cover, approval):
     response = requests.get(video_url, timeout=60)
     if not response.ok or len(response.content) != movie.stat().st_size:
         raise RuntimeError(f'MP4 no accesible públicamente: HTTP {response.status_code}')
-    # La descripción desarrolla el contenido en lugar de mostrar autores de fotos.
-    # Los datos se extraen exclusivamente del guion generado; no se inventan cifras.
-    caption = f'{ep["title"]}\n\n{ep["script"].strip()}'
-    fact = str(ep.get('fact') or '').strip()
-    lesson = str(ep.get('lesson') or '').strip()
-    if fact and fact.casefold() not in ep['script'].casefold():
-        caption += f'\n\nDato clave: {fact}'
-    if lesson and lesson.casefold() not in ep['script'].casefold():
-        caption += f'\n\nPara recordar: {lesson}'
+    caption = f'{ep["title"]}\n\n{ep["lesson"]}'
     if ep.get('source'):
         caption += f'\n\nReferencias sugeridas (no verificadas): {ep["source"]}'
-    caption += '\n\n#AeroDatos #Aviacion #ConocimientoAeronautico'
+    caption += '\n\n¿Qué parte te sorprendió más? Cuéntanos en comentarios.\n\n#DatoWow #AprendeAlgoNuevo'
     state['episodes'][ep['id']] = row
     row['reel'] = 'enviando'
     row['updated_at'] = now()
@@ -1462,13 +1892,9 @@ def publish(ep, movie, cover, approval):
     row['reel'] = 'publicado'
     row['share_to_feed'] = True
     row['reel_id'] = published
-    row['video_url'] = video_url
     row['updated_at'] = now()
     save()
-    print(f'Video publicado como Reel Y visible en el feed: {published}', flush=True)
-    # Story independiente: nunca borrar ni degradar 'reel=publicado' si falla.
-    # Guardar estado 'enviando' ANTES de llamar a Instagram y 'incierto' si
-    # hubo error (incluye fallos cuya publicación pudo haber ocurrido).
+    print(f'Video publicado como Reel Y visible en el feed: {published}')
     row['story'] = 'enviando'
     row['updated_at'] = now()
     save()
@@ -1479,9 +1905,8 @@ def publish(ep, movie, cover, approval):
         row['updated_at'] = now()
         try:
             save()
-        except Exception as ex:
-            print(f'ALERTA: sin persistencia del estado incierto Story: {ex}', file=sys.stderr)
-        print('Reel publicado. Story incierta o fallida; NO se repetirá el Reel.', file=sys.stderr)
+        except Exception as exc:
+            print(f'ALERTA persistencia Story: {type(exc).__name__}', file=sys.stderr)
         raise
     row['story'] = 'publicado'
     row['story_id'] = story_id
@@ -1490,22 +1915,16 @@ def publish(ep, movie, cover, approval):
     print(f'Story publicada: {story_id}', flush=True)
 
 
+
 def main():
-    ap = argparse.ArgumentParser(description='AERO_DATOS: 500 ideas, IA OpenRouter Free y video Instagram')
+    ap = argparse.ArgumentParser(description='DataViral: 500 ideas, IA OpenRouter Free y video Instagram')
     ap.add_argument('--list', action='store_true')
-    ap.add_argument('--check-instagram', action='store_true', help='Verifica token, cuenta e ID sin generar video ni publicar')
     ap.add_argument('--episode', default='', help='ID concreto; vacío = siguiente disponible')
     ap.add_argument('--out', default='output')
-    ap.add_argument('--publish', action='store_true', help='Publicar Reel en feed y Story independiente')
+    ap.add_argument('--publish', action='store_true', help='Publicar Reel en feed y Story')
     ap.add_argument('--approved-id', default='', help='ID revisado manualmente (modo seguro)')
     ap.add_argument('--auto-publish', action='store_true', help='Publicación autónoma (sin revisión humana)')
     args=ap.parse_args()
-    if args.check_instagram:
-        check_instagram_identity()
-        return 0
-    if args.publish:
-        # Validar ANTES de consumir OpenRouter y renderizar video.
-        check_instagram_identity()
     episodes=catalog()
     if len(episodes)!=500 or len({e['id'] for e in episodes})!=500:
         raise RuntimeError('Catálogo de 500 propuestas dañado')
@@ -1524,7 +1943,16 @@ def main():
     out.mkdir(exist_ok=True,parents=True)
     (out/f"{ep['id']}-guion.json").write_text(
         json.dumps(generated,ensure_ascii=False,indent=2),encoding='utf-8')
-    print(f"Guion IA creado: {ep['id']}; referencias propuestas: {generated['source'] or 'ninguna'}")
+    print(f"Guion generado: {ep['id']}; referencias propuestas: {generated['source'] or 'ninguna'}")
+    (out/f"{ep['id']}-experimento.json").write_text(
+        json.dumps({
+            'episode_id': ep['id'], 'category': ep.get('category'),
+            'creative_variant': 'hook_mono_subtle_zoom_v1',
+            'hook_visual': generated['visuals'][0],
+            'duration_seconds': 20, 'scene_count': 5,
+            'metrics': None,
+            'note': 'Etiquetas de creatividad; las métricas reales requieren consulta posterior a Insights.'
+        }, ensure_ascii=False, indent=2), encoding='utf-8')
     if args.publish and not generated.get('source'):
         print('AVISO: el guion no tiene fuentes; se permite publicar, pero no existe verificación independiente.', flush=True)
     movie,cover=render(generated,out,require_voice=args.publish)
