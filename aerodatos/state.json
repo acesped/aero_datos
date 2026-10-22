@@ -155,8 +155,11 @@
       "story_id": "18100816298410454"
     },
     "AD-186": {
-      "reel": "enviando",
-      "updated_at": "2026-10-22T09:07:52.138701+00:00"
+      "reel": "publicado",
+      "updated_at": "2026-10-22T09:08:31.698120+00:00",
+      "share_to_feed": true,
+      "reel_id": "17990636822871860",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/2053b906674fa8e71df5a64d2bdcd81ea26eb017/aerodatos_assets/media/AD-186-dfec8fb5ff07f158.mp4"
     }
   }
 }
