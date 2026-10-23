@@ -222,7 +222,7 @@
       "story_id": "17893697988615096"
     },
     "AD-056": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Martinair_Cargo_Boeing_747-400BCF_PH-MPS_landing_at_Schiphol.jpg/1280px-Martinair_Cargo_Boeing_747-400BCF_PH-MPS_landing_at_Schiphol.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Martinair_Cargo_Boeing_747-400BCF_PH-MPS_landing_at_Schiphol.jpg",
@@ -232,7 +232,10 @@
         "license": "cc0",
         "matched_query": "Boeing 747 passenger airliner"
       },
-      "updated_at": "2026-10-23T21:53:22.986972+00:00"
+      "updated_at": "2026-10-23T21:53:54.394897+00:00",
+      "share_to_feed": true,
+      "reel_id": "18118985854994272",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/5e3485ad84d93a6c89b96302b42708936c5dce2a/aerodatos_assets/media/AD-056-8f56c70d2a01618f.mp4"
     }
   }
 }
