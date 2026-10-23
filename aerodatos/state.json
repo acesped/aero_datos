@@ -200,8 +200,11 @@
       "story_id": "18118733719999739"
     },
     "AD-167": {
-      "reel": "enviando",
-      "updated_at": "2026-10-23T09:01:21.499826+00:00"
+      "reel": "publicado",
+      "updated_at": "2026-10-23T09:02:00.201194+00:00",
+      "share_to_feed": true,
+      "reel_id": "18114292061121054",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/3dbea29cebab5efc9f30a158f0ed897adafa34cc/aerodatos_assets/media/AD-167-ccdea3afa7f1c542.mp4"
     }
   }
 }
