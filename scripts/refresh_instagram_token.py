@@ -53,11 +53,34 @@ def ig_call(endpoint, token, **params):
 
 
 def verify_identity(token, expected_username, expected_id):
-    me = ig_call("me", token, fields="id,username")
-    username = str(me.get("username", "")).lstrip("@").lower()
-    account_id = str(me.get("id", ""))
-    if username != expected_username or account_id != expected_id:
-        raise RuntimeError("Identidad de cuenta Instagram no coincide; ninguna credencial será modificada")
+    """Verifica nombre Y uno de los IDs de Instagram Login, sin cambiar secretos.
+
+    El campo ``id`` puede ser el identificador con alcance de aplicación,
+    mientras ``user_id`` puede ser el ID profesional usado en publicación.
+    Nunca basta con que coincida solamente un ID: el username es obligatorio.
+    """
+    me = ig_call("me", token, fields="id,user_id,username")
+    username = str(me.get("username") or "").strip().lstrip("@").lower()
+    app_id = str(me.get("id") or "").strip()
+    professional_id = str(me.get("user_id") or "").strip()
+    expected_id = str(expected_id).strip()
+    if username != expected_username:
+        raise RuntimeError(
+            "Instagram: nombre de usuario no coincide "
+            f"(esperado=@{expected_username}; recibido=@{username or 'no disponible'}). "
+            "No se modificó ningún secreto."
+        )
+    if expected_id not in (app_id, professional_id):
+        raise RuntimeError(
+            "Instagram: @" + expected_username + " validado, pero INSTAGRAM_USER_ID "
+            "no coincide con los identificadores devueltos por Meta "
+            f"(id={'disponible' if app_id else 'ausente'}, "
+            f"user_id={'disponible' if professional_id else 'ausente'}). "
+            "Revisar el ID profesional guardado en GitHub. "
+            "No se modificó ningún secreto."
+        )
+    matched = "user_id" if expected_id == professional_id else "id"
+    log("Instagram: identidad validada, INSTAGRAM_USER_ID coincide con " + matched)
     return username
 
 
