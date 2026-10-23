@@ -174,3 +174,4 @@ if __name__ == "__main__":
         summary("❌ AERO DATOS: monitor/renovación de token falló. "
                 "Revisa la ejecución y, si está revocado, vuelve a autorizar la cuenta manualmente.")
         sys.exit(1)
+ 
