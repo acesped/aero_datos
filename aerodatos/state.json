@@ -232,10 +232,11 @@
         "license": "cc0",
         "matched_query": "Boeing 747 passenger airliner"
       },
-      "updated_at": "2026-10-23T21:53:54.394897+00:00",
+      "updated_at": "2026-10-23T21:53:55.565414+00:00",
       "share_to_feed": true,
       "reel_id": "18118985854994272",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/5e3485ad84d93a6c89b96302b42708936c5dce2a/aerodatos_assets/media/AD-056-8f56c70d2a01618f.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/5e3485ad84d93a6c89b96302b42708936c5dce2a/aerodatos_assets/media/AD-056-8f56c70d2a01618f.mp4",
+      "story": "enviando"
     }
   }
 }
