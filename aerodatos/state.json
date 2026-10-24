@@ -238,6 +238,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/5e3485ad84d93a6c89b96302b42708936c5dce2a/aerodatos_assets/media/AD-056-8f56c70d2a01618f.mp4",
       "story": "publicado",
       "story_id": "18128282086885826"
+    },
+    "AD-393": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Airbus_A380-861._Christchurch_NZ_%2842946453761%29.jpg/1280px-Airbus_A380-861._Christchurch_NZ_%2842946453761%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Airbus_A380-861._Christchurch_NZ_(42946453761).jpg",
+        "photo_sha256": "4eca9afb702c9d9a8089df7cbb7aa0abe3ead4ea3f37ea85e7d8ce431f4a8228",
+        "photo_dhash": "0004669c9eb2a19a",
+        "title": "File:Airbus A380-861. Christchurch NZ (42946453761).jpg",
+        "license": "publicdomain",
+        "matched_query": "Airbus A380 passenger airliner"
+      },
+      "updated_at": "2026-10-24T03:04:42.157450+00:00"
     }
   }
 }
