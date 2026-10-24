@@ -276,7 +276,7 @@
       "story_id": "18081526118711101"
     },
     "AD-449": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/D-AIXH_Lufthansa_Airbus_A350-941_airplane%2C_Miami%2C_Florida.jpg/1280px-D-AIXH_Lufthansa_Airbus_A350-941_airplane%2C_Miami%2C_Florida.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:D-AIXH_Lufthansa_Airbus_A350-941_airplane,_Miami,_Florida.jpg",
@@ -286,7 +286,10 @@
         "license": "cc0",
         "matched_query": "Airbus A350 commercial airplane"
       },
-      "updated_at": "2026-10-24T15:03:15.322726+00:00"
+      "updated_at": "2026-10-24T15:03:56.430549+00:00",
+      "share_to_feed": true,
+      "reel_id": "18147952069554282",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/88c9225cadd115fd11ec0875d58c04b9e91499da/aerodatos_assets/media/AD-449-d61755e228029511.mp4"
     }
   }
 }
