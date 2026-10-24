@@ -268,11 +268,12 @@
         "license": "cc0",
         "matched_query": "ATR 72 passenger aircraft"
       },
-      "updated_at": "2026-10-24T09:02:27.036068+00:00",
+      "updated_at": "2026-10-24T09:03:13.941010+00:00",
       "share_to_feed": true,
       "reel_id": "18100565267192411",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/3452a21b62b07d2588dec5cd2fe1e614082a6577/aerodatos_assets/media/AD-113-919986295e1baad3.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18081526118711101"
     }
   }
 }
