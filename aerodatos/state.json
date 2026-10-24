@@ -250,10 +250,11 @@
         "license": "publicdomain",
         "matched_query": "Airbus A380 passenger airliner"
       },
-      "updated_at": "2026-10-24T03:05:10.398042+00:00",
+      "updated_at": "2026-10-24T03:05:11.758226+00:00",
       "share_to_feed": true,
       "reel_id": "18013984427974922",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/9f78a37c2178117febd7493eccb2291d1ebf0403/aerodatos_assets/media/AD-393-b728e46e0600feff.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/9f78a37c2178117febd7493eccb2291d1ebf0403/aerodatos_assets/media/AD-393-b728e46e0600feff.mp4",
+      "story": "enviando"
     }
   }
 }
