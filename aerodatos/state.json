@@ -292,6 +292,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/88c9225cadd115fd11ec0875d58c04b9e91499da/aerodatos_assets/media/AD-449-d61755e228029511.mp4",
       "story": "publicado",
       "story_id": "18001915548034658"
+    },
+    "AD-247": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Commercial_flight_NK258_IAH_to_FLL_airplane_N935NK_Airbus_A320-271N.jpg/1280px-Commercial_flight_NK258_IAH_to_FLL_airplane_N935NK_Airbus_A320-271N.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Commercial_flight_NK258_IAH_to_FLL_airplane_N935NK_Airbus_A320-271N.jpg",
+        "photo_sha256": "f00be0ed223eaa25a5aa7f0140cf6bc665434bf3f03970a6d900a3c5b448c24d",
+        "photo_dhash": "d54966b6b8a9887b",
+        "title": "File:Commercial flight NK258 IAH to FLL airplane N935NK Airbus A320-271N.jpg",
+        "license": "cc0",
+        "matched_query": "Airbus A320 commercial airplane"
+      },
+      "updated_at": "2026-10-24T21:01:18.135003+00:00"
     }
   }
 }
