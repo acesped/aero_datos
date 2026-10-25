@@ -340,11 +340,12 @@
         "license": "cc0",
         "matched_query": "Airbus A350 commercial airplane"
       },
-      "updated_at": "2026-10-25T09:02:00.350426+00:00",
+      "updated_at": "2026-10-25T09:02:36.873050+00:00",
       "share_to_feed": true,
       "reel_id": "17948114724346457",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/91f38615cf6dd3b6c3bcdce46418fc5d63f79918/aerodatos_assets/media/AD-071-5a2345cbbf2db9ca.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18105190787366195"
     }
   }
 }
