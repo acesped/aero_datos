@@ -330,7 +330,7 @@
       "story_id": "18640425418047866"
     },
     "AD-071": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Singapore_Airlines_Airbus_A350-941.jpg/1280px-Singapore_Airlines_Airbus_A350-941.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Singapore_Airlines_Airbus_A350-941.jpg",
@@ -340,7 +340,10 @@
         "license": "cc0",
         "matched_query": "Airbus A350 commercial airplane"
       },
-      "updated_at": "2026-10-25T09:01:21.106467+00:00"
+      "updated_at": "2026-10-25T09:01:59.338551+00:00",
+      "share_to_feed": true,
+      "reel_id": "17948114724346457",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/91f38615cf6dd3b6c3bcdce46418fc5d63f79918/aerodatos_assets/media/AD-071-5a2345cbbf2db9ca.mp4"
     }
   }
 }
