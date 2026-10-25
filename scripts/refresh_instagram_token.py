@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """AERO DATOS: valida token Instagram y renueva tokens long-lived válidos.
 
@@ -10,6 +11,10 @@ import argparse
 import base64
 import os
 import sys
+import hashlib
+import hmac
+import json
+import time
 from datetime import datetime, timezone
 
 import requests
@@ -20,6 +25,7 @@ GH_ROOT = "https://api.github.com"
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": "AeroDatos-InstagramTokenWatch/2.0"})
 TIMEOUT = 25
+SECRET_NAME = "INSTAGRAM_TOKEN"
 
 
 def log(message):
@@ -96,6 +102,23 @@ def github_request(method, path, token, *, payload=None):
     return resp.json() if resp.content else {}
 
 
+def secret_metadata(repo, admin_token):
+    """Lee fecha de actualización sin acceder al valor del secreto."""
+    return github_request("GET", f"/repos/{repo}/actions/secrets/{SECRET_NAME}", admin_token)
+
+
+def token_fingerprint(token):
+    """Huella local opaca; nunca se imprime ni se envía al registro."""
+    return hashlib.sha256(token.encode("utf-8")).digest()
+
+
+def assert_secret_not_changed(repo, admin_token, initial_updated_at):
+    current = secret_metadata(repo, admin_token).get("updated_at")
+    if current != initial_updated_at:
+        raise RuntimeError("INSTAGRAM_TOKEN cambió durante la ejecución; no se sobrescribirá. "
+                           "Revisar otro workflow o actualización manual.")
+
+
 def save_secret(repo, admin_token, secret_name, value):
     repo_path = f"/repos/{repo}/actions/secrets"
     pubkey = github_request("GET", repo_path + "/public-key", admin_token)
@@ -125,42 +148,57 @@ def main():
         raise RuntimeError("Este monitor solo puede actualizar el token de @aero_datos")
     expected_id = require("INSTAGRAM_USER_ID")
     log("Instagram: comprobando credencial e identidad de @" + expected_username)
-    verify_identity(token, expected_username, expected_id)
+    try:
+        verify_identity(token, expected_username, expected_id)
+    except RuntimeError as exc:
+        summary("❌ Instagram: token o identidad inválidos. Se requiere revisar la autorización; no se modifica ningún secreto.")
+        raise
     log("Instagram: token vigente, cuenta correcta")
     if not args.refresh:
-        summary("✅ Instagram @" + expected_username + ": token vigente e identidad validada.")
+        summary("✅ Token vigente e identidad correcta de @aero_datos.")
         return 0
 
-    log("Instagram: intentando renovar token de larga duración (solo Instagram Login)")
+    # Asegurar permisos de escritura ANTES de renovar, para evitar perder
+    # un token ya refrescado sin poder persistir el resultado.
+    admin = require("IG_SECRET_MANAGER_TOKEN")
+    repo = require("GITHUB_REPOSITORY")
+    if repo != "acesped/aero_datos":
+        raise RuntimeError("Repositorio inesperado; no se actualizará ningún secreto")
+    initial_updated = secret_metadata(repo, admin).get("updated_at")
+    if not initial_updated:
+        raise RuntimeError("No fue posible comprobar la versión actual del secreto INSTAGRAM_TOKEN")
+
+    log("Instagram: intentando renovación preventiva de token vigente")
     try:
         obj = ig_call("refresh_access_token", token, grant_type="ig_refresh_token")
     except RuntimeError as exc:
-        # El token recién renovado puede no reunir todavía las 24 horas
-        # mínimas; no convertir esa condición específica en una alarma falsa.
-        detail = str(exc)
-        if "code=190" not in detail and "code=?" not in detail and (
-            "24 hour" in detail.lower() or "24 horas" in detail.lower()
-        ):
-            log("Instagram: renovación aún no habilitada (edad mínima de 24 horas).")
-            summary("ℹ️ Token válido; renovación aplazada por edad mínima de Meta.")
-            return 0
-        summary("⚠️ Renovación no completada; el secreto actual no se modificó.")
-        raise RuntimeError("No se pudo renovar. Token almacenado sin cambios. "
-                           "Si está revocado o caducado, necesita reautorización. " + detail) from exc
+        # La validación inicial fue correcta; un rechazo de renovación NO
+        # demuestra que el token haya dejado de funcionar para publicar.
+        summary("⚠️ Token validado, pero Meta rechazó la renovación. No se modificó el secreto.")
+        raise RuntimeError("Meta no permitió renovar el token vigente. "
+                           "El secreto se conserva; revisar cuotas, antigüedad y tipo de token. "
+                           + str(exc)) from exc
+
     updated = str(obj.get("access_token", "")).strip()
     if not updated:
-        raise RuntimeError("Renovación sin access_token; secreto antiguo conservado")
-    verify_identity(updated, expected_username, expected_id)
+        raise RuntimeError("Meta respondió sin access_token; no se modificó el secreto")
     expires_in = obj.get("expires_in")
     if not isinstance(expires_in, (int, float)) or expires_in <= 0:
-        raise RuntimeError("Renovación sin expires_in válido; secreto antiguo conservado")
-
-    admin = require("IG_SECRET_MANAGER_TOKEN")
-    repo = require("GITHUB_REPOSITORY")
-    save_secret(repo, admin, "INSTAGRAM_TOKEN", updated)
-    log("Instagram: token renovado, identidad verificada y secreto INSTAGRAM_TOKEN actualizado")
-    summary("✅ Instagram @" + expected_username + ": token renovado y guardado en GitHub Secrets. "
-            "Validez informada: " + str(int(expires_in // 86400)) + " días.")
+        raise RuntimeError("Meta respondió sin expires_in válido; no se modificó el secreto")
+    verify_identity(updated, expected_username, expected_id)
+    assert_secret_not_changed(repo, admin, initial_updated)
+    if hmac.compare_digest(token_fingerprint(updated), token_fingerprint(token)):
+        log("Instagram: Meta devolvió el mismo valor de token; sigue vigente")
+    save_secret(repo, admin, SECRET_NAME, updated)
+    # Confirmar solo el metadato de persistencia; la API de GitHub nunca
+    # permite leer de vuelta el texto de un secreto.
+    after = secret_metadata(repo, admin).get("updated_at")
+    if not after or after == initial_updated:
+        raise RuntimeError("GitHub no confirmó un cambio de fecha del secreto. "
+                           "Revisar manualmente su estado antes de publicar.")
+    log("Instagram: renovación aceptada y actualización de GitHub Secrets confirmada")
+    summary(f"✅ @aero_datos: token validado, renovado y secreto actualizado. "
+            f"Duración comunicada por Meta: {int(expires_in // 86400)} días.")
     return 0
 
 
@@ -174,4 +212,3 @@ if __name__ == "__main__":
         summary("❌ AERO DATOS: monitor/renovación de token falló. "
                 "Revisa la ejecución y, si está revocado, vuelve a autorizar la cuenta manualmente.")
         sys.exit(1)
- 
