@@ -366,7 +366,7 @@
       "story_id": "18097042904543970"
     },
     "AD-428": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Identified_airplanes_neck_and_neck.jpg/1280px-Identified_airplanes_neck_and_neck.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Identified_airplanes_neck_and_neck.jpg",
@@ -376,7 +376,10 @@
         "license": "cc0",
         "matched_query": "Airbus A330 commercial airplane"
       },
-      "updated_at": "2026-10-25T21:24:53.433721+00:00"
+      "updated_at": "2026-10-25T21:25:31.818173+00:00",
+      "share_to_feed": true,
+      "reel_id": "17894489646681925",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/3fd51850d1b74c7890fcc21b7e11dd6fdc81a6b8/aerodatos_assets/media/AD-428-15f5b7e86963acc9.mp4"
     }
   }
 }
