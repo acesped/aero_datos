@@ -322,11 +322,12 @@
         "license": "cc0",
         "matched_query": "Airbus A320 commercial airplane"
       },
-      "updated_at": "2026-10-25T03:01:53.295324+00:00",
+      "updated_at": "2026-10-25T03:02:30.622168+00:00",
       "share_to_feed": true,
       "reel_id": "18014358758968398",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/b227c89ac8f815774729f40ab8d262b48e8eea8c/aerodatos_assets/media/AD-270-a2306eb913411d79.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18640425418047866"
     }
   }
 }
