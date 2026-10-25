@@ -328,6 +328,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/b227c89ac8f815774729f40ab8d262b48e8eea8c/aerodatos_assets/media/AD-270-a2306eb913411d79.mp4",
       "story": "publicado",
       "story_id": "18640425418047866"
+    },
+    "AD-071": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Singapore_Airlines_Airbus_A350-941.jpg/1280px-Singapore_Airlines_Airbus_A350-941.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Singapore_Airlines_Airbus_A350-941.jpg",
+        "photo_sha256": "79a9c9e7b3212727b3a015cb7f9e22c94a210ebd1b9b0bb26cf75dca14a6da26",
+        "photo_dhash": "5f7f7f477159733e",
+        "title": "File:Singapore Airlines Airbus A350-941.jpg",
+        "license": "cc0",
+        "matched_query": "Airbus A350 commercial airplane"
+      },
+      "updated_at": "2026-10-25T09:01:21.106467+00:00"
     }
   }
 }
