@@ -384,7 +384,7 @@
       "story_id": "18103151705305754"
     },
     "AD-230": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Passenger_aircraft_at_Rio_de_Janeiro_airport%2C_Brazil.jpg/1280px-Passenger_aircraft_at_Rio_de_Janeiro_airport%2C_Brazil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Passenger_aircraft_at_Rio_de_Janeiro_airport,_Brazil.jpg",
@@ -394,7 +394,10 @@
         "license": "cc0",
         "matched_query": "commercial passenger aircraft airport"
       },
-      "updated_at": "2026-10-26T03:01:24.032131+00:00"
+      "updated_at": "2026-10-26T03:02:03.211865+00:00",
+      "share_to_feed": true,
+      "reel_id": "18060820754551947",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/b9decd03a83e0efeed8865d26712e3fd49b2bd69/aerodatos_assets/media/AD-230-45a1d33576003ca6.mp4"
     }
   }
 }
