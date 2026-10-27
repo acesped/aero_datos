@@ -474,7 +474,7 @@
       "story_id": "18119401703023717"
     },
     "AD-355": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Shipping_flight_C28501_EYW_to_FLL_airplane_N729FX_Airbus_A320-271N.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Shipping_flight_C28501_EYW_to_FLL_airplane_N729FX_Airbus_A320-271N.jpg",
@@ -484,7 +484,10 @@
         "license": "cc0",
         "matched_query": "Airbus A320 commercial airplane"
       },
-      "updated_at": "2026-10-27T15:12:08.587221+00:00"
+      "updated_at": "2026-10-27T15:12:47.187848+00:00",
+      "share_to_feed": true,
+      "reel_id": "18103116638056756",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/fcc8f3c5b4d9a29378907c873f3aa56096869019/aerodatos_assets/media/AD-355-6ab0f1c2b027e54e.mp4"
     }
   }
 }
