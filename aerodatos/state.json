@@ -526,6 +526,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/f4490ee8a954bb1afb4d863a079242074eb82eb1/aerodatos_assets/media/AD-213-8cb16166390b4898.mp4",
       "story": "publicado",
       "story_id": "18178308322456261"
+    },
+    "AD-437": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Passenger_cabin_of_the_Flagship_Knoxville%2C_a_fully_restored_DC-3_aircraft_at_the_American_Airlines_C.R._Smith_Museum_on_the_campus_of_the_American_Airlines_Flight_Academy%2C_at_the_southern_end_of_DFW_LCCN2015630849.tif/lossy-page1-1280px-thumbnail.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Passenger_cabin_of_the_Flagship_Knoxville,_a_fully_restored_DC-3_aircraft_at_the_American_Airlines_C.R._Smith_Museum_on_the_campus_of_the_American_Airlines_Flight_Academy,_at_the_southern_end_of_DFW_LCCN2015630849.tif",
+        "photo_sha256": "7c31cd58083deab84c8b6367ed9f305a081ddde468992e43df910b882d843361",
+        "photo_dhash": "f8b4d8ccec68f2a8",
+        "title": "File:Passenger cabin of the Flagship Knoxville, a fully restored DC-3 aircraft at the American Airlines C.R. Smith Museum on the campus of the American Airlines Flight Academy, at the southern end of DFW LCCN2015630849.tif",
+        "license": "publicdomain",
+        "matched_query": "commercial passenger aircraft airport"
+      },
+      "updated_at": "2026-10-28T15:01:26.018844+00:00"
     }
   }
 }
