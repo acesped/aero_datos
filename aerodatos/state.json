@@ -556,11 +556,12 @@
         "license": "publicdomain",
         "matched_query": "Boeing 777 passenger airliner"
       },
-      "updated_at": "2026-10-28T21:03:15.391135+00:00",
+      "updated_at": "2026-10-28T21:03:52.812204+00:00",
       "share_to_feed": true,
       "reel_id": "17916766770509194",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/32e8e5aa331d2ed7e6be2233e5553851817dc302/aerodatos_assets/media/AD-362-4181c4ae34d1fa17.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18133461991823005"
     }
   }
 }
