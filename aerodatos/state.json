@@ -528,7 +528,7 @@
       "story_id": "18178308322456261"
     },
     "AD-437": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Passenger_cabin_of_the_Flagship_Knoxville%2C_a_fully_restored_DC-3_aircraft_at_the_American_Airlines_C.R._Smith_Museum_on_the_campus_of_the_American_Airlines_Flight_Academy%2C_at_the_southern_end_of_DFW_LCCN2015630849.tif/lossy-page1-1280px-thumbnail.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Passenger_cabin_of_the_Flagship_Knoxville,_a_fully_restored_DC-3_aircraft_at_the_American_Airlines_C.R._Smith_Museum_on_the_campus_of_the_American_Airlines_Flight_Academy,_at_the_southern_end_of_DFW_LCCN2015630849.tif",
@@ -538,7 +538,10 @@
         "license": "publicdomain",
         "matched_query": "commercial passenger aircraft airport"
       },
-      "updated_at": "2026-10-28T15:01:26.018844+00:00"
+      "updated_at": "2026-10-28T15:02:05.259503+00:00",
+      "share_to_feed": true,
+      "reel_id": "18375325384240116",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/de4e909e1472b5dddd9d329efa2af101933c3e5b/aerodatos_assets/media/AD-437-e689be91e6cd635b.mp4"
     }
   }
 }
