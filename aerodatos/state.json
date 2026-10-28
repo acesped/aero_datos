@@ -546,7 +546,7 @@
       "story_id": "18471975358143228"
     },
     "AD-362": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Dryden_F-8_Research_Aircraft_Fleet_1973_in_flight%2C_DFBW_and_SCW_DVIDS697267.jpg/1280px-Dryden_F-8_Research_Aircraft_Fleet_1973_in_flight%2C_DFBW_and_SCW_DVIDS697267.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Dryden_F-8_Research_Aircraft_Fleet_1973_in_flight,_DFBW_and_SCW_DVIDS697267.jpg",
@@ -556,7 +556,10 @@
         "license": "publicdomain",
         "matched_query": "Boeing 777 passenger airliner"
       },
-      "updated_at": "2026-10-28T21:02:34.218039+00:00"
+      "updated_at": "2026-10-28T21:03:14.325839+00:00",
+      "share_to_feed": true,
+      "reel_id": "17916766770509194",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/32e8e5aa331d2ed7e6be2233e5553851817dc302/aerodatos_assets/media/AD-362-4181c4ae34d1fa17.mp4"
     }
   }
 }
