@@ -600,7 +600,7 @@
       "story_id": "18124837300895779"
     },
     "AD-127": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/PK-GPQ_Garuda_Indonesia_Airbus_A330-243_-_cn_1410%2C_landing_on_Schiphol%2C_pic-2.JPG/1280px-PK-GPQ_Garuda_Indonesia_Airbus_A330-243_-_cn_1410%2C_landing_on_Schiphol%2C_pic-2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:PK-GPQ_Garuda_Indonesia_Airbus_A330-243_-_cn_1410,_landing_on_Schiphol,_pic-2.JPG",
@@ -610,7 +610,10 @@
         "license": "cc0",
         "matched_query": "Airbus A330 commercial airplane"
       },
-      "updated_at": "2026-10-29T15:01:16.784886+00:00"
+      "updated_at": "2026-10-29T15:01:55.826212+00:00",
+      "share_to_feed": true,
+      "reel_id": "18149688778565199",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/0643fff6097ec273db0216e81012c6a950da7bbf/aerodatos_assets/media/AD-127-adf2c8b5efa38656.mp4"
     }
   }
 }
