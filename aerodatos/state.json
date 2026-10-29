@@ -580,6 +580,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/661d168ab98d80b920894ec62830e5198b44e3a3/aerodatos_assets/media/AD-485-730b673a21e0c8f8.mp4",
       "story": "publicado",
       "story_id": "17894444397683005"
+    },
+    "AD-099": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Lufthansa_Regional_Bombardier_Dash8_after_disembarkation%2C_Florence_International_Airport%2C_Italy_-_20100906_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Lufthansa_Regional_Bombardier_Dash8_after_disembarkation,_Florence_International_Airport,_Italy_-_20100906_(cropped).jpg",
+        "photo_sha256": "f3b6101e68c7d9e0959e3bc791d676a869a5646b2c95161b0e499b55eeaf86cf",
+        "photo_dhash": "cdbf57676772cca1",
+        "title": "File:Lufthansa Regional Bombardier Dash8 after disembarkation, Florence International Airport, Italy - 20100906 (cropped).jpg",
+        "license": "publicdomain",
+        "matched_query": "commercial passenger aircraft airport"
+      },
+      "updated_at": "2026-10-29T09:01:32.517119+00:00"
     }
   }
 }
