@@ -700,10 +700,11 @@
         "license": "cc0",
         "matched_query": "Airbus A330 commercial airplane"
       },
-      "updated_at": "2026-10-30T21:02:01.162882+00:00",
+      "updated_at": "2026-10-30T21:02:02.308352+00:00",
       "share_to_feed": true,
       "reel_id": "17884496367527318",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/d51c563d147f70cc43e9f684242c543b6446316b/aerodatos_assets/media/AD-450-401ea2a5daf26695.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/d51c563d147f70cc43e9f684242c543b6446316b/aerodatos_assets/media/AD-450-401ea2a5daf26695.mp4",
+      "story": "enviando"
     }
   }
 }
