@@ -672,7 +672,7 @@
       "story_id": "18022021535731661"
     },
     "AD-039": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/GE_Aviation_passenger_aircraft_concept_2010.jpg/1280px-GE_Aviation_passenger_aircraft_concept_2010.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:GE_Aviation_passenger_aircraft_concept_2010.jpg",
@@ -682,7 +682,10 @@
         "license": "publicdomain",
         "matched_query": "commercial passenger aircraft airport"
       },
-      "updated_at": "2026-10-30T15:01:38.937099+00:00"
+      "updated_at": "2026-10-30T15:02:46.952770+00:00",
+      "share_to_feed": true,
+      "reel_id": "17916038457540528",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/74fa8030e92d8c8c8cd7157ea6a967bcb2800cf0/aerodatos_assets/media/AD-039-5500b0d27fee2889.mp4"
     }
   }
 }
