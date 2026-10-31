@@ -708,7 +708,7 @@
       "story_id": "18103802324644833"
     },
     "AD-033": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Airbus_A330-941_at_Rio_de_Janeiro-Gale%C3%A3o_-_Ant%C3%B4nio_Carlos_Jobim_International_Airport.jpg/1280px-Airbus_A330-941_at_Rio_de_Janeiro-Gale%C3%A3o_-_Ant%C3%B4nio_Carlos_Jobim_International_Airport.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Airbus_A330-941_at_Rio_de_Janeiro-Gale%C3%A3o_-_Ant%C3%B4nio_Carlos_Jobim_International_Airport.jpg",
@@ -718,7 +718,10 @@
         "license": "cc0",
         "matched_query": "Airbus A330 commercial airplane"
       },
-      "updated_at": "2026-10-31T03:01:23.663929+00:00"
+      "updated_at": "2026-10-31T03:02:01.477710+00:00",
+      "share_to_feed": true,
+      "reel_id": "18020731421944034",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/6b1d9f2e0ef149f8ba5b5bd96ad4fb1813f8bc84/aerodatos_assets/media/AD-033-d20141a3efdb2928.mp4"
     }
   }
 }
