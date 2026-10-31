@@ -726,7 +726,7 @@
       "story_id": "18637294531011710"
     },
     "AD-110": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Commercial_flight_B6813_HPN_to_FLL_airplane_N760JB_Airbus_A320-232.jpg/1280px-Commercial_flight_B6813_HPN_to_FLL_airplane_N760JB_Airbus_A320-232.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Commercial_flight_B6813_HPN_to_FLL_airplane_N760JB_Airbus_A320-232.jpg",
@@ -736,7 +736,10 @@
         "license": "cc0",
         "matched_query": "Airbus A320 commercial airplane"
       },
-      "updated_at": "2026-10-31T09:01:35.643119+00:00"
+      "updated_at": "2026-10-31T09:02:15.137208+00:00",
+      "share_to_feed": true,
+      "reel_id": "18126025165928380",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/bca48eacb65fcda216d0cb5cd92ff772ecb821c4/aerodatos_assets/media/AD-110-fbc57c9c0f9dcda4.mp4"
     }
   }
 }
