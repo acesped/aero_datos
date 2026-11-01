@@ -834,7 +834,7 @@
       "story_id": "18155257666526594"
     },
     "AD-271": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Easyjet_Airbus_A320-200_OE-INI.jpg/1280px-Easyjet_Airbus_A320-200_OE-INI.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Easyjet_Airbus_A320-200_OE-INI.jpg",
@@ -844,7 +844,10 @@
         "license": "cc0",
         "matched_query": "Airbus A320 commercial airplane"
       },
-      "updated_at": "2026-11-01T21:01:34.392176+00:00"
+      "updated_at": "2026-11-01T21:02:13.323516+00:00",
+      "share_to_feed": true,
+      "reel_id": "18122904328923686",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/ece2a616f7ce627d08c860132e5c02736813c893/aerodatos_assets/media/AD-271-1a69f9b033b2bcb4.mp4"
     }
   }
 }
