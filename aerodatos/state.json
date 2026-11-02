@@ -888,7 +888,7 @@
       "story_id": "17916590043542475"
     },
     "AD-137": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Commercial_jet_airplane.jpg/1280px-Commercial_jet_airplane.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Commercial_jet_airplane.jpg",
@@ -898,7 +898,10 @@
         "license": "cc0",
         "matched_query": "Airbus A320 commercial airplane"
       },
-      "updated_at": "2026-11-02T15:01:22.033626+00:00"
+      "updated_at": "2026-11-02T15:02:01.677884+00:00",
+      "share_to_feed": true,
+      "reel_id": "17992873116061080",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/016e42861f49aff03ecb8a66ade79fafa5b31b83/aerodatos_assets/media/AD-137-d9fbfa7deb16d07f.mp4"
     }
   }
 }
