@@ -1,25 +1,25 @@
-name: AERO_DATOS - Groq Gemini OpenRouter - Instagram
+name: AEROFACTUM - IA gratuita - Instagram
 
 on:
   workflow_dispatch:
     inputs:
       episode_id:
-        description: 'ID opcional (vacio = siguiente episodio pendiente al publicar)'
+        description: 'ID opcional (vacio = elegir episodio pendiente)'
         required: false
         default: ''
         type: string
       publish:
-        description: 'Publicar un Reel en feed y Story'
+        description: 'Publicar Reel en feed y Story'
         required: true
         default: true
         type: boolean
       auto_publish:
-        description: 'Publicacion autonoma; tambien se activa si publish=true y episode_id esta vacio'
+        description: 'Publicar sin aprobacion individual'
         required: true
         default: true
         type: boolean
       approved_id:
-        description: 'Si auto_publish=false, escribe ID revisado para publicar'
+        description: 'Si auto_publish=false, indicar el ID revisado'
         required: false
         default: ''
         type: string
@@ -28,13 +28,14 @@ permissions:
   contents: write
 
 concurrency:
-  group: aerodatos-instagram
+  group: aerofactum-instagram-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
   generar:
+    name: Generar y publicar como Aerofactum
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 45
     env:
       PYTHONUNBUFFERED: '1'
       OPENROUTER_MODEL: 'openrouter/free'
@@ -44,112 +45,114 @@ jobs:
       INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
       INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
       IG_GRAPH_VERSION: 'v25.0'
-      IG_EXPECTED_USERNAME: ${{ vars.IG_EXPECTED_USERNAME || 'aero_datos' }}
+      IG_EXPECTED_USERNAME: aerofactum
       GH_TOKEN: ${{ github.token }}
       GITHUB_REPOSITORY: ${{ github.repository }}
       GITHUB_REF_NAME: ${{ github.event.repository.default_branch }}
+      PUBLISH: ${{ inputs.publish && 'true' || 'false' }}
+      AUTO: ${{ inputs.auto_publish && 'true' || 'false' }}
+      EPISODE: ${{ inputs.episode_id }}
+      APPROVED: ${{ inputs.approved_id }}
+
     steps:
-      - name: Checkout
+      - name: Checkout de la rama principal
         uses: actions/checkout@v4
-      - name: Python
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+
+      - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: pip
-      - name: Instalar librerias y FFmpeg
+          cache-dependency-path: requirements.txt
+
+      - name: Instalar dependencias y FFmpeg
         shell: bash
         run: |
           set -euo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg fonts-dejavu-core
           python -m pip install -r requirements.txt
-      - name: Verificar catalogo y sintaxis
+          command -v ffmpeg
+
+      - name: Validar codigo y catalogo
         shell: bash
         run: |
           set -euo pipefail
-          python -m py_compile aerodatos.py
+          test -f aerofactum.py || { echo '::error::Falta aerofactum.py en el repositorio'; exit 1; }
+          python -m py_compile aerofactum.py
           python - <<'PY'
-          import aerodatos
-          episodes=aerodatos.catalog()
-          assert len(episodes)==500
-          assert len({ep['id'] for ep in episodes})==500
-          print('Catalogo de 500 temas cargado')
+          import aerofactum
+          assert aerofactum.BRAND == 'AEROFACTUM'
+          assert aerofactum.STATE_PATH == 'aerofactum/state.json'
+          episodes = aerofactum.catalog()
+          assert len(episodes) == 500
+          assert len({ep['id'] for ep in episodes}) == 500
+          assert all(ep['id'].startswith('AD-') for ep in episodes)
+          print('AEROFACTUM: 500 episodios; IDs compatibles con el historial')
           PY
-      - name: Diagnosticar usuario Instagram
+
+      - name: Validar configuracion y autorizacion
         shell: bash
-        env:
-          REPOSITORY_USERNAME: ${{ vars.IG_EXPECTED_USERNAME }}
-          IG_EXPECTED_USERNAME: ${{ vars.IG_EXPECTED_USERNAME || 'aero_datos' }}
         run: |
           set -euo pipefail
-          echo "Repositorio: $GITHUB_REPOSITORY"
-          echo "Rama del workflow: $GITHUB_REF"
-          if [[ -z "${REPOSITORY_USERNAME:-}" ]]; then
-            echo "::warning::IG_EXPECTED_USERNAME no disponible en Repository variables; se usara el respaldo @aero_datos."
-          else
-            echo "Usuario obtenido desde Repository variables."
+          [[ -n "${GROQ_API_KEY:-}" || -n "${GEMINI_API_KEY:-}" || -n "${OPENROUTER_API_KEY:-}" ]] || {
+            echo '::error::Configura GROQ_API_KEY, GEMINI_API_KEY u OPENROUTER_API_KEY'; exit 1;
+          }
+          [[ "$IG_EXPECTED_USERNAME" == 'aerofactum' ]] || {
+            echo '::error::Cuenta autorizada incorrecta'; exit 1;
+          }
+          if [[ -n "$EPISODE" && ! "$EPISODE" =~ ^AD-[0-9]{3}$ ]]; then
+            echo '::error::episode_id debe tener formato AD-001'; exit 1
           fi
-          [[ -n "${IG_EXPECTED_USERNAME:-}" ]] || { echo "::error::Usuario Instagram vacio"; exit 1; }
-          echo "Usuario esperado: @${IG_EXPECTED_USERNAME}"
-      - name: Validar configuración
-        shell: bash
-        env:
-          PUBLISH: ${{ inputs.publish && 'true' || 'false' }}
-          AUTO: ${{ inputs.auto_publish && 'true' || 'false' }}
-          EPISODE: ${{ inputs.episode_id }}
-          APPROVED: ${{ inputs.approved_id }}
-        run: |
-          set -euo pipefail
-          [[ -n "${GROQ_API_KEY:-}" || -n "${GEMINI_API_KEY:-}" || -n "${OPENROUTER_API_KEY:-}" ]] || { echo '::error::Configura GROQ_API_KEY, GEMINI_API_KEY u OPENROUTER_API_KEY'; exit 1; }
           if [[ "$PUBLISH" == true ]]; then
-            [[ -n "${INSTAGRAM_TOKEN:-}" && -n "${INSTAGRAM_USER_ID:-}" ]] || { echo '::error::Faltan secretos de Instagram'; exit 1; }
-            [[ "$INSTAGRAM_USER_ID" =~ ^[0-9]+$ ]] || { echo '::error::INSTAGRAM_USER_ID no es numerico'; exit 1; }
-            [[ -n "${IG_EXPECTED_USERNAME:-}" ]] || { echo '::error::IG_EXPECTED_USERNAME vacio incluso tras aplicar respaldo'; exit 1; }
-            # Si no se especifica ID, el flujo elige uno pendiente y autoriza
-            # esa seleccion automaticamente (no exige approved_id).
+            [[ -n "${INSTAGRAM_TOKEN:-}" && -n "${INSTAGRAM_USER_ID:-}" ]] || {
+              echo '::error::Faltan INSTAGRAM_TOKEN o INSTAGRAM_USER_ID'; exit 1;
+            }
+            [[ "$INSTAGRAM_USER_ID" =~ ^[0-9]+$ ]] || {
+              echo '::error::INSTAGRAM_USER_ID debe ser numerico'; exit 1;
+            }
+            if [[ "$AUTO" != true && -n "$EPISODE" && "$APPROVED" != "$EPISODE" ]]; then
+              echo '::error::approved_id debe coincidir con episode_id'; exit 1
+            fi
             if [[ -z "$EPISODE" ]]; then
-              echo "Modo autonomo: se seleccionara un episodio pendiente de forma aleatoria y equilibrada."
-            elif [[ "$AUTO" != true ]]; then
-              [[ "$EPISODE" == "$APPROVED" ]] || { echo '::error::Con ID especifico, confirma approved_id o activa auto_publish'; exit 1; }
+              echo 'Seleccion automatica de episodio pendiente; se publicara si la generacion resulta correcta.'
             fi
           fi
-      - name: Informar proveedores de IA
+          echo "Cuenta objetivo: @$IG_EXPECTED_USERNAME; publicar=$PUBLISH; auto=$AUTO"
+
+      - name: Confirmar identidad de Instagram antes de generar
+        if: ${{ inputs.publish }}
         shell: bash
-        run: |
-          echo 'Orden de proveedores: Groq, Gemini, OpenRouter gratuito'
-      - name: Generar video con fotografias libres y publicar
-        shell: bash
-        env:
-          IG_EXPECTED_USERNAME: ${{ vars.IG_EXPECTED_USERNAME || 'aero_datos' }}
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
-          PUBLISH: ${{ inputs.publish && 'true' || 'false' }}
-          AUTO: ${{ inputs.auto_publish && 'true' || 'false' }}
-          EPISODE: ${{ inputs.episode_id }}
-          APPROVED: ${{ inputs.approved_id }}
         run: |
           set -euo pipefail
-          args=()
+          python aerofactum.py --check-instagram
+
+      - name: Generar video y publicar
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--out aerofactum_output)
           if [[ -n "$EPISODE" ]]; then args+=(--episode "$EPISODE"); fi
           if [[ "$PUBLISH" == true ]]; then args+=(--publish); fi
-          # Con publicacion y sin episodio se habilita la seleccion autonoma,
-          # incluso si auto_publish no se marco en la interfaz.
+          # El script permite seleccion de episodio sin ID solo en modo autonomo.
           if [[ "$AUTO" == true || ( "$PUBLISH" == true && -z "$EPISODE" ) ]]; then
             args+=(--auto-publish)
           fi
           if [[ -n "$APPROVED" ]]; then args+=(--approved-id "$APPROVED"); fi
-          python aerodatos.py "${args[@]}"
-      - name: Guardar guion y MP4
+          python aerofactum.py "${args[@]}"
+
+      - name: Guardar video, portada, guion y creditos
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: aerodatos-${{ github.run_id }}-${{ github.run_attempt }}
+          name: aerofactum-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            output/*.json
-            output/*.mp4
-            output/*.jpg
-          if-no-files-found: ignore
+            aerofactum_output/**/*.json
+            aerofactum_output/*.json
+            aerofactum_output/*.mp4
+            aerofactum_output/*.jpg
+          if-no-files-found: warn
           retention-days: 7
