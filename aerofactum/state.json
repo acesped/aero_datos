@@ -958,6 +958,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/03e1611ab139c793cb6b48643b4b62e1b63f200c/aerofactum_assets/media/AD-336-f0b0951169f314b0.mp4",
       "story": "publicado",
       "story_id": "18179204152436121"
+    },
+    "AD-371": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Commercial_flight_F91362_ATL_to_FLL_airplane_N367FR_Airbus_A320-251N.jpg/1280px-Commercial_flight_F91362_ATL_to_FLL_airplane_N367FR_Airbus_A320-251N.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Commercial_flight_F91362_ATL_to_FLL_airplane_N367FR_Airbus_A320-251N.jpg",
+        "photo_sha256": "8eb35b4ccd78c4c815bfe9757b867b2ae8845d4346abdd0b9b710cf422d7d391",
+        "photo_dhash": "8310929998322110",
+        "title": "File:Commercial flight F91362 ATL to FLL airplane N367FR Airbus A320-251N.jpg",
+        "license": "cc0",
+        "matched_query": "Airbus A320 commercial airplane"
+      },
+      "updated_at": "2026-11-04T03:01:16.500245+00:00"
     }
   }
 }
