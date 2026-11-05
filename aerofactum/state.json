@@ -1048,6 +1048,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/f4007604101cbbe401adb599b1224036e4f9bc94/aerofactum_assets/media/AD-215-258dd2c1958c0cf5.mp4",
       "story": "publicado",
       "story_id": "18080710028405645"
+    },
+    "AD-443": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/F-HEPG_Air_France_Airbus_A320-214%28WL%29_takeoff_from_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands%2C_11june2014%2C_pic-1.JPG/1280px-F-HEPG_Air_France_Airbus_A320-214%28WL%29_takeoff_from_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands%2C_11june2014%2C_pic-1.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:F-HEPG_Air_France_Airbus_A320-214(WL)_takeoff_from_Schiphol_(AMS_-_EHAM),_The_Netherlands,_11june2014,_pic-1.JPG",
+        "photo_sha256": "7909008f1162f01fa5f13203378213ae62cb37727545f5f9cb2f951189eefd8d",
+        "photo_dhash": "3f877939676b1d0b",
+        "title": "File:F-HEPG Air France Airbus A320-214(WL) takeoff from Schiphol (AMS - EHAM), The Netherlands, 11june2014, pic-1.JPG",
+        "license": "cc0",
+        "matched_query": "Airbus A320 commercial airplane"
+      },
+      "updated_at": "2026-11-05T09:01:59.341138+00:00"
     }
   }
 }
