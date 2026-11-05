@@ -1032,7 +1032,7 @@
       "story_id": "18121423765767018"
     },
     "AD-215": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/PR-AJE%2C_Airbus_A320_of_Avianca_Brazil_at_S%C3%A3o_Paulo-Guarulhos_International_Airport%2C_2019_02.jpg/1280px-PR-AJE%2C_Airbus_A320_of_Avianca_Brazil_at_S%C3%A3o_Paulo-Guarulhos_International_Airport%2C_2019_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:PR-AJE,_Airbus_A320_of_Avianca_Brazil_at_S%C3%A3o_Paulo-Guarulhos_International_Airport,_2019_02.jpg",
@@ -1042,7 +1042,10 @@
         "license": "cc0",
         "matched_query": "Airbus A320 commercial airplane"
       },
-      "updated_at": "2026-11-05T03:01:24.955811+00:00"
+      "updated_at": "2026-11-05T03:02:55.207690+00:00",
+      "share_to_feed": true,
+      "reel_id": "18139045231711028",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/f4007604101cbbe401adb599b1224036e4f9bc94/aerofactum_assets/media/AD-215-258dd2c1958c0cf5.mp4"
     }
   }
 }
