@@ -37,7 +37,7 @@ jobs:
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
-          IG_EXPECTED_USERNAME: aero_datos
+          IG_EXPECTED_USERNAME: aerofactum
           IG_SECRET_MANAGER_TOKEN: ${{ secrets.IG_SECRET_MANAGER_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         shell: bash
