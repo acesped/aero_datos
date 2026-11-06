@@ -2,7 +2,7 @@
 """AEROFACTUM: 500 propuestas aeronáuticas, videos de 20 s y publicación Instagram.
 
 Python 3.11+. Requiere requests, Pillow, edge-tts y ffmpeg.
-Fotografías: Wikimedia Commons/Openverse, solo CC0 o dominio público.
+Fotografías: Wikimedia Commons (CC0/dominio público); ilustración original si se agotan.
 La IA no constituye verificación independiente de hechos: revisar afirmaciones.
 Las publicaciones nuevas reservan huellas de imágenes para evitar reutilizaciones.
 Conserva los IDs AD-001..AD-500 y permite migrar el historial anterior.
@@ -475,9 +475,23 @@ def _commons_candidates(query):
           'license':lic,'source':info.get('descriptionurl','')}
 
 def _openverse_candidates(query):
-    with _image_request('https://api.openverse.org/v1/images/',
-        params={'q':query,'license':'cc0,pdm','page_size':40},timeout=25) as r:
-        items=r.json().get('results',[])
+    """Openverse anónimo suele devolver 401/429: desactivado por defecto.
+
+    Permite reactivarlo explícitamente en despliegues donde sí esté autorizado,
+    sin exigir claves ni afectar la búsqueda libre en Wikimedia Commons.
+    """
+    if os.getenv('AERO_ENABLE_OPENVERSE', 'false').lower() != 'true':
+        return
+    try:
+        with _image_request('https://api.openverse.org/v1/images/',
+            params={'q':query,'license':'cc0,pdm','page_size':40},timeout=25) as r:
+            items=r.json().get('results',[])
+    except requests.HTTPError as exc:
+        status=getattr(getattr(exc,'response',None),'status_code',None)
+        if status in (401,403,429):
+            print(f'Openverse: HTTP {status}; omitiendo servicio sin credenciales',flush=True)
+            return
+        raise
     for item in items:
         lic=str(item.get('license') or '').lower()
         if lic not in IMAGE_LICENSES:continue
@@ -486,6 +500,7 @@ def _openverse_candidates(query):
           'description':str(item.get('description') or '')[:500],
           'author':item.get('creator',''),'license':lic,
           'source':item.get('foreign_landing_url','')}
+
 
 def _airliner_metadata_valid(c):
     text=' '.join(str(c.get(k) or '') for k in ('title','description'))
@@ -534,7 +549,7 @@ def _photo_unique(fingerprint,candidate,records):
         if fingerprint['photo_sha256']==record.get('photo_sha256'):return False
         other=record.get('photo_dhash','')
         if isinstance(other,str) and re.fullmatch(r'[0-9a-fA-F]{16}',other):
-            if (int(fingerprint['photo_dhash'],16)^int(other,16)).bit_count()<=6:return False
+            if (int(fingerprint['photo_dhash'],16)^int(other,16)).bit_count()<=3:return False
     return True
 
 def _public_https_host(url):
@@ -570,13 +585,94 @@ def _safe_photo_download(url,target):
         print(f'Fotografía descartada ({type(exc).__name__}): {str(exc)[:100]}',flush=True)
         return False
 
+def _commons_extra_candidates(query):
+    """Páginas adicionales de Commons, manteniendo verificación CC0/PD."""
+    params={'action':'query','format':'json','generator':'search',
+        'gsrsearch':query,'gsrnamespace':6,'gsrlimit':50,
+        'prop':'imageinfo','iiprop':'url|extmetadata|mime|size',
+        'iiurlwidth':1300}
+    offset=random.SystemRandom().choice([0,50,100])
+    if offset:params['gsroffset']=offset
+    try:
+        with _image_request('https://commons.wikimedia.org/w/api.php',params=params) as r:
+            pages=(r.json().get('query') or {}).get('pages') or {}
+    except requests.HTTPError as exc:
+        # Sin coincidencias en esa paginación, continuar con otras consultas.
+        print('Commons búsqueda ampliada:',str(exc)[:100],flush=True)
+        return
+    for page in (pages.values() if isinstance(pages,dict) else pages):
+        info=(page.get('imageinfo') or [{}])[0]
+        lic=_strip_html((info.get('extmetadata') or {}).get('LicenseShortName',{}).get('value','')).lower().replace(' ','')
+        if not (lic=='cc0' or 'publicdomain' in lic or lic in ('pd','pdm') or lic.startswith('pd-')):continue
+        if any(term in lic for term in ('cc-by','-nc','-nd')):continue
+        if info.get('mime') not in ('image/jpeg','image/png','image/webp'):continue
+        url=info.get('thumburl') or info.get('url')
+        if not url:continue
+        meta=info.get('extmetadata') or {}
+        yield {'url':url,'title':page.get('title',''),
+               'description':_strip_html((meta.get('ImageDescription') or {}).get('value',''))[:500],
+               'author':_strip_html((meta.get('Artist') or {}).get('value','')),
+               'license':lic,'source':info.get('descriptionurl','')}
+
+
+def _original_airliner_background(dest,ep):
+    """Alternativa ORIGINAL dibujada con Pillow, no fotografía ni imagen falsa.
+
+    Se identifica explícitamente como ilustración en los créditos.
+    """
+    seed=int(hashlib.sha256(ep['id'].encode()).hexdigest()[:12],16)
+    rng=random.Random(seed)
+    width,height=900,1600
+    image=Image.new('RGB',(width,height))
+    draw=ImageDraw.Draw(image)
+    for y in range(height):
+        t=y/height
+        draw.line((0,y,width,y),fill=(round(5+24*t),round(25+45*t),round(51+60*t)))
+    # Nubes originales, horizonte, luces y avión comercial visto de perfil.
+    for i in range(65):
+        x=rng.randrange(-90,width+80);y=rng.randrange(160,1050)
+        r=rng.randrange(25,100)
+        draw.ellipse((x-r*2,y-r//2,x+r*2,y+r//2),fill=(35+rng.randrange(8,30),77,110))
+    draw.polygon([(0,1260),(900,1195),(900,1600),(0,1600)],fill=(17,30,49))
+    for x in range(35,900,140):
+        draw.line((x,1375,x+65,1368),fill=(230,208,145),width=6)
+    # Perfil vectorial reconocible de avión de pasajeros, sin aludir a modelo real.
+    ax,ay=450,680
+    draw.ellipse((ax-290,ay-38,ax+300,ay+38),fill=(218,230,237))
+    draw.polygon([(ax+270,ay-25),(ax+360,ay+5),(ax+270,ay+35)],fill=(210,223,230))
+    draw.polygon([(ax-250,ay+8),(ax-295,ay-120),(ax-245,ay-118),(ax-175,ay+5)],fill=(202,218,230))
+    draw.polygon([(ax-50,ay+8),(ax+120,ay+205),(ax+205,ay+212),(ax+80,ay+8)],fill=(165,194,213))
+    draw.polygon([(ax+15,ay-8),(ax+185,ay-200),(ax+245,ay-206),(ax+118,ay-5)],fill=(188,210,225))
+    for x in range(ax-205,ax+225,31):
+        draw.ellipse((x,ay-9,x+13,ay+3),fill=(30,69,99))
+    draw.ellipse((ax+90,ay+60,ax+155,ay+95),fill=(74,101,123))
+    draw.ellipse((ax-120,ay+53,ax-53,ay+86),fill=(74,101,123))
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    image.save(dest,'JPEG',quality=91,optimize=True)
+    with Image.open(dest) as im:fp=_image_fingerprint(im)
+    return dict(fp,photo_url='',photo_source='Obra original AEROFACTUM',
+        title='Ilustración aeronáutica original',license='Obra original',
+        author='AEROFACTUM',generated=True,illustration=True,
+        matched_query='Fondo vectorial original')
+
 def prepare_photos(ep,folder,used_records=()):
-    """Una foto CC0/PD civil nueva por episodio; URL y huellas se comparan."""
+    """Prioriza foto CC0/PD no utilizada; si falla, fondo ilustrado original.
+
+    Nunca admite fotos con licencia no confirmada ni repite fotos reservadas.
+    """
     dest=folder/'foto_avion_comercial.jpg';dest.unlink(missing_ok=True)
     seen_urls=set();rejected=duplicate=failures=0
-    for query in _image_queries(ep):
-        backends=[_commons_candidates,_openverse_candidates]
-        random.SystemRandom().shuffle(backends)
+    queries=_image_queries(ep)
+    # Amplía variantes para agotar menos a menudo la búsqueda de Commons.
+    additional=['Airbus passenger aircraft','Boeing passenger airplane',
+        'commercial airliner aircraft','airliner passenger aircraft airport',
+        'Airbus aircraft takeoff','Boeing aircraft landing',
+        'civil passenger jet airplane','passenger airplane runway',
+        'Airbus A321 passenger jet','Boeing 767 passenger aircraft']
+    random.SystemRandom().shuffle(additional)
+    queries=list(dict.fromkeys(queries+additional))
+    backends=(_commons_candidates,_commons_extra_candidates)
+    for query in queries:
         for backend in backends:
             try:
                 candidates=list(backend(query));random.SystemRandom().shuffle(candidates)
@@ -598,9 +694,35 @@ def prepare_photos(ep,folder,used_records=()):
                     return [dest],credits
             except (requests.RequestException,ValueError,KeyError,RuntimeError) as exc:
                 print(f'Fotos: {backend.__name__} falló: {str(exc)[:140]}',flush=True)
+    # Openverse suele necesitar permisos/rate limits; solo consultar bajo opt-in.
+    if os.getenv('AERO_ENABLE_OPENVERSE','false').lower()=='true':
+        for query in queries[:8]:
+            try:
+                for candidate in _openverse_candidates(query):
+                    url=candidate['url']
+                    if url in seen_urls:continue
+                    seen_urls.add(url)
+                    if not _airliner_metadata_valid(candidate):rejected+=1;continue
+                    fp=_safe_photo_download(url,dest)
+                    if not fp:failures+=1;continue
+                    if not _photo_unique(fp,candidate,used_records):
+                        duplicate+=1;dest.unlink(missing_ok=True);continue
+                    chosen=dict(candidate)
+                    chosen.update(fp,photo_url=url,photo_source=candidate.get('source',''),matched_query=query)
+                    credits=[chosen]
+                    (folder/'creditos_imagenes.json').write_text(json.dumps(credits,ensure_ascii=False,indent=2),encoding='utf-8')
+                    return [dest],credits
+            except (requests.RequestException,ValueError,KeyError,RuntimeError) as exc:
+                print('Openverse sin disponibilidad:',str(exc)[:140],flush=True)
+    if os.getenv('AERO_ALLOW_ILLUSTRATED_FALLBACK','true').lower() not in ('false','0','no'):
+        credit=_original_airliner_background(dest,ep)
+        (folder/'creditos_imagenes.json').write_text(json.dumps([credit],ensure_ascii=False,indent=2),encoding='utf-8')
+        print(f'FONDO ORIGINAL: fotografía CC0/PD agotada; ilustración propia. Descartadas={rejected}, repetidas={duplicate}, fallidas={failures}',flush=True)
+        return [dest],[credit]
     (folder/'creditos_imagenes.json').write_text('[]',encoding='utf-8')
     raise RuntimeError('No hay foto civil CC0/PD nueva. '
       f'Descartadas={rejected}, repetidas={duplicate}, fallidas={failures}. NO publicar.')
+
 
 # ---------- Video 720×1280, cinco escenas de cuatro segundos ----------
 def font(size,bold=False):
