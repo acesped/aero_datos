@@ -1068,7 +1068,7 @@
       "story_id": "18046418900643072"
     },
     "AD-125": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Concorde.planview.arp.jpg/1280px-Concorde.planview.arp.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Concorde.planview.arp.jpg",
@@ -1078,7 +1078,10 @@
         "license": "publicdomain",
         "matched_query": "commercial airliner aircraft"
       },
-      "updated_at": "2026-11-06T21:13:09.049053+00:00"
+      "updated_at": "2026-11-06T21:13:40.480584+00:00",
+      "share_to_feed": true,
+      "reel_id": "18052240457818025",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/6ce64587e392760f447ed7aab96941786c9b59f0/aerofactum_assets/media/AD-125-3ebf405bd5c45fd3.mp4"
     }
   }
 }
