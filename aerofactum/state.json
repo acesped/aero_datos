@@ -1086,7 +1086,7 @@
       "story_id": "18108346204976534"
     },
     "AD-267": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Sri_Lanka_airport.jpg/1920px-Sri_Lanka_airport.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Sri_Lanka_airport.jpg",
@@ -1096,7 +1096,10 @@
         "license": "cc0",
         "matched_query": "Airbus A320 commercial airplane"
       },
-      "updated_at": "2026-11-07T03:01:48.890143+00:00"
+      "updated_at": "2026-11-07T03:02:30.004450+00:00",
+      "share_to_feed": true,
+      "reel_id": "18107722628347607",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/49eed454ccab62387c709e742f6b94f076086f05/aerofactum_assets/media/AD-267-a732f3b2169edc81.mp4"
     }
   }
 }
