@@ -1104,7 +1104,7 @@
       "story_id": "18000659708822959"
     },
     "AD-169": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Cathay_pacific_cargo_b747-400bcf_b-hkh_arp.jpg/1920px-Cathay_pacific_cargo_b747-400bcf_b-hkh_arp.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Cathay_pacific_cargo_b747-400bcf_b-hkh_arp.jpg",
@@ -1114,7 +1114,10 @@
         "license": "publicdomain",
         "matched_query": "Boeing 747 passenger airliner"
       },
-      "updated_at": "2026-11-07T09:01:24.132231+00:00"
+      "updated_at": "2026-11-07T09:02:03.060011+00:00",
+      "share_to_feed": true,
+      "reel_id": "18108723095351821",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/9aeb0f0f85d3cdc1493f39585193bb6bab79371b/aerofactum_assets/media/AD-169-a6c7d424e0d7ae67.mp4"
     }
   }
 }
