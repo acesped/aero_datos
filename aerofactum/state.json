@@ -1194,7 +1194,7 @@
       "story_id": "18150763465619907"
     },
     "AD-308": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Delta_Air_Lines_Boeing_717-231_N927AT_Landing_on_Runway_22_at_Blue_Grass_Airport_in_2025.jpg/1280px-Delta_Air_Lines_Boeing_717-231_N927AT_Landing_on_Runway_22_at_Blue_Grass_Airport_in_2025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Delta_Air_Lines_Boeing_717-231_N927AT_Landing_on_Runway_22_at_Blue_Grass_Airport_in_2025.jpg",
@@ -1204,7 +1204,10 @@
         "license": "cc0",
         "matched_query": "Boeing aircraft landing"
       },
-      "updated_at": "2026-11-08T15:01:57.182753+00:00"
+      "updated_at": "2026-11-08T15:02:34.963712+00:00",
+      "share_to_feed": true,
+      "reel_id": "18119227486807515",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/c7526f74785489be015d6d192760b71b72451548/aerofactum_assets/media/AD-308-8a9f919ae3de84dd.mp4"
     }
   }
 }
