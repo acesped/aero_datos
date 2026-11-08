@@ -1156,6 +1156,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/db7d4b5cec0d0b735090f81010b449432784eb69/aerofactum_assets/media/AD-384-5fd4911b58d6ec7c.mp4",
       "story": "publicado",
       "story_id": "18097191218666350"
+    },
+    "AD-015": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/G%C3%BCm%C3%BC%C5%9Fhane_Airplane_-_Turkish_Airlines_08.jpg/1920px-G%C3%BCm%C3%BC%C5%9Fhane_Airplane_-_Turkish_Airlines_08.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:G%C3%BCm%C3%BC%C5%9Fhane_Airplane_-_Turkish_Airlines_08.jpg",
+        "photo_sha256": "7d30d605911a0bcbcf16aade3dad01fec250bbdc118d44a931f25f6ba8334403",
+        "photo_dhash": "9163a2c4c4f1f8da",
+        "title": "File:Gümüşhane Airplane - Turkish Airlines 08.jpg",
+        "license": "cc0",
+        "matched_query": "commercial passenger aircraft airport"
+      },
+      "updated_at": "2026-11-08T03:01:44.026378+00:00"
     }
   }
 }
