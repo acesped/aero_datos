@@ -1204,10 +1204,11 @@
         "license": "cc0",
         "matched_query": "Boeing aircraft landing"
       },
-      "updated_at": "2026-11-08T15:02:34.963712+00:00",
+      "updated_at": "2026-11-08T15:02:35.898766+00:00",
       "share_to_feed": true,
       "reel_id": "18119227486807515",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/c7526f74785489be015d6d192760b71b72451548/aerofactum_assets/media/AD-308-8a9f919ae3de84dd.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/c7526f74785489be015d6d192760b71b72451548/aerofactum_assets/media/AD-308-8a9f919ae3de84dd.mp4",
+      "story": "enviando"
     }
   }
 }
