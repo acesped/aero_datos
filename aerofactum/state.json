@@ -1258,11 +1258,12 @@
         "license": "cc0",
         "matched_query": "commercial passenger aircraft airport"
       },
-      "updated_at": "2026-11-09T09:01:57.980055+00:00",
+      "updated_at": "2026-11-09T09:02:35.813657+00:00",
       "share_to_feed": true,
       "reel_id": "17975978676173693",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/7f87316caae27f317be88133536d57c39168faac/aerofactum_assets/media/AD-320-d762e1a01c37b6be.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18127291624933232"
     }
   }
 }
