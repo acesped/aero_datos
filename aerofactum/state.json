@@ -1264,6 +1264,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/7f87316caae27f317be88133536d57c39168faac/aerofactum_assets/media/AD-320-d762e1a01c37b6be.mp4",
       "story": "publicado",
       "story_id": "18127291624933232"
+    },
+    "AD-047": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/USSR_1956-08-18_R-airmail_cover.jpg/1280px-USSR_1956-08-18_R-airmail_cover.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:USSR_1956-08-18_R-airmail_cover.jpg",
+        "photo_sha256": "2953a338b5a53722f074ba89a0915e06f8539772d17a63e5cb4dc2342aa9fc55",
+        "photo_dhash": "a6e8eae6d4d4d4f0",
+        "title": "File:USSR 1956-08-18 R-airmail cover.jpg",
+        "license": "publicdomain",
+        "matched_query": "civil passenger jet airplane"
+      },
+      "updated_at": "2026-11-09T15:01:50.256628+00:00"
     }
   }
 }
