@@ -1320,7 +1320,7 @@
       "story_id": "18111807266185953"
     },
     "AD-487": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/PLANE_CP_HANDLEY_PAGE_HP-42_%27HANNIBAL%27_AT_CROYDON_AIRPORT_-_ART_BY_FRANK_WOOTTON_-_25274371156.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:PLANE_CP_HANDLEY_PAGE_HP-42_%27HANNIBAL%27_AT_CROYDON_AIRPORT_-_ART_BY_FRANK_WOOTTON_-_25274371156.jpg",
@@ -1330,7 +1330,10 @@
         "license": "publicdomain",
         "matched_query": "airliner passenger aircraft airport"
       },
-      "updated_at": "2026-11-10T09:01:32.913855+00:00"
+      "updated_at": "2026-11-10T09:02:10.476220+00:00",
+      "share_to_feed": true,
+      "reel_id": "18099218687452693",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/d23a4cc7fb28f49bf5065966867aa5376845727d/aerofactum_assets/media/AD-487-623a365509f04c82.mp4"
     }
   }
 }
