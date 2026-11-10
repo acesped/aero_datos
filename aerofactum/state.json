@@ -1366,10 +1366,11 @@
         "license": "cc0",
         "matched_query": "commercial passenger aircraft airport"
       },
-      "updated_at": "2026-11-10T21:02:31.979146+00:00",
+      "updated_at": "2026-11-10T21:02:33.329947+00:00",
       "share_to_feed": true,
       "reel_id": "17953629777326776",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/0a6c16e82720c3d7e947cb5d2082434a4d346810/aerofactum_assets/media/AD-255-a6a37e7e41b9c9a4.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/0a6c16e82720c3d7e947cb5d2082434a4d346810/aerofactum_assets/media/AD-255-a6a37e7e41b9c9a4.mp4",
+      "story": "enviando"
     }
   }
 }
