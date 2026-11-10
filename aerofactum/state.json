@@ -1338,7 +1338,7 @@
       "story_id": "18026783507938980"
     },
     "AD-212": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Ground_crewmen_service_a_Cuban_Il-18_airliner_-_DPLA_-_74a03399aed9312c0219bfb0d2a35ef0.jpeg/1280px-Ground_crewmen_service_a_Cuban_Il-18_airliner_-_DPLA_-_74a03399aed9312c0219bfb0d2a35ef0.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Ground_crewmen_service_a_Cuban_Il-18_airliner_-_DPLA_-_74a03399aed9312c0219bfb0d2a35ef0.jpeg",
@@ -1348,7 +1348,10 @@
         "license": "publicdomain",
         "matched_query": "commercial airliner aircraft"
       },
-      "updated_at": "2026-11-10T15:13:47.358125+00:00"
+      "updated_at": "2026-11-10T15:14:26.387470+00:00",
+      "share_to_feed": true,
+      "reel_id": "18204527350327677",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/deff567c46e9fcfa51a253f1d92ef2c19f86cbde/aerofactum_assets/media/AD-212-83d15fbb5d494d4e.mp4"
     }
   }
 }
