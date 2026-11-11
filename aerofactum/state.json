@@ -1392,7 +1392,7 @@
       "story_id": "18158729137518944"
     },
     "AD-053": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flight_paths_of_hijacked_planes-September_11_attacks.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Flight_paths_of_hijacked_planes-September_11_attacks.jpg",
@@ -1402,7 +1402,10 @@
         "license": "publicdomain",
         "matched_query": "Boeing 767 passenger aircraft"
       },
-      "updated_at": "2026-11-11T09:01:39.665660+00:00"
+      "updated_at": "2026-11-11T09:02:08.756680+00:00",
+      "share_to_feed": true,
+      "reel_id": "17894491362447579",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/38ba74d240e0cd65e1c5283a6d05f9be6bd65f6c/aerofactum_assets/media/AD-053-21336cd5eede5408.mp4"
     }
   }
 }
