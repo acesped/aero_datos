@@ -1402,10 +1402,11 @@
         "license": "publicdomain",
         "matched_query": "Boeing 767 passenger aircraft"
       },
-      "updated_at": "2026-11-11T09:02:08.756680+00:00",
+      "updated_at": "2026-11-11T09:02:09.897367+00:00",
       "share_to_feed": true,
       "reel_id": "17894491362447579",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/38ba74d240e0cd65e1c5283a6d05f9be6bd65f6c/aerofactum_assets/media/AD-053-21336cd5eede5408.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/38ba74d240e0cd65e1c5283a6d05f9be6bd65f6c/aerofactum_assets/media/AD-053-21336cd5eede5408.mp4",
+      "story": "enviando"
     }
   }
 }
