@@ -1420,10 +1420,11 @@
         "license": "publicdomain",
         "matched_query": "Airbus passenger aircraft"
       },
-      "updated_at": "2026-11-11T21:02:20.458535+00:00",
+      "updated_at": "2026-11-11T21:02:21.589055+00:00",
       "share_to_feed": true,
       "reel_id": "18353949715271591",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/d87f917f9773057601dacfd665360b827e7650bc/aerofactum_assets/media/AD-149-d04c68ecdf124aca.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/d87f917f9773057601dacfd665360b827e7650bc/aerofactum_assets/media/AD-149-d04c68ecdf124aca.mp4",
+      "story": "enviando"
     }
   }
 }
