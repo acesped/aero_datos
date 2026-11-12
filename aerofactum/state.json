@@ -1462,6 +1462,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/621a5334a95fc3d21caf5b1db2560fe3a8029502/aerofactum_assets/media/AD-446-f433e09ccaae37b1.mp4",
       "story": "publicado",
       "story_id": "18658030162053025"
+    },
+    "AD-389": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Chicago_Municipal_Airport_-_American_Airlines_-_DC-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Chicago_Municipal_Airport_-_American_Airlines_-_DC-2.jpg",
+        "photo_sha256": "d3eab92417ea5e8b87cc6d0b52ed9e6349144b83e094a6faf050bd59070bb93e",
+        "photo_dhash": "968e8cb3868ef89c",
+        "title": "File:Chicago Municipal Airport - American Airlines - DC-2.jpg",
+        "license": "cc0",
+        "matched_query": "commercial passenger aircraft airport"
+      },
+      "updated_at": "2026-11-12T15:02:07.281796+00:00"
     }
   }
 }
