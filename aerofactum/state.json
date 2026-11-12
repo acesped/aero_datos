@@ -1480,6 +1480,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/39cd36d8f81d738505a0f15576ef67ce995149c1/aerofactum_assets/media/AD-389-303a30433a6280c0.mp4",
       "story": "publicado",
       "story_id": "18154521736473807"
+    },
+    "AD-478": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Sky_from_United_airliner_%28Orlando_-_NYC%29_May_2023.JPG/1280px-Sky_from_United_airliner_%28Orlando_-_NYC%29_May_2023.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Sky_from_United_airliner_(Orlando_-_NYC)_May_2023.JPG",
+        "photo_sha256": "dee468c153f144f696a431dc90edd36b889e7a5f3b0200f123636e70f02b7124",
+        "photo_dhash": "07070f0f23c5c0f0",
+        "title": "File:Sky from United airliner (Orlando - NYC) May 2023.JPG",
+        "license": "cc0",
+        "matched_query": "commercial airliner aircraft"
+      },
+      "updated_at": "2026-11-12T21:01:49.529929+00:00"
     }
   }
 }
