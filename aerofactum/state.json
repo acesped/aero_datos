@@ -1456,11 +1456,12 @@
         "license": "cc0",
         "matched_query": "commercial passenger aircraft airport"
       },
-      "updated_at": "2026-11-12T09:02:14.900074+00:00",
+      "updated_at": "2026-11-12T09:02:51.316488+00:00",
       "share_to_feed": true,
       "reel_id": "18134813620776073",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/621a5334a95fc3d21caf5b1db2560fe3a8029502/aerofactum_assets/media/AD-446-f433e09ccaae37b1.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18658030162053025"
     }
   }
 }
