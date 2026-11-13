@@ -1518,7 +1518,7 @@
       "story_id": "18077987393754299"
     },
     "AD-076": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/F-GTAE_Air_France_Airbus_A321-212_takeoff_from_Schiphol_runway_36C.JPG/1280px-F-GTAE_Air_France_Airbus_A321-212_takeoff_from_Schiphol_runway_36C.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:F-GTAE_Air_France_Airbus_A321-212_takeoff_from_Schiphol_runway_36C.JPG",
@@ -1528,7 +1528,10 @@
         "license": "publicdomain",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-13T09:02:15.949259+00:00"
+      "updated_at": "2026-11-13T09:02:54.883275+00:00",
+      "share_to_feed": true,
+      "reel_id": "17915542251560103",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/d8045f0b51319365bc4cd55596b1983343a37916/aerofactum_assets/media/AD-076-372fbf937f9afa09.mp4"
     }
   }
 }
