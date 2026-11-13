@@ -1546,11 +1546,12 @@
         "license": "cc0",
         "matched_query": "Airbus A321 passenger jet"
       },
-      "updated_at": "2026-11-13T15:04:23.583073+00:00",
+      "updated_at": "2026-11-13T15:05:03.105524+00:00",
       "share_to_feed": true,
       "reel_id": "18118702475045694",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/6e9c2511a6d36641048a9063149c3bdcaa6a97b6/aerofactum_assets/media/AD-162-6a32a12f008b99b7.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18507356521098254"
     }
   }
 }
