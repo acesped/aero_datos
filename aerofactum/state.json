@@ -1554,7 +1554,7 @@
       "story_id": "18507356521098254"
     },
     "AD-285": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/G%C3%BCm%C3%BC%C5%9Fhane_Airplane_-_Turkish_Airlines_03.jpg/1920px-G%C3%BCm%C3%BC%C5%9Fhane_Airplane_-_Turkish_Airlines_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:G%C3%BCm%C3%BC%C5%9Fhane_Airplane_-_Turkish_Airlines_03.jpg",
@@ -1564,7 +1564,10 @@
         "license": "cc0",
         "matched_query": "commercial passenger aircraft airport"
       },
-      "updated_at": "2026-11-13T21:01:37.004508+00:00"
+      "updated_at": "2026-11-13T21:02:16.779256+00:00",
+      "share_to_feed": true,
+      "reel_id": "17940277437404564",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/b98e7d739e42f89292263d14ac1df6edacc99621/aerofactum_assets/media/AD-285-0c4711cb11f4e10d.mp4"
     }
   }
 }
