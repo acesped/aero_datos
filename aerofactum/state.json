@@ -1626,7 +1626,7 @@
       "story_id": "18146982382591941"
     },
     "AD-197": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Lockheed_L-1649_Constellation_TWA.jpg/1920px-Lockheed_L-1649_Constellation_TWA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Lockheed_L-1649_Constellation_TWA.jpg",
@@ -1636,7 +1636,10 @@
         "license": "publicdomain",
         "matched_query": "airliner passenger aircraft airport"
       },
-      "updated_at": "2026-11-14T21:02:01.379429+00:00"
+      "updated_at": "2026-11-14T21:02:43.637103+00:00",
+      "share_to_feed": true,
+      "reel_id": "18120703252955420",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/0b9ad646e398691b9fd265192dd5daf44f963854/aerofactum_assets/media/AD-197-cda233355225df2a.mp4"
     }
   }
 }
