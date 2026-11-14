@@ -1582,10 +1582,11 @@
         "license": "cc0",
         "matched_query": "Boeing passenger airplane"
       },
-      "updated_at": "2026-11-14T03:03:09.316532+00:00",
+      "updated_at": "2026-11-14T03:03:10.633914+00:00",
       "share_to_feed": true,
       "reel_id": "18128827636677175",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/45f99282d3a2b0e3a449684fd2b4ef684e4a5fbd/aerofactum_assets/media/AD-008-60f7d98ce9621034.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/45f99282d3a2b0e3a449684fd2b4ef684e4a5fbd/aerofactum_assets/media/AD-008-60f7d98ce9621034.mp4",
+      "story": "enviando"
     }
   }
 }
