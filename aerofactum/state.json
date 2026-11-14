@@ -1590,7 +1590,7 @@
       "story_id": "18644553766014578"
     },
     "AD-252": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Primary_flight_display_of_an_A320_during_cruise.jpg/1920px-Primary_flight_display_of_an_A320_during_cruise.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Primary_flight_display_of_an_A320_during_cruise.jpg",
@@ -1600,7 +1600,10 @@
         "license": "cc0",
         "matched_query": "Airbus A321 passenger jet"
       },
-      "updated_at": "2026-11-14T09:01:31.327080+00:00"
+      "updated_at": "2026-11-14T09:02:08.956989+00:00",
+      "share_to_feed": true,
+      "reel_id": "18001761963031737",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/544a7852fe84bd7ab12432590d84a8a2eab7eae9/aerofactum_assets/media/AD-252-3ce7f898b3a8e782.mp4"
     }
   }
 }
