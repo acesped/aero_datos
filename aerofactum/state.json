@@ -1698,7 +1698,7 @@
       "story_id": "18151042024602934"
     },
     "AD-097": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/EasyJet_G-EZIR_Airbus_A319_takeoff_from_Polderbaan%2C_Schiphol_%28AMS_-_EHAM%29_at_sunset.JPG/1280px-EasyJet_G-EZIR_Airbus_A319_takeoff_from_Polderbaan%2C_Schiphol_%28AMS_-_EHAM%29_at_sunset.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:EasyJet_G-EZIR_Airbus_A319_takeoff_from_Polderbaan,_Schiphol_(AMS_-_EHAM)_at_sunset.JPG",
@@ -1708,7 +1708,10 @@
         "license": "cc0",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-15T21:02:59.263558+00:00"
+      "updated_at": "2026-11-15T21:03:37.621628+00:00",
+      "share_to_feed": true,
+      "reel_id": "18147444379598315",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/633fef12a924c877ed9727ed65b8df16d13e4b95/aerofactum_assets/media/AD-097-46ea9ebf012fae5a.mp4"
     }
   }
 }
