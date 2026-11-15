@@ -1662,7 +1662,7 @@
       "story_id": "18154989310530897"
     },
     "AD-004": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Boeing_Model_367-80.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Boeing_Model_367-80.jpg",
@@ -1672,7 +1672,10 @@
         "license": "publicdomain",
         "matched_query": "airliner passenger aircraft airport"
       },
-      "updated_at": "2026-11-15T09:02:44.249700+00:00"
+      "updated_at": "2026-11-15T09:03:21.937674+00:00",
+      "share_to_feed": true,
+      "reel_id": "18649979422027003",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/c0040ca1f759ef86c610113435400c010f8dfc58/aerofactum_assets/media/AD-004-2ac767010afa33c0.mp4"
     }
   }
 }
