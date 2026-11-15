@@ -1680,7 +1680,7 @@
       "story_id": "17972769020962316"
     },
     "AD-481": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Airbus_A320-family_airliner_at_gate_57_of_Montr%C3%A9al-Trudeau_International_Airport.jpg/1920px-Airbus_A320-family_airliner_at_gate_57_of_Montr%C3%A9al-Trudeau_International_Airport.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Airbus_A320-family_airliner_at_gate_57_of_Montr%C3%A9al-Trudeau_International_Airport.jpg",
@@ -1690,7 +1690,10 @@
         "license": "cc0",
         "matched_query": "Airbus A321 passenger jet"
       },
-      "updated_at": "2026-11-15T15:02:29.410513+00:00"
+      "updated_at": "2026-11-15T15:03:07.666245+00:00",
+      "share_to_feed": true,
+      "reel_id": "18025282556930248",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/420529a22420ae9e340a87c60a040de8d0ed3e61/aerofactum_assets/media/AD-481-135dbb4dad60622f.mp4"
     }
   }
 }
