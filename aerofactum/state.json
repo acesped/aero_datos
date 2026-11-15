@@ -1672,10 +1672,11 @@
         "license": "publicdomain",
         "matched_query": "airliner passenger aircraft airport"
       },
-      "updated_at": "2026-11-15T09:03:21.937674+00:00",
+      "updated_at": "2026-11-15T09:03:23.166572+00:00",
       "share_to_feed": true,
       "reel_id": "18649979422027003",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/c0040ca1f759ef86c610113435400c010f8dfc58/aerofactum_assets/media/AD-004-2ac767010afa33c0.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/c0040ca1f759ef86c610113435400c010f8dfc58/aerofactum_assets/media/AD-004-2ac767010afa33c0.mp4",
+      "story": "enviando"
     }
   }
 }
