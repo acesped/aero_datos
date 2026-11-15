@@ -1660,6 +1660,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/ccc88f4c361412d6505bd94d421ab111c67e68e1/aerofactum_assets/media/AD-103-ff2f8381d523d217.mp4",
       "story": "publicado",
       "story_id": "18154989310530897"
+    },
+    "AD-004": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Boeing_Model_367-80.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Boeing_Model_367-80.jpg",
+        "photo_sha256": "714b4e730d7379223208f68894354ffc7c6647b421b91553e939c8f6bd61f502",
+        "photo_dhash": "c0d6f69c3a75cc56",
+        "title": "File:Boeing Model 367-80.jpg",
+        "license": "publicdomain",
+        "matched_query": "airliner passenger aircraft airport"
+      },
+      "updated_at": "2026-11-15T09:02:44.249700+00:00"
     }
   }
 }
