@@ -1734,7 +1734,7 @@
       "story_id": "17981737841919165"
     },
     "AD-378": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Russian_Tu-144LL_SST_Flying_Laboratory_Takeoff_at_Zhukovsky_Air_Development_Center.jpg/1920px-Russian_Tu-144LL_SST_Flying_Laboratory_Takeoff_at_Zhukovsky_Air_Development_Center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Russian_Tu-144LL_SST_Flying_Laboratory_Takeoff_at_Zhukovsky_Air_Development_Center.jpg",
@@ -1744,7 +1744,10 @@
         "license": "publicdomain",
         "matched_query": "airliner passenger aircraft airport"
       },
-      "updated_at": "2026-11-16T09:02:10.145902+00:00"
+      "updated_at": "2026-11-16T09:02:47.902445+00:00",
+      "share_to_feed": true,
+      "reel_id": "18115311770153417",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/8e60520e99b4c89a046d649c1f7feeb2075798db/aerofactum_assets/media/AD-378-46559f25aa6409ba.mp4"
     }
   }
 }
