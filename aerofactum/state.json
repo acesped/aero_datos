@@ -1752,7 +1752,7 @@
       "story_id": "17891158785623690"
     },
     "AD-239": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/United_Airlines_-_Western_Air_Express_Boeing_247D_crash_on_November_9%2C_1933.jpeg/1280px-United_Airlines_-_Western_Air_Express_Boeing_247D_crash_on_November_9%2C_1933.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:United_Airlines_-_Western_Air_Express_Boeing_247D_crash_on_November_9,_1933.jpeg",
@@ -1762,7 +1762,10 @@
         "license": "publicdomain",
         "matched_query": "passenger airplane runway"
       },
-      "updated_at": "2026-11-16T15:03:03.098392+00:00"
+      "updated_at": "2026-11-16T15:03:41.624145+00:00",
+      "share_to_feed": true,
+      "reel_id": "18132755950896660",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/68e3e925d6286012cabe6121a84bb7c59362be28/aerofactum_assets/media/AD-239-1f04918b503fd283.mp4"
     }
   }
 }
