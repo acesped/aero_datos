@@ -1816,11 +1816,12 @@
         "license": "publicdomain",
         "matched_query": "Boeing aircraft landing"
       },
-      "updated_at": "2026-11-17T09:03:00.268483+00:00",
+      "updated_at": "2026-11-17T09:03:37.307581+00:00",
       "share_to_feed": true,
       "reel_id": "18120198713069952",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/43ba8776fc7dcf45ec33d39367ac98c38438dc2b/aerofactum_assets/media/AD-399-8219f48c083937eb.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18115307240270859"
     }
   }
 }
