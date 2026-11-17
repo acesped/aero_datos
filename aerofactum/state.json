@@ -1824,7 +1824,7 @@
       "story_id": "18115307240270859"
     },
     "AD-457": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Boeing_747-200_%28Evergreen_International_Airlines%29_91.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Boeing_747-200_(Evergreen_International_Airlines)_91.jpg",
@@ -1834,7 +1834,10 @@
         "license": "cc0",
         "matched_query": "747 passenger airliner aircraft"
       },
-      "updated_at": "2026-11-17T15:02:16.052207+00:00"
+      "updated_at": "2026-11-17T15:02:56.742301+00:00",
+      "share_to_feed": true,
+      "reel_id": "17972809194195863",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/99e4d5714adf0388645ac588ae1faeb6538763c4/aerofactum_assets/media/AD-457-7e9fe6f697d10043.mp4"
     }
   }
 }
