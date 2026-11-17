@@ -1834,10 +1834,11 @@
         "license": "cc0",
         "matched_query": "747 passenger airliner aircraft"
       },
-      "updated_at": "2026-11-17T15:02:56.742301+00:00",
+      "updated_at": "2026-11-17T15:02:57.892982+00:00",
       "share_to_feed": true,
       "reel_id": "17972809194195863",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/99e4d5714adf0388645ac588ae1faeb6538763c4/aerofactum_assets/media/AD-457-7e9fe6f697d10043.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/99e4d5714adf0388645ac588ae1faeb6538763c4/aerofactum_assets/media/AD-457-7e9fe6f697d10043.mp4",
+      "story": "enviando"
     }
   }
 }
