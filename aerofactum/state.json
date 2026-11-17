@@ -1822,6 +1822,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/43ba8776fc7dcf45ec33d39367ac98c38438dc2b/aerofactum_assets/media/AD-399-8219f48c083937eb.mp4",
       "story": "publicado",
       "story_id": "18115307240270859"
+    },
+    "AD-457": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Boeing_747-200_%28Evergreen_International_Airlines%29_91.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Boeing_747-200_(Evergreen_International_Airlines)_91.jpg",
+        "photo_sha256": "306e445e522de39f8c2387e8d79cb1e92c7d42ee6e0bf12fc7ff60a123479dda",
+        "photo_dhash": "4b936e31b25a8713",
+        "title": "File:Boeing 747-200 (Evergreen International Airlines) 91.jpg",
+        "license": "cc0",
+        "matched_query": "747 passenger airliner aircraft"
+      },
+      "updated_at": "2026-11-17T15:02:16.052207+00:00"
     }
   }
 }
