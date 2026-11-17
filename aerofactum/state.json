@@ -1804,6 +1804,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/a237322b48352cf2567cb71042c78fbc488d4b90/aerofactum_assets/media/AD-188-aa85371ae43048af.mp4",
       "story": "publicado",
       "story_id": "17901586635397306"
+    },
+    "AD-399": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/American_Airlines_Boeing_777-200ER_N788AN_landing_gear_and_flaps_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:American_Airlines_Boeing_777-200ER_N788AN_landing_gear_and_flaps_(cropped).jpg",
+        "photo_sha256": "17700b4c41b773076857680bdd41435dbfe8151259ba22d6c532cb0d23185c41",
+        "photo_dhash": "f8f9e46ceee2e132",
+        "title": "File:American Airlines Boeing 777-200ER N788AN landing gear and flaps (cropped).jpg",
+        "license": "publicdomain",
+        "matched_query": "Boeing aircraft landing"
+      },
+      "updated_at": "2026-11-17T09:02:20.584950+00:00"
     }
   }
 }
