@@ -1788,7 +1788,7 @@
       "story_id": "18134092294768844"
     },
     "AD-188": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/8/81/UNITED_AIRLINES_FLIGHT_233.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:UNITED_AIRLINES_FLIGHT_233.jpg",
@@ -1798,7 +1798,10 @@
         "license": "publicdomain",
         "matched_query": "passenger airplane runway"
       },
-      "updated_at": "2026-11-17T03:02:03.890472+00:00"
+      "updated_at": "2026-11-17T03:03:16.578673+00:00",
+      "share_to_feed": true,
+      "reel_id": "17995839531104942",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/a237322b48352cf2567cb71042c78fbc488d4b90/aerofactum_assets/media/AD-188-aa85371ae43048af.mp4"
     }
   }
 }
