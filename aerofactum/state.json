@@ -1798,10 +1798,11 @@
         "license": "publicdomain",
         "matched_query": "passenger airplane runway"
       },
-      "updated_at": "2026-11-17T03:03:16.578673+00:00",
+      "updated_at": "2026-11-17T03:03:17.585220+00:00",
       "share_to_feed": true,
       "reel_id": "17995839531104942",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/a237322b48352cf2567cb71042c78fbc488d4b90/aerofactum_assets/media/AD-188-aa85371ae43048af.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/a237322b48352cf2567cb71042c78fbc488d4b90/aerofactum_assets/media/AD-188-aa85371ae43048af.mp4",
+      "story": "enviando"
     }
   }
 }
