@@ -1876,6 +1876,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/dcfdcdd0a2951dd864c24e88e170d794501ee0ca/aerofactum_assets/media/AD-326-b3cb806437c25ee1.mp4",
       "story": "publicado",
       "story_id": "18290065378293948"
+    },
+    "AD-082": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/G-EZTX_easyJet_Airbus_A320-214_taxiing_at_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands%2C_18may2014%2C_pic-4.JPG/1920px-G-EZTX_easyJet_Airbus_A320-214_taxiing_at_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands%2C_18may2014%2C_pic-4.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:G-EZTX_easyJet_Airbus_A320-214_taxiing_at_Schiphol_(AMS_-_EHAM),_The_Netherlands,_18may2014,_pic-4.JPG",
+        "photo_sha256": "731130904eb23d4d6bab557ecb4852a6840005a92ce469eaab6bdc6b1b88c6d4",
+        "photo_dhash": "0f1f130f4d2fd64d",
+        "title": "File:G-EZTX easyJet Airbus A320-214 taxiing at Schiphol (AMS - EHAM), The Netherlands, 18may2014, pic-4.JPG",
+        "license": "cc0",
+        "matched_query": "Airbus A321 passenger jet"
+      },
+      "updated_at": "2026-11-18T09:02:29.074374+00:00"
     }
   }
 }
