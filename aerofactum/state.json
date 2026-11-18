@@ -1878,7 +1878,7 @@
       "story_id": "18290065378293948"
     },
     "AD-082": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/G-EZTX_easyJet_Airbus_A320-214_taxiing_at_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands%2C_18may2014%2C_pic-4.JPG/1920px-G-EZTX_easyJet_Airbus_A320-214_taxiing_at_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands%2C_18may2014%2C_pic-4.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:G-EZTX_easyJet_Airbus_A320-214_taxiing_at_Schiphol_(AMS_-_EHAM),_The_Netherlands,_18may2014,_pic-4.JPG",
@@ -1888,7 +1888,10 @@
         "license": "cc0",
         "matched_query": "Airbus A321 passenger jet"
       },
-      "updated_at": "2026-11-18T09:02:29.074374+00:00"
+      "updated_at": "2026-11-18T09:03:49.713193+00:00",
+      "share_to_feed": true,
+      "reel_id": "18360317644222855",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/d4e148f924baa869bbf47e0b613cbce418e5af7f/aerofactum_assets/media/AD-082-39646f1adba479f9.mp4"
     }
   }
 }
