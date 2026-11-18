@@ -1914,7 +1914,7 @@
       "story_id": "18394290016225600"
     },
     "AD-006": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/EC-LVT_Vueling_Airbus_A320-232%28WL%29_-_cn_5612_takeoff_from_Schiphol_and_LX-VCI_%28aircraft%29.JPG/1280px-EC-LVT_Vueling_Airbus_A320-232%28WL%29_-_cn_5612_takeoff_from_Schiphol_and_LX-VCI_%28aircraft%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:EC-LVT_Vueling_Airbus_A320-232(WL)_-_cn_5612_takeoff_from_Schiphol_and_LX-VCI_(aircraft).JPG",
@@ -1924,7 +1924,10 @@
         "license": "publicdomain",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-18T21:30:45.223245+00:00"
+      "updated_at": "2026-11-18T21:31:26.122834+00:00",
+      "share_to_feed": true,
+      "reel_id": "18459907765122675",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/f0b13cc36503acce53fb854a5bd7d77cdd4bd12c/aerofactum_assets/media/AD-006-d54a3501fe8585c0.mp4"
     }
   }
 }
