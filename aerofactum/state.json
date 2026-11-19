@@ -1986,7 +1986,7 @@
       "story_id": "18109095164202757"
     },
     "AD-306": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/G-EZWF_%28aircraft%29_Airbus_A319_%28EasyJet%29_takeoff_from_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands_pic1.JPG/1280px-G-EZWF_%28aircraft%29_Airbus_A319_%28EasyJet%29_takeoff_from_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands_pic1.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:G-EZWF_(aircraft)_Airbus_A319_(EasyJet)_takeoff_from_Schiphol_(AMS_-_EHAM),_The_Netherlands_pic1.JPG",
@@ -1996,7 +1996,10 @@
         "license": "publicdomain",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-19T21:07:31.352268+00:00"
+      "updated_at": "2026-11-19T21:08:11.793545+00:00",
+      "share_to_feed": true,
+      "reel_id": "18196199005416890",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/9ce3dd383bb281cedb8bf63ca5bc293958ee3957/aerofactum_assets/media/AD-306-383b339fb123eccd.mp4"
     }
   }
 }
