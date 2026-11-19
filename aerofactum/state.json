@@ -1978,11 +1978,12 @@
         "license": "publicdomain",
         "matched_query": "passenger airplane runway"
       },
-      "updated_at": "2026-11-19T15:03:11.232101+00:00",
+      "updated_at": "2026-11-19T15:03:48.669701+00:00",
       "share_to_feed": true,
       "reel_id": "18643720897049579",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/8758c64c7df865ae2a38b37c2a02ffd4cb48c4e0/aerofactum_assets/media/AD-073-9ad0f444c986ac3f.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18109095164202757"
     }
   }
 }
