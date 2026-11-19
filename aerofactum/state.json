@@ -1984,6 +1984,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/8758c64c7df865ae2a38b37c2a02ffd4cb48c4e0/aerofactum_assets/media/AD-073-9ad0f444c986ac3f.mp4",
       "story": "publicado",
       "story_id": "18109095164202757"
+    },
+    "AD-306": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/G-EZWF_%28aircraft%29_Airbus_A319_%28EasyJet%29_takeoff_from_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands_pic1.JPG/1280px-G-EZWF_%28aircraft%29_Airbus_A319_%28EasyJet%29_takeoff_from_Schiphol_%28AMS_-_EHAM%29%2C_The_Netherlands_pic1.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:G-EZWF_(aircraft)_Airbus_A319_(EasyJet)_takeoff_from_Schiphol_(AMS_-_EHAM),_The_Netherlands_pic1.JPG",
+        "photo_sha256": "067ae13926360f08ff442025ab4795b013c9ea753322486a703b922aae20f039",
+        "photo_dhash": "07070d7133871931",
+        "title": "File:G-EZWF (aircraft) Airbus A319 (EasyJet) takeoff from Schiphol (AMS - EHAM), The Netherlands pic1.JPG",
+        "license": "publicdomain",
+        "matched_query": "Airbus aircraft takeoff"
+      },
+      "updated_at": "2026-11-19T21:07:31.352268+00:00"
     }
   }
 }
