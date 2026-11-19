@@ -1968,7 +1968,7 @@
       "story_id": "18106343414023450"
     },
     "AD-073": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Markair_N670MA_crashsite_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Markair_N670MA_crashsite_2.jpg",
@@ -1978,7 +1978,10 @@
         "license": "publicdomain",
         "matched_query": "passenger airplane runway"
       },
-      "updated_at": "2026-11-19T15:02:40.895106+00:00"
+      "updated_at": "2026-11-19T15:03:09.673586+00:00",
+      "share_to_feed": true,
+      "reel_id": "18643720897049579",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/8758c64c7df865ae2a38b37c2a02ffd4cb48c4e0/aerofactum_assets/media/AD-073-9ad0f444c986ac3f.mp4"
     }
   }
 }
