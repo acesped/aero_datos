@@ -2050,11 +2050,12 @@
         "license": "cc0",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-20T15:03:19.541955+00:00",
+      "updated_at": "2026-11-20T15:03:55.582998+00:00",
       "share_to_feed": true,
       "reel_id": "18223789597342595",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/8ba53629b1f1d6d1425f6d958c11d5e2b4c6cd12/aerofactum_assets/media/AD-490-d21c50a02ef99e4f.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18125170549818100"
     }
   }
 }
