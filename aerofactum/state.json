@@ -2014,11 +2014,12 @@
         "license": "publicdomain",
         "matched_query": "commercial airliner aircraft"
       },
-      "updated_at": "2026-11-20T03:11:45.667623+00:00",
+      "updated_at": "2026-11-20T03:12:23.209631+00:00",
       "share_to_feed": true,
       "reel_id": "17902347027674855",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/26c05b952592420ef77801a3328a75da8b5503c5/aerofactum_assets/media/AD-440-3987b6885fa41dc4.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18060506369650803"
     }
   }
 }
