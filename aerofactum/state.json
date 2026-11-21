@@ -2128,6 +2128,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/8a9423008a6892e5a029b561f1fa333e603a2d26/aerofactum_assets/media/AD-036-8e0ab82d831012fb.mp4",
       "story": "publicado",
       "story_id": "18155867305538438"
+    },
+    "AD-075": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Two_airliners_heading_to_Haneda_over_Ebisu.jpeg/1280px-Two_airliners_heading_to_Haneda_over_Ebisu.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Two_airliners_heading_to_Haneda_over_Ebisu.jpeg",
+        "photo_sha256": "bc294eba32ca74d53129bc3c30daa2c380d83c7ec9397859f3a3a0e43851d4ba",
+        "photo_dhash": "d0d00fef4e467671",
+        "title": "File:Two airliners heading to Haneda over Ebisu.jpeg",
+        "license": "cc0",
+        "matched_query": "commercial airliner aircraft"
+      },
+      "updated_at": "2026-11-21T21:02:31.775664+00:00"
     }
   }
 }
