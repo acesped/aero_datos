@@ -2110,6 +2110,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/e450e2285790ff93f2535fbcab08c19152c648e7/aerofactum_assets/media/AD-257-0742fc96d6d3ae87.mp4",
       "story": "publicado",
       "story_id": "18129881567489538"
+    },
+    "AD-036": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Thai_airways_a340-600_hs-tna_takeoff_arp.jpg/1280px-Thai_airways_a340-600_hs-tna_takeoff_arp.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Thai_airways_a340-600_hs-tna_takeoff_arp.jpg",
+        "photo_sha256": "8936dc56e3076fbfe33610a6503e180943fdcbe9c6aec86333a66b264c34475b",
+        "photo_dhash": "2699c33613939f6f",
+        "title": "File:Thai airways a340-600 hs-tna takeoff arp.jpg",
+        "license": "publicdomain",
+        "matched_query": "Airbus aircraft takeoff"
+      },
+      "updated_at": "2026-11-21T15:01:58.344430+00:00"
     }
   }
 }
