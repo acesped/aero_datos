@@ -2202,7 +2202,7 @@
       "story_id": "18121730758800202"
     },
     "AD-325": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/031924sda001_Curatorial_Collection_Image_-_Model%2C_Boeing_377_Stratocruiser%2C_Pan_American_World_Airways_%28PAA%29_livery%3B_Long-range_airliner_with_two_passenger_decks_and_a_pressurized_cabin%3B_Boeing_Commercial_Airplanes%3B_Intr_%2853896711412%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:031924sda001_Curatorial_Collection_Image_-_Model,_Boeing_377_Stratocruiser,_Pan_American_World_Airways_(PAA)_livery;_Long-range_airliner_with_two_passenger_decks_and_a_pressurized_cabin;_Boeing_Commercial_Airplanes;_Intr_(53896711412).jpg",
@@ -2212,7 +2212,10 @@
         "license": "publicdomain",
         "matched_query": "Boeing passenger airplane"
       },
-      "updated_at": "2026-11-22T21:02:51.772929+00:00"
+      "updated_at": "2026-11-22T21:03:32.798745+00:00",
+      "share_to_feed": true,
+      "reel_id": "18035823170681608",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/1b000c5c2b59bc56ae8ed9dc908c36d7a1cee3fb/aerofactum_assets/media/AD-325-459cd059e7d36344.mp4"
     }
   }
 }
