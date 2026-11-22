@@ -2146,6 +2146,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/f90136c5c6c33d120c8a3f0427eb1d603018bdab/aerofactum_assets/media/AD-075-c47205fa01d0ae0c.mp4",
       "story": "publicado",
       "story_id": "18108025763368545"
+    },
+    "AD-289": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Passengers_on_a_crowded_airliner_%28209705169%29.jpg/1280px-Passengers_on_a_crowded_airliner_%28209705169%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Passengers_on_a_crowded_airliner_(209705169).jpg",
+        "photo_sha256": "ab81b3241f551908f88df4061434b4ffa5782fff225077809aee1b5716ac1766",
+        "photo_dhash": "1350f0ebe1273636",
+        "title": "File:Passengers on a crowded airliner (209705169).jpg",
+        "license": "cc0",
+        "matched_query": "commercial airliner aircraft"
+      },
+      "updated_at": "2026-11-22T03:01:57.675685+00:00"
     }
   }
 }
