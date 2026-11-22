@@ -2182,6 +2182,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/79431288e70ebe46af4985d55b396fecba18cf75/aerofactum_assets/media/AD-420-67d5e18198e0eda6.mp4",
       "story": "publicado",
       "story_id": "17981658291126612"
+    },
+    "AD-219": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Aircraft_parts_of_Airliners_20200126.jpg/1920px-Aircraft_parts_of_Airliners_20200126.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Aircraft_parts_of_Airliners_20200126.jpg",
+        "photo_sha256": "00c1d7b1021c3fe22d12cae04f465270987ed244f0d8d83bbabbbb2a29c59c8f",
+        "photo_dhash": "2523133758623319",
+        "title": "File:Aircraft parts of Airliners 20200126.jpg",
+        "license": "cc0",
+        "matched_query": "commercial airliner aircraft"
+      },
+      "updated_at": "2026-11-22T15:02:04.201228+00:00"
     }
   }
 }
