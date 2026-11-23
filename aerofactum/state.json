@@ -2274,7 +2274,7 @@
       "story_id": "18001098641829121"
     },
     "AD-373": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/NASA%2C_Boeing_Advance_Truss-Braced_Wing_Research_in_Test.jpg/1280px-NASA%2C_Boeing_Advance_Truss-Braced_Wing_Research_in_Test.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:NASA,_Boeing_Advance_Truss-Braced_Wing_Research_in_Test.jpg",
@@ -2284,7 +2284,10 @@
         "license": "publicdomain",
         "matched_query": "Boeing passenger airplane"
       },
-      "updated_at": "2026-11-23T21:07:51.268556+00:00"
+      "updated_at": "2026-11-23T21:08:23.451367+00:00",
+      "share_to_feed": true,
+      "reel_id": "18152175250559126",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/5b1dd306774ed7e5e9ee4af6c1486aafa1e04607/aerofactum_assets/media/AD-373-7ebd7ecd2734da52.mp4"
     }
   }
 }
