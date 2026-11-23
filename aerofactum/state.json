@@ -2238,7 +2238,7 @@
       "story_id": "17880129324573358"
     },
     "AD-494": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Easyjet_Airbus_320_G-EZUH_takeoff_from_Polderbaan%2C_Schiphol_%28AMS_-_EHAM%29_at_sunset%2C_pic4.JPG/1280px-Easyjet_Airbus_320_G-EZUH_takeoff_from_Polderbaan%2C_Schiphol_%28AMS_-_EHAM%29_at_sunset%2C_pic4.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Easyjet_Airbus_320_G-EZUH_takeoff_from_Polderbaan,_Schiphol_(AMS_-_EHAM)_at_sunset,_pic4.JPG",
@@ -2248,7 +2248,10 @@
         "license": "cc0",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-23T09:05:35.312679+00:00"
+      "updated_at": "2026-11-23T09:06:13.946446+00:00",
+      "share_to_feed": true,
+      "reel_id": "18129831652853687",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/9dbef90a272987ab1674db62dd14f4840cd6e8a9/aerofactum_assets/media/AD-494-908afd00aa8506ea.mp4"
     }
   }
 }
