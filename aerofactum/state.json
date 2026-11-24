@@ -2310,7 +2310,7 @@
       "story_id": "18122508455084339"
     },
     "AD-012": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Saudi_Arabian_airliner_in_Bamako_in_2004.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Saudi_Arabian_airliner_in_Bamako_in_2004.jpg",
@@ -2320,7 +2320,10 @@
         "license": "cc0",
         "matched_query": "commercial airliner aircraft"
       },
-      "updated_at": "2026-11-24T09:04:06.879733+00:00"
+      "updated_at": "2026-11-24T09:04:36.783676+00:00",
+      "share_to_feed": true,
+      "reel_id": "18400713736201155",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/e8027285db9c0fb2c94fd56447badb2b5af0b449/aerofactum_assets/media/AD-012-7b2c9762a5e745fa.mp4"
     }
   }
 }
