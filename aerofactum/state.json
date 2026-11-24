@@ -2290,6 +2290,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/5b1dd306774ed7e5e9ee4af6c1486aafa1e04607/aerofactum_assets/media/AD-373-7ebd7ecd2734da52.mp4",
       "story": "publicado",
       "story_id": "18001835075823316"
+    },
+    "AD-173": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Takeoff_of_the_Airbus_A321Neo_aircraft_from_the_Yakutsk_International_Airport_05.05.2025_SmallSonMarex.jpg/1280px-Takeoff_of_the_Airbus_A321Neo_aircraft_from_the_Yakutsk_International_Airport_05.05.2025_SmallSonMarex.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Takeoff_of_the_Airbus_A321Neo_aircraft_from_the_Yakutsk_International_Airport_05.05.2025_SmallSonMarex.jpg",
+        "photo_sha256": "3d159d8a89ba020f2d1455d435102971b528663d148a49023759c25eef62ea07",
+        "photo_dhash": "173e0f291bcdcdcc",
+        "title": "File:Takeoff of the Airbus A321Neo aircraft from the Yakutsk International Airport 05.05.2025 SmallSonMarex.jpg",
+        "license": "cc0",
+        "matched_query": "Airbus aircraft takeoff"
+      },
+      "updated_at": "2026-11-24T03:25:52.026465+00:00"
     }
   }
 }
