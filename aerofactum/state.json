@@ -2374,11 +2374,12 @@
         "license": "cc0",
         "matched_query": "Boeing passenger airplane"
       },
-      "updated_at": "2026-11-25T03:02:47.713341+00:00",
+      "updated_at": "2026-11-25T03:04:13.426823+00:00",
       "share_to_feed": true,
       "reel_id": "17955751146290851",
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/58204a498229b6bd347022e0f8026c93a3e172df/aerofactum_assets/media/AD-492-8d9430c17734da6d.mp4",
-      "story": "enviando"
+      "story": "publicado",
+      "story_id": "18485889115113604"
     }
   }
 }
