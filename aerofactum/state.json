@@ -2382,7 +2382,7 @@
       "story_id": "18485889115113604"
     },
     "AD-093": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/EC-LVV_Vueling_Airbus_A320-232%28WL%29_takeoff_from_Polderbaan%2C_Schiphol_%28AMS_-_EHAM%29%2C_pic3.JPG/1280px-EC-LVV_Vueling_Airbus_A320-232%28WL%29_takeoff_from_Polderbaan%2C_Schiphol_%28AMS_-_EHAM%29%2C_pic3.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:EC-LVV_Vueling_Airbus_A320-232(WL)_takeoff_from_Polderbaan,_Schiphol_(AMS_-_EHAM),_pic3.JPG",
@@ -2392,7 +2392,10 @@
         "license": "cc0",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-25T09:02:39.442997+00:00"
+      "updated_at": "2026-11-25T09:03:17.604792+00:00",
+      "share_to_feed": true,
+      "reel_id": "18024633470950621",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/2af2dd8b12e99fb09fcc490d4fce7d21d482e32e/aerofactum_assets/media/AD-093-acfa70fb70bbbf15.mp4"
     }
   }
 }
