@@ -2418,7 +2418,7 @@
       "story_id": "18151171372604837"
     },
     "AD-400": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/G-EUPJ_-_Airbus_A319-131_-_British_Airways_Takeoff_from_Schiphol.JPG/1280px-G-EUPJ_-_Airbus_A319-131_-_British_Airways_Takeoff_from_Schiphol.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:G-EUPJ_-_Airbus_A319-131_-_British_Airways_Takeoff_from_Schiphol.JPG",
@@ -2428,7 +2428,10 @@
         "license": "publicdomain",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-25T21:01:54.450993+00:00"
+      "updated_at": "2026-11-25T21:02:33.625403+00:00",
+      "share_to_feed": true,
+      "reel_id": "18121222021999648",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/2eb3b422698603ebbd284073cc2a45b2413ae5ed/aerofactum_assets/media/AD-400-919da4f472d62505.mp4"
     }
   }
 }
