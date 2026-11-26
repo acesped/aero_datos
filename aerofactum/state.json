@@ -2434,6 +2434,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/2eb3b422698603ebbd284073cc2a45b2413ae5ed/aerofactum_assets/media/AD-400-919da4f472d62505.mp4",
       "story": "publicado",
       "story_id": "18121113550795571"
+    },
+    "AD-134": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Notice_anything_different_about_the_wings_on_this_airliner%3F_This_conceptual_truss-braced_wing_narrowbody_is_an_aircraft_with_a_170ft_span_folding_wing_%28TTBW-90-lt-blue-windows-with-gray-Head-On%29.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Notice_anything_different_about_the_wings_on_this_airliner%3F_This_conceptual_truss-braced_wing_narrowbody_is_an_aircraft_with_a_170ft_span_folding_wing_(TTBW-90-lt-blue-windows-with-gray-Head-On).jpg",
+        "photo_sha256": "f1cc8f5931d9f8eb0b6ed1cdc3d4b9dba04eeb817842c9780ade30de536ee3d9",
+        "photo_dhash": "01000122d3069e3a",
+        "title": "File:Notice anything different about the wings on this airliner? This conceptual truss-braced wing narrowbody is an aircraft with a 170ft span folding wing (TTBW-90-lt-blue-windows-with-gray-Head-On).jpg",
+        "license": "publicdomain",
+        "matched_query": "commercial airliner aircraft"
+      },
+      "updated_at": "2026-11-26T03:01:53.717679+00:00"
     }
   }
 }
