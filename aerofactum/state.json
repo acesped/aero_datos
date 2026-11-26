@@ -2500,10 +2500,11 @@
         "license": "publicdomain",
         "matched_query": "commercial airliner aircraft"
       },
-      "updated_at": "2026-11-26T21:02:40.047228+00:00",
+      "updated_at": "2026-11-26T21:02:41.374710+00:00",
       "share_to_feed": true,
       "reel_id": "18093218522243891",
-      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/6afc5eddc1a64de8af4f65ebcfaffe45b8d7ca51/aerofactum_assets/media/AD-172-7bd41d9058852676.mp4"
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/6afc5eddc1a64de8af4f65ebcfaffe45b8d7ca51/aerofactum_assets/media/AD-172-7bd41d9058852676.mp4",
+      "story": "enviando"
     }
   }
 }
