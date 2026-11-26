@@ -2436,7 +2436,7 @@
       "story_id": "18121113550795571"
     },
     "AD-134": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Notice_anything_different_about_the_wings_on_this_airliner%3F_This_conceptual_truss-braced_wing_narrowbody_is_an_aircraft_with_a_170ft_span_folding_wing_%28TTBW-90-lt-blue-windows-with-gray-Head-On%29.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:Notice_anything_different_about_the_wings_on_this_airliner%3F_This_conceptual_truss-braced_wing_narrowbody_is_an_aircraft_with_a_170ft_span_folding_wing_(TTBW-90-lt-blue-windows-with-gray-Head-On).jpg",
@@ -2446,7 +2446,10 @@
         "license": "publicdomain",
         "matched_query": "commercial airliner aircraft"
       },
-      "updated_at": "2026-11-26T03:01:53.717679+00:00"
+      "updated_at": "2026-11-26T03:03:02.162762+00:00",
+      "share_to_feed": true,
+      "reel_id": "17998543454843449",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/35337d777feb32cf95caacf4c57f30f49174edae/aerofactum_assets/media/AD-134-323846e9bba52aa4.mp4"
     }
   }
 }
