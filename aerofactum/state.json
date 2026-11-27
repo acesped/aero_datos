@@ -2544,7 +2544,7 @@
       "story_id": "18130836745810019"
     },
     "AD-365": {
-      "reel": "enviando",
+      "reel": "publicado",
       "image": {
         "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/EC-LAB_-_Airbus_A320-214_-_Vueling_takeoff_from_Schiphol_pic2.JPG/1280px-EC-LAB_-_Airbus_A320-214_-_Vueling_takeoff_from_Schiphol_pic2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "photo_source": "https://commons.wikimedia.org/wiki/File:EC-LAB_-_Airbus_A320-214_-_Vueling_takeoff_from_Schiphol_pic2.JPG",
@@ -2554,7 +2554,10 @@
         "license": "publicdomain",
         "matched_query": "Airbus aircraft takeoff"
       },
-      "updated_at": "2026-11-27T15:03:08.779730+00:00"
+      "updated_at": "2026-11-27T15:03:36.321537+00:00",
+      "share_to_feed": true,
+      "reel_id": "18136661939497301",
+      "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/4f2bb1d597b177d3cd7883763eb23e48681b9a6b/aerofactum_assets/media/AD-365-88aecc0051af12bb.mp4"
     }
   }
 }
