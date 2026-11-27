@@ -2506,6 +2506,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/6afc5eddc1a64de8af4f65ebcfaffe45b8d7ca51/aerofactum_assets/media/AD-172-7bd41d9058852676.mp4",
       "story": "publicado",
       "story_id": "17975567760191165"
+    },
+    "AD-065": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/NASA_Issues_Award_for_Greener%2C_More_Fuel-Efficient_Airliner_of_Future.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:NASA_Issues_Award_for_Greener,_More_Fuel-Efficient_Airliner_of_Future.jpg",
+        "photo_sha256": "69ee31b3049be16bbebc2ba28a5c932521f6ebc3736397df2e2c7fa860562527",
+        "photo_dhash": "dbd3d3b3b3b3f3f3",
+        "title": "File:NASA Issues Award for Greener, More Fuel-Efficient Airliner of Future.jpg",
+        "license": "publicdomain",
+        "matched_query": "commercial airliner aircraft"
+      },
+      "updated_at": "2026-11-27T03:02:45.798815+00:00"
     }
   }
 }
