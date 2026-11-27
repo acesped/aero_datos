@@ -2560,6 +2560,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/4f2bb1d597b177d3cd7883763eb23e48681b9a6b/aerofactum_assets/media/AD-365-88aecc0051af12bb.mp4",
       "story": "publicado",
       "story_id": "18117323045147476"
+    },
+    "AD-138": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Delta_airliner_over_Federal_Way%2C_WA_approaching_SeaTac_Airport.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Delta_airliner_over_Federal_Way,_WA_approaching_SeaTac_Airport.jpg",
+        "photo_sha256": "491f4b6b188666192363746db87d4965d3b88382484c8089c3eeb3011ad3e363",
+        "photo_dhash": "00299592700f1205",
+        "title": "File:Delta airliner over Federal Way, WA approaching SeaTac Airport.jpg",
+        "license": "cc0",
+        "matched_query": "commercial airliner aircraft"
+      },
+      "updated_at": "2026-11-27T21:01:54.315009+00:00"
     }
   }
 }
