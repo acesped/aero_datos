@@ -2524,6 +2524,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/e4bb0c30fc1903b149216599e312c1d681dfced3/aerofactum_assets/media/AD-065-59920ec818c309c7.mp4",
       "story": "publicado",
       "story_id": "18202336696388673"
+    },
+    "AD-452": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Boeing_80-A_tri-motor_18-passenger_aircraft%2C_August_14%2C_1929_%28TRANSPORT_1534%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Boeing_80-A_tri-motor_18-passenger_aircraft,_August_14,_1929_(TRANSPORT_1534).jpg",
+        "photo_sha256": "76bc40d26ec4b0148fd21f221cfcdb80d6e502c45a3ddc1a27486b0a2f020210",
+        "photo_dhash": "32c9e4e4c2c6c79f",
+        "title": "File:Boeing 80-A tri-motor 18-passenger aircraft, August 14, 1929 (TRANSPORT 1534).jpg",
+        "license": "publicdomain",
+        "matched_query": "Boeing passenger airplane"
+      },
+      "updated_at": "2026-11-27T09:03:19.321137+00:00"
     }
   }
 }
