@@ -2578,6 +2578,19 @@
       "video_url": "https://raw.githubusercontent.com/acesped/aero_datos/4a0a485225f5dabff3cdb22dac30816c3ea3fe43/aerofactum_assets/media/AD-138-af75dc895bccb49e.mp4",
       "story": "publicado",
       "story_id": "18136874761682696"
+    },
+    "AD-266": {
+      "reel": "enviando",
+      "image": {
+        "photo_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Boeing_247-D_-_DPLA_-_069d557576650fed45a422612b9d9702_%28page_1%29.jpg/1920px-Boeing_247-D_-_DPLA_-_069d557576650fed45a422612b9d9702_%28page_1%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "photo_source": "https://commons.wikimedia.org/wiki/File:Boeing_247-D_-_DPLA_-_069d557576650fed45a422612b9d9702_(page_1).jpg",
+        "photo_sha256": "63c79a07545af1db847d956408263b61ea8d8026274de03ed545866287c11c8d",
+        "photo_dhash": "0803100f27000a00",
+        "title": "File:Boeing 247-D - DPLA - 069d557576650fed45a422612b9d9702 (page 1).jpg",
+        "license": "cc0",
+        "matched_query": "Boeing passenger airplane"
+      },
+      "updated_at": "2026-11-28T03:02:07.000754+00:00"
     }
   }
 }
